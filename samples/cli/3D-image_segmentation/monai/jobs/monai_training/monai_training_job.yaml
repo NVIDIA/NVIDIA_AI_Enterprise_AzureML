@@ -1,0 +1,32 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+
+display_name: monai_pipeline_with_component
+experiment_name: monai_pipeline_with_component
+description: Select best model trained with different learning rate
+type: pipeline
+
+inputs:
+  pipeline_input_file: 
+    type: uri_file
+    path: azureml://registries/NVIDIARegistryTest1/dataassets
+  best_model_name: "best_model"
+  train_node_compute: gpu-cluster
+  compute_compare_node: cpu-cluster
+
+outputs: 
+  model:
+    mode: upload
+
+settings:
+  default_datastore: azureml:workspaceblobstore
+  default_compute: azureml:cpu-cluster
+  continue_on_step_failure: false
+
+jobs:
+  train_and_evaluate_model1:
+    type: pipeline
+    component: azureml://registries/NVIDIARegistryTest1/components/monai_train_pipeline/versions/1
+    inputs:
+      training_data: ${{parent.inputs.pipeline_input_file}}
+      best_model_name: ${{parent.inputs.best_model_name}}
+      train_node_compute: ${{parent.inputs.train_node_compute}}
