@@ -1,0 +1,6 @@
+$schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
+name: NVIDIA-tritonserver
+version: 1
+description: Environment using TRITONSERVER NVAIE container
+build:
+  path: ./env_tritonserver

@@ -1,0 +1,38 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: tao_detectnet_v2_dataset_convert
+display_name: tao_detectnet_v2_dataset_convert
+description: Wrapper for TAO command detectnet_v2 dataset_convert. The DetectNet_v2 app requires the raw input data to be converted to TFRecords for optimized iteration across the data batches, which is accomplish with this component <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/tao/object_detection/detectnet_v2/tao_detectnet_v2_dataset_convert/README.md>Reference file</a>
+version: 1
+type: command
+inputs:
+  specs_dir:
+    type: uri_folder
+  data_dir:
+    type: uri_folder
+  dataset_export_spec:
+    type: string
+    default: detectnet_v2_tfrecords_kitti_trainval.txt
+  output_filename:
+    type: string
+    default: kitti_trainval/kitti_trainval
+  specfile_reference_data_dir:
+    type: string
+    default: /home/jupyter/data 
+  validation_fold:
+    type: string
+    default: ND
+outputs:
+  tf_records_dir:
+    type: uri_folder
+code: ./src
+environment: azureml://registries/<registry_name>/environments/tao-toolkit-4.0.0-tf1.15.5/versions/1
+command: >-
+  bash update_and_convert.sh 
+  ${{inputs.specs_dir}} 
+  ${{inputs.data_dir}} 
+  ${{inputs.dataset_export_spec}} 
+  ${{outputs.tf_records_dir}} 
+  ${{inputs.output_filename}} 
+  ${{inputs.specfile_reference_data_dir}} 
+  ${{inputs.validation_fold}} 
+

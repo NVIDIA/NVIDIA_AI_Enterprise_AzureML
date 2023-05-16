@@ -1,0 +1,20 @@
+artifact_path: model
+flavors:
+  python_function:
+    data: data
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pytorch
+    pickle_module_name: mlflow.pytorch.pickle_module
+    python_version: 3.10.4
+  pytorch:
+    code: null
+    extra_files:
+    - path: extra_files/best_metric_model.pth
+    model_data: data
+    pytorch_version: 1.11.0
+mlflow_version: 2.2.2
+model_uuid: bca5e4557ba54ca6bb308bb4c5f8d6bd
+run_id: 2381189c-7c4e-48eb-a5c1-28d6c7f80ea2
+utc_time_created: '2023-04-05 02:48:17.465705'

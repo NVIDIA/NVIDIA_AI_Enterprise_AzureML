@@ -1,0 +1,9 @@
+$schema: https://azuremlschemas.azureedge.net/latest/amlCompute.schema.json 
+name: gpu-cluster
+type: amlcompute
+size: Standard_NC96ads_A100_v4
+tier: low_priority
+min_instances: 0
+max_instances: 3
+idle_time_before_scale_down: 600
+location: westeurope

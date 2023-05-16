@@ -1,0 +1,6 @@
+$schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
+name: NVIDIA-pytorch
+version: 1
+description: Environment using PYTORCH NVAIE container
+build:
+  path: ./env_pytorch

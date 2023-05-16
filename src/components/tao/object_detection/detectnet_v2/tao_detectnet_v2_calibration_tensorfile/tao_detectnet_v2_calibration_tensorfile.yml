@@ -1,0 +1,86 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: tao_detectnet_v2_calibration_tensorfile
+display_name: tao_detectnet_v2_calibration_tensorfile
+description: Wrapper for TAO command detectnet_v2 calibration_tensorfile. It generates the INT8 tensorfile, that is a binary file that contains the preprocessed training samples, which may be used to calibrate the model <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/tao/object_detection/detectnet_v2/tao_detectnet_v2_calibration_tensorfile/README.md>Reference file</a>
+version: 1
+type: command
+inputs:
+  model_app_name:
+    type: string
+  training_data_dir:
+    type: uri_folder
+  training_data_subdir:
+    type: string
+  specfile_reference_training_data_dir:
+    type: string
+  validation_data_dir:
+    type: uri_folder
+  validation_data_subdir:
+    type: string
+    default: ND
+  specfile_reference_validation_data_dir:
+    type: string
+    default: ND
+  training_tf_records_dir:
+    type: uri_folder
+  training_tf_records_subdir:
+    type: string
+  specfile_reference_training_tf_records_dir:
+    type: string
+  validation_tf_records_dir:
+    type: uri_folder
+  validation_tf_records_subdir:
+    type: string
+    default: ND
+  specfile_reference_validation_tf_records_dir:
+    type: string
+    default: ND
+  base_model_dir:
+    type: uri_folder
+  base_model_subdir:
+    type: string
+    default: ND
+  specfile_reference_model_dir:
+    type: string
+  original_specs:
+    type: uri_folder
+  specs_file:
+    type: string
+    default: detectnet_v2_retrain_resnet18_kitti.txt
+  max_batches:
+    type: number
+    default: 10
+  use_validation_set:
+    type: string
+    default: ND  
+  output_subfolder:
+    type: string
+    default: experiment_dir_final
+  output_filename:
+    type: string
+    default: calibration.tensor 
+outputs:
+  output_dir:
+    type: uri_folder
+code: ./src
+environment: azureml://registries/<registry_name>/environments/tao-toolkit-4.0.0-tf1.15.5/versions/1
+command: >-
+  bash update_and_calibration_tensorfile.sh 
+  ${{inputs.original_specs}} 
+  ${{inputs.specs_file}} 
+  ${{inputs.training_data_dir}}/${{inputs.training_data_subdir}}
+  ${{inputs.specfile_reference_training_data_dir}} 
+  ${{inputs.validation_data_dir}}/${{inputs.validation_data_subdir}}
+  ${{inputs.specfile_reference_validation_data_dir}} 
+  ${{inputs.training_tf_records_dir}}/${{inputs.training_tf_records_subdir}}
+  ${{inputs.specfile_reference_training_tf_records_dir}} 
+  ${{inputs.validation_tf_records_dir}}/${{inputs.validation_tf_records_subdir}}
+  ${{inputs.specfile_reference_validation_tf_records_dir}} 
+  ${{inputs.base_model_dir}}/${{inputs.model_app_name}}/${{inputs.base_model_subdir}}
+  ${{inputs.specfile_reference_model_dir}}
+  ${{inputs.output_subfolder}} 
+  ${{inputs.output_filename}} 
+  ${{outputs.output_dir}}/${{inputs.model_app_name}} 
+  ${{inputs.max_batches}} 
+  ${{inputs.use_validation_set}} 
+

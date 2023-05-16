@@ -1,0 +1,93 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: tao_detectnet_v2_evaluate
+display_name: tao_detectnet_v2_evaluate
+description: Wrapper for TAO command detectnet_v2 evaluate, which is used to evaluate the performance of a model. It uses the same configuration specs as the TAO detectnet_v2 train command <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/tao/object_detection/detectnet_v2/tao_detectnet_v2_evaluate/README.md>Reference file</a>
+version: 3
+type: command
+inputs:
+  training_data_dir:
+    type: uri_folder
+  training_data_subdir:
+    type: string
+  specfile_reference_training_data_dir:
+    type: string
+  validation_data_dir:
+    type: uri_folder
+  validation_data_subdir:
+    type: string
+    default: ND
+  specfile_reference_validation_data_dir:
+    type: string
+    default: ND
+  training_tf_records_dir:
+    type: uri_folder
+  training_tf_records_subdir:
+    type: string
+  specfile_reference_training_tf_records_dir:
+    type: string
+  validation_tf_records_dir:
+    type: uri_folder
+  validation_tf_records_subdir:
+    type: string
+    default: ND
+  specfile_reference_validation_tf_records_dir:
+    type: string
+    default: ND
+  original_specs:
+    type: uri_folder
+  specs_file:
+    type: string
+    default: detectnet_v2_train_resnet18_kitti.txt
+  target_model_dir: 
+    type: uri_folder
+  key:
+    type: string
+    default: tlt_encode
+  model_app_name:
+    type: string
+    default: detectnet_v2 
+  base_model_dir:
+    type: uri_folder
+  base_model_subdir:
+    type: string
+    default: ND
+  specfile_reference_model_dir:
+    type: string
+  model_name:
+    type: string
+    default: resnet18_detector
+  model_subfolder:
+    type: string
+    default: experiment_dir_unpruned
+  running_framework:
+    type: string
+    default: ND
+  use_training_set:
+    type: string
+    default: ND
+  gpu_index:
+    type: string
+    default: ND
+code: ./src
+environment: azureml://registries/<registry_name>/environments/nvidia_tao_tfv3_22_05_tf1_15_4/versions/2
+command: >-
+  bash update_and_evaluate.sh 
+  ${{inputs.original_specs}} 
+  ${{inputs.specs_file}} 
+  ${{inputs.training_data_dir}}/${{inputs.training_data_subdir}}
+  ${{inputs.specfile_reference_training_data_dir}} 
+  ${{inputs.validation_data_dir}}/${{inputs.validation_data_subdir}}
+  ${{inputs.specfile_reference_validation_data_dir}} 
+  ${{inputs.training_tf_records_dir}}/${{inputs.training_tf_records_subdir}}
+  ${{inputs.specfile_reference_training_tf_records_dir}} 
+  ${{inputs.validation_tf_records_dir}}/${{inputs.validation_tf_records_subdir}}
+  ${{inputs.specfile_reference_validation_tf_records_dir}} 
+  ${{inputs.key}} 
+  ${{inputs.base_model_dir}}/${{inputs.model_app_name}}/${{inputs.base_model_subdir}}
+  ${{inputs.specfile_reference_model_dir}}
+  ${{inputs.model_name}} 
+  ${{inputs.model_app_name}}/${{inputs.model_subfolder}} 
+  ${{inputs.target_model_dir}} 
+  ${{inputs.running_framework}} 
+  ${{inputs.use_training_set}} 
+  ${{inputs.gpu_index}} 

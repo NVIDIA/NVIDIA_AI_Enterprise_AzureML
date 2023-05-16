@@ -1,0 +1,5 @@
+$schema: https://azuremlschemas.azureedge.net/latest/data.schema.json
+name: nyc_Regression_Data
+description: Training dataset for NYC Regression
+type: uri_folder
+path: ./data

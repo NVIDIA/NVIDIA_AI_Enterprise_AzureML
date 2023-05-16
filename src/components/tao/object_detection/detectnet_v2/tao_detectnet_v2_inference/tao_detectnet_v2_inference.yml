@@ -1,0 +1,52 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: tao_detectnet_v2_inference
+display_name: tao_detectnet_v2_inference
+description: Wrapper for TAO command detectnet_v2 inference, The inference command for detectnet_v2 may be used to visualize bboxes and/or generate frame-by-frame KITTI format labels on a single image or directory of images. <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/tao/object_detection/detectnet_v2/tao_detectnet_v2_inference/README.md>Reference file</a> 
+version: 4
+type: command
+inputs:
+  data_dir:
+    type: uri_folder
+  input_subfolder:
+    type: string
+    default: /testing/image_2  
+  model_dir:
+    type: uri_folder
+  model_app_name: 
+      type: string
+      default: detectnet_v2
+  specfile_reference_model_dir:
+    type: string
+    default: /home/jupyter/detectnet_v2
+  original_specs:
+    type: uri_folder
+  specs_file:
+    type: string
+    default: detectnet_v2_inference_kitti_tlt.txt
+  key:
+    type: string
+    default: tlt_encode 
+  output_subfolder:
+    type: string
+    default: tlt_infer_testing
+  number_of_images:
+    type: integer
+    default: 10
+outputs:
+  results_dir:
+    type: uri_folder
+code: ./src
+environment: azureml://registries/<registry_name>/environments/nvidia_tao_tfv3_22_05_tf1_15_4/versions/2
+command: >-
+  bash update_and_inference.sh 
+  ${{inputs.original_specs}} 
+  ${{inputs.specs_file}} 
+  ${{inputs.data_dir}} 
+  ${{inputs.input_subfolder}} 
+  ${{inputs.model_dir}}/${{inputs.model_app_name}}
+  ${{inputs.specfile_reference_model_dir}}
+  ${{inputs.key}} 
+  ${{inputs.output_subfolder}}
+  ${{inputs.number_of_images}}
+  ${{outputs.results_dir}}/${{inputs.model_app_name}}
+

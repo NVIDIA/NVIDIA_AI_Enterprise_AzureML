@@ -1,0 +1,5 @@
+name: monai_train_env
+version: 1
+build:
+  path: ./
+description: nvcr.io/nvidia/clara/monai-toolkit:1.0

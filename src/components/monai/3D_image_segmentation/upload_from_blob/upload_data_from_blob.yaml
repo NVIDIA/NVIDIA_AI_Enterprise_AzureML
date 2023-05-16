@@ -1,0 +1,34 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: upload_data_from_blob
+version: 0.3.0
+display_name: Upload data from blob
+type: command
+description: Download and uncompress data from blob to local folder
+is_deterministic: true
+tags:
+  Preview: ''
+
+inputs:
+  blob_file_location:
+    type: uri_folder
+    description: the input blob .tar file location
+    mode: "ro_mount"
+  overwrite:
+    type: boolean
+    description: overwrire local data
+    default: true
+    optional: true
+
+outputs:
+  image_data_folder:
+    type: uri_folder
+    description: the output folder where the uncompressed data will be written
+    mode: "rw_mount"
+    mode: "upload"  
+
+code: ./src
+
+command: >-
+  python run.py --blob_file ${{inputs.blob_file_location}} $[[--overwrite ${{inputs.overwrite}}]] --image_data_folder ${{outputs.image_data_folder}}
+
+environment: "azureml://registries/NVIDIARegistryTest1/environments/monai_train_env/versions/1"

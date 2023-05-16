@@ -1,0 +1,6 @@
+$schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
+name: NVIDIA-tensorrt
+version: 1
+description: Environment using TENSORRT NVAIE container
+build:
+  path: ./env_tensorrt

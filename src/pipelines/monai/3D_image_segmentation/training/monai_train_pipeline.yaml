@@ -1,0 +1,43 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineComponent.schema.json
+type: pipeline
+
+name: monai_train_pipeline
+display_name: monai_train_pipeline_component
+description: MONAI train pipeline component with command components
+tags:
+  Preview: ''
+
+inputs:
+  pipeline_input_file: 
+    type: uri_file  # default/path for data type
+  best_model_name: # best trained model
+    type: string
+  train_node_compute: # promote compute as input
+    type: string
+
+outputs: 
+  model:
+    type: uri_folder
+
+jobs:
+  load_job:
+    type: command
+    component: azureml://registries/NVIDIARegistryTest1/components/upload_data_from_blob/versions/0.3.0
+    inputs:
+      blob_file_location: ${{parent.inputs.pipeline_input_file}}
+    outputs:
+      image_data_folder: 
+        mode: upload
+
+  train_job:
+    type: command
+    component: azureml://registries/NVIDIARegistryTest1/components/train_segmentation/versions/0.4.0
+    inputs:
+      input_data: ${{parent.jobs.load_job.outputs.image_data_folder}}
+      best_model_name: ${{parent.inputs.best_model_name}}
+      max_epochs: 2
+      
+    outputs:
+      model: ${{parent.outputs.model}}
+    compute: ${{parent.inputs.train_node_compute}}
+  

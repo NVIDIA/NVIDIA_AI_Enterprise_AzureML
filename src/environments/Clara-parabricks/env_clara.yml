@@ -1,0 +1,6 @@
+$schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
+name: NVIDIA-clara
+version: 1
+description: Environment using CLARA-PARABRICKS NVAIE container
+build:
+  path: ./env_clara

@@ -1,0 +1,105 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: tao_detectnet_v2_train
+display_name: tao_detectnet_v2_train
+description: Wrapper for TAO command detectnet_v2 train. After creating TFRecords ingestible by the TAO training and setting up a spec file, one is now ready to start training an object detection network using this component. It allows the specification of the number of epochs to be used <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/tao/object_detection/detectnet_v2/tao_detectnet_v2_train/README.md>Reference file</a> 
+version: 1
+type: command
+inputs:
+  model_app_name:
+    type: string
+  class_list:
+    type: string
+  num_epochs:
+    type: number
+    default: 5
+  training_data_dir:
+    type: uri_folder
+  training_data_subdir:
+    type: string
+  specfile_reference_training_data_dir:
+    type: string
+  validation_data_dir:
+    type: uri_folder
+  validation_data_subdir:
+    type: string
+    default: ND
+  specfile_reference_validation_data_dir:
+    type: string
+    default: ND
+  training_tf_records_dir:
+    type: uri_folder
+  training_tf_records_subdir:
+    type: string
+  specfile_reference_training_tf_records_dir:
+    type: string
+  validation_tf_records_dir:
+    type: uri_folder
+  validation_tf_records_subdir:
+    type: string
+    default: ND
+  specfile_reference_validation_tf_records_dir:
+    type: string
+    default: ND
+  base_model_dir:
+    type: uri_folder
+  base_model_subdir:
+    type: string
+    default: ND
+  specfile_reference_model_dir:
+    type: string
+  original_specs:
+    type: uri_folder
+  specs_file:
+    type: string
+    default: detectnet_v2_train_resnet18_kitti.txt
+  num_gpus:
+    type: number
+    default: 1
+  key:
+    type: string
+    default: tlt_encode 
+  name_string_for_the_model:
+    type: string
+    default: resnet18_detector
+  model_subfolder:
+    type: string
+    default: experiment_dir_unpruned
+  gpu_index:
+    type: string
+    default: ND
+  use_amp:
+    type: string
+    default: ND
+  log_file:
+    type: string
+    default: ND
+outputs:
+  trained_model_dir:
+    type: uri_folder
+code: ./src
+environment:  azureml://registries/<registry_name>/environments/nvidia_tao_tfv3_22_05_tf1_15_4/versions/2
+command: >-
+  bash ./update_and_train.sh 
+  ${{inputs.original_specs}} 
+  ${{inputs.specs_file}}
+  ${{inputs.class_list}}
+  ${{inputs.num_epochs}}
+  ${{inputs.training_data_dir}}/${{inputs.training_data_subdir}}
+  ${{inputs.specfile_reference_training_data_dir}} 
+  ${{inputs.validation_data_dir}}/${{inputs.validation_data_subdir}}
+  ${{inputs.specfile_reference_validation_data_dir}} 
+  ${{inputs.training_tf_records_dir}}/${{inputs.training_tf_records_subdir}}
+  ${{inputs.specfile_reference_training_tf_records_dir}} 
+  ${{inputs.validation_tf_records_dir}}/${{inputs.validation_tf_records_subdir}}
+  ${{inputs.specfile_reference_validation_tf_records_dir}} 
+  ${{inputs.key}} 
+  ${{inputs.base_model_dir}}/${{inputs.model_app_name}}/${{inputs.base_model_subdir}}
+  ${{inputs.specfile_reference_model_dir}}
+  ${{inputs.num_gpus}} 
+  ${{inputs.name_string_for_the_model}} 
+  ${{inputs.model_subfolder}} 
+  ${{outputs.trained_model_dir}}/${{inputs.model_app_name}}
+  ${{inputs.gpu_index}} 
+  ${{inputs.use_amp}} 
+  ${{inputs.log_file}}
+

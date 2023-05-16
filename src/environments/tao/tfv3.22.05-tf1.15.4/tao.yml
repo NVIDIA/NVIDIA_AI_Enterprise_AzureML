@@ -1,0 +1,5 @@
+name: nvidia_tao_tfv3_22_05_tf1_15_4
+version: 2
+build:
+  path: ./docker
+description: Environment for container nvcr.io/nvidia/tao/tao-toolkit-tf:v3.22.05-tf1.15.4-py3 with MLFlow

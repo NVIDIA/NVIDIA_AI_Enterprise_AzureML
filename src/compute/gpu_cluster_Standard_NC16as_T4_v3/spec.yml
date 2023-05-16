@@ -1,0 +1,9 @@
+$schema: https://azuremlschemas.azureedge.net/latest/amlCompute.schema.json 
+name: gpu_T4_cluster
+type: amlcompute
+size: Standard_NC16as_T4_v3
+tier: low_priority
+min_instances: 0
+max_instances: 3
+idle_time_before_scale_down: 600
+location: eastus

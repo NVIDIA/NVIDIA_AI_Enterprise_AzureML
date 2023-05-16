@@ -1,0 +1,25 @@
+# <component>
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: prep_taxi_data
+display_name: PrepTaxiData
+description: Component for Taking in Raw NYC Taxi Data
+version: 1
+tags:
+  'NVIDIA AI Enterprise': '3.1'
+  Preview: ''
+
+type: command
+inputs:
+  raw_data: 
+    type: uri_folder 
+outputs:
+  prep_data:
+    type: uri_folder
+code: ./prep_src
+#environment: azureml:NVIDIA-rapids@latest
+environment: azureml://registries/NVIDIARegistryTest1/environments/NVIDIA-rapids/versions/1
+command: >-
+  python prep.py 
+  --raw_data ${{inputs.raw_data}} 
+  --prep_data ${{outputs.prep_data}}
+# </component>

@@ -1,0 +1,22 @@
+# <component>
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: taxi_feature_engineering
+display_name: TaxiFeatureEngineering
+tags:
+  NVAIE: '3.1'
+version: 1
+type: command
+inputs:
+  clean_data: 
+    type: uri_folder 
+outputs:
+  transformed_data:
+    type: uri_folder
+code: ./transform_src
+#environment: azureml:NVIDIA-rapids@latest
+environment: azureml://registries/NVIDIARegistryTest1/environments/NVIDIA-rapids/versions/1
+command: >-
+  python transform.py 
+  --clean_data ${{inputs.clean_data}} 
+  --transformed_data ${{outputs.transformed_data}}
+# </component>

@@ -1,0 +1,43 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: train_segmentation
+version: "0.4.0"
+display_name: Train segmentation model
+type: command
+description: Component to train a model
+is_deterministic: true
+tags:
+  Preview: ''
+
+distribution:
+  type: pytorch
+ 
+shm_size:
+  type: string
+
+
+# (input_data_dir, best_model_name, max_epochs):
+inputs:
+  input_data:
+    type: uri_folder
+    description: the input folder
+    mode: "ro_mount"
+#    mode: "download"
+  best_model_name:
+    type: string
+    description: best model name
+  max_epochs:
+    type: integer
+    description: total number of epochs for local training
+    default: 2
+    optional: true    
+outputs:
+  model:
+    type: uri_folder
+    description: the output checkpoint
+
+code: ./src
+
+command: >-
+  python run.py $[[--epochs ${{inputs.max_epochs}}]] --initial_lr 0.00025 --train_batch_size 1 --val_batch_size 1 --input_data ${{inputs.input_data}} --best_model_name ${{inputs.best_model_name}} --model ${{outputs.model}}
+
+environment: "azureml://registries/NVIDIARegistryTest1/environments/monai_train_env/versions/1"

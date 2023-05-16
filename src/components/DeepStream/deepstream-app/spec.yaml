@@ -1,0 +1,48 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+type: command
+
+description: Wrapper for deepstream-app in deepstream samples. <a href=https://https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/Deepstream/deepstream-app/README.md>Reference file</a>
+
+tags:
+  'NVIDIA AI Enterprise': '3.1'
+  Preview: ''
+
+
+name: deepstream_app
+display_name: deepstream_app
+version: 1
+
+inputs:
+  sample_input_data:
+    type: uri_folder
+  conn_str:
+    type: string
+  container_name:
+    type: string
+  model:
+    type: uri_folder
+  model_name:
+    type: string    
+outputs:
+  sample_output_data:
+    type: uri_folder
+
+code: ./src
+
+environment: azureml://registries/NVIDIARegistryTest1/environments/ds_6_2_triton/versions/1
+
+command: >-
+  python run.py  
+  --input_data ${{inputs.sample_input_data}}
+  --conn_str '${{inputs.conn_str}}'
+  --container_name ${{inputs.container_name}}
+  --model ${{inputs.model}}
+  --model_name ${{inputs.model_name}}  
+  --output_data ${{outputs.sample_output_data}}
+
+resources:
+  instance_count: 1
+
+distribution:
+  type: mpi
+  process_count_per_instance: 1

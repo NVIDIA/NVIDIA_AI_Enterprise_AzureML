@@ -1,0 +1,66 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: tao_detectnet_v2_prune
+display_name: tao_detectnet_v2_prune
+description: Wrapper for TAO command detectnet_v2 prune. Pruning removes parameters from the model to reduce the model size without compromising the integrity of the model itself <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/tao/object_detection/detectnet_v2/tao_detectnet_v2_prune/README.md>Reference file</a>
+version: 3
+type: command
+inputs:
+  model_app_name:
+    type: string
+    default: detectnet_v2
+  unpruned_model_dir:
+    type: uri_folder
+  unprunned_model_subfolder:
+    type: string
+    default: experiment_dir_unpruned/weights
+  unprunned_model_name:
+    type: string
+    default: resnet18_detector.tlt
+  prunned_model_subfolder:
+    type: string
+    default: experiment_dir_pruned
+  prunned_model_name:
+    type: string
+    default: resnet18_nopool_bn_detectnet_v2_pruned.tlt
+  key:
+    type: string
+    default: tlt_encode
+  equalization_criterion:
+    type: string
+    default: ND
+  pth:
+    type: string
+    default: ND
+  normalizer:
+    type: string
+    default: ND
+  excluded_layers:
+    type: string
+    default: ND
+  pruning_granularity:
+    type: string
+    default: ND
+  min_num_filters:
+    type: string
+    default: ND
+outputs:
+  pruned_model_dir:
+    type: uri_folder
+code: ./
+environment: azureml://registries/<registry_name>/environments/nvidia_tao_tfv3_22_05_tf1_15_4/versions/2
+command: >-
+  bash ./tao_detectnet_v2_prune.sh 
+  ${{inputs.unpruned_model_dir}}/${{inputs.model_app_name}}/
+  ${{inputs.unprunned_model_subfolder}}
+  ${{inputs.unprunned_model_name}} 
+  ${{inputs.prunned_model_subfolder}} 
+  ${{inputs.prunned_model_name}} 
+  ${{inputs.key}} 
+  ${{outputs.pruned_model_dir}}/${{inputs.model_app_name}}
+  ${{inputs.equalization_criterion}} 
+  ${{inputs.pth}} 
+  ${{inputs.normalizer}} 
+  ${{inputs.excluded_layers}} 
+  ${{inputs.pruning_granularity}} 
+  ${{inputs.min_num_filters}}
+

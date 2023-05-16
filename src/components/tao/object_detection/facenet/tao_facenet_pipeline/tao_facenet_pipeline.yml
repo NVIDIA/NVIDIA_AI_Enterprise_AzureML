@@ -1,0 +1,270 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineComponent.schema.json
+type: pipeline
+name: tao_facenet_pipeline
+version: 2
+display_name: pipeline component with TAO facenet workflow
+description: Face Detect AzureML Pipeline Component using TAO DetectNet_v2 Command Components. The FaceDetect model detects one or more faces in a given image or video. Some of the major steps covered in the pipeline are, but not limited to Take a pretrained resnet18 model and train a ResNet-18 FaceNet model on the WIDERFACE dataset, Prune the trained FaceNet model, Retrain the pruned model to recover lost accuracy, Export the pruned model, Run Inference on the trained model <a href=https://github.com/mreyesgomez/NVIDIA_AzureML_Components_and_Pipelines/tree/main/components/tao/tfv3.22.05-tf1.15.4/object_detection/facenet/tao_facenet_pipeline/README.md>Reference file</a>
+inputs:
+  num_epochs:
+    type: integer
+  model_app_name:
+    type: string
+  num_gpus:
+    type: integer
+  key:
+    type: string
+  compute_train_node:
+    type: string
+  original_specs:
+    type: uri_folder
+outputs:
+  data_dir:
+    type: uri_folder
+  converted_data_dir:
+    type: uri_folder
+  tf_records_dir_train:
+    type: uri_folder
+  tf_records_dir_val:
+    type: uri_folder
+  base_model_dir:
+    type: uri_folder
+  unpruned_model_dir:
+    type: uri_folder
+  pruned_model_dir:
+    type: uri_folder
+  pruned_and_retrained_model_dir:
+    type: uri_folder
+  trained_pruned_model_inference_dir:
+    type: uri_folder
+jobs: 
+  download_data:
+    type: command
+    component: azureml://registries/<registry_name>/components/download_multiple_streams/versions/2
+    compute: ${{parent.inputs.compute_train_node}}
+    inputs:
+      urls: "https://huggingface.co/datasets/wider_face/resolve/main/data/WIDER_train.zip,https://huggingface.co/datasets/wider_face/resolve/main/data/WIDER_val.zip,https://huggingface.co/datasets/wider_face/resolve/main/data/WIDER_test.zip,http://mmlab.ie.cuhk.edu.hk/projects/WIDERFace/support/bbx_annotation/wider_face_split.zip"
+      file_types: "training_images,validations_images,testing_images,annotations"
+      checksums: 'NA'
+    outputs:
+      data_dir: ${{parent.outputs.data_dir}}
+  convert_data:
+    type: command
+    component: azureml://registries/<registry_name>/components/convert_multiple_streams_wider_to_kitti/versions/2
+    compute: ${{parent.inputs.compute_train_node}}
+    inputs:
+      source_data_dir: ${{parent.jobs.download_data.outputs.data_dir}}
+      image_subdirs: "WIDER_train/images,WIDER_val/images"
+      label_files: "wider_face_split/wider_face_train_bbx_gt.txt,wider_face_split/wider_face_val_bbx_gt.txt"
+      output_subdirs: 'training,validation'
+      image_height: 146
+      image_width: 736
+    outputs:
+      converted_data_dir: ${{parent.outputs.converted_data_dir}}
+  dataset_convert_train:
+    type: command
+    component: azureml://registries/<registry_name>/components/tao_detectnet_v2_dataset_convert/versions/3
+    compute: ${{parent.inputs.compute_train_node}}
+    inputs:
+      specs_dir: ${{parent.inputs.original_specs}}
+      data_dir: ${{parent.jobs.convert_data.outputs.converted_data_dir}}
+      dataset_export_spec: facenet_tfrecords_kitti_train.txt
+      output_filename: training/kitti_train
+      specfile_reference_data_dir: /home/jupyter/imported_files/files/facenet/data
+    outputs:
+      tf_records_dir: ${{parent.outputs.tf_records_dir_train}}
+  dataset_convert_val:
+    type: command
+    component: azureml://registries/<registry_name>/components/tao_detectnet_v2_dataset_convert/versions/3
+    compute: ${{parent.inputs.compute_train_node}}
+    inputs:
+      specs_dir: ${{parent.inputs.original_specs}}
+      data_dir: ${{parent.jobs.convert_data.outputs.converted_data_dir}}
+      dataset_export_spec: facenet_tfrecords_kitti_val.txt
+      output_filename: validation/kitti_val
+      specfile_reference_data_dir: /home/jupyter/imported_files/files/facenet/data
+    outputs:
+      tf_records_dir: ${{parent.outputs.tf_records_dir_val}}
+  download_model:
+    type: command
+    component: azureml://registries/<registry_name>/components/tao_download_model/versions/3
+    compute: ${{parent.inputs.compute_train_node}}
+    inputs:
+      model_app_name: ${{parent.inputs.model_app_name}}
+      model_type: facenet
+      model_name: unpruned_v2.0
+      model_subdir: pretrain_models
+    outputs:
+      base_model_dir: ${{parent.outputs.base_model_dir}}
+  tao_evaluate_pretrained:
+    type: command
+    component: azureml://registries/<registry_name>/components/tao_detectnet_v2_evaluate/versions/3
+    compute: ${{parent.inputs.compute_train_node}}
+    inputs:
+      training_data_dir: ${{parent.jobs.convert_data.outputs.converted_data_dir}}
+      training_data_subdir: data/training
+      specfile_reference_training_data_dir: /home/jupyter/imported_files/files/facenet/data/training
+      training_tf_records_dir: ${{parent.jobs.dataset_convert_train.outputs.tf_records_dir}}
+      training_tf_records_subdir: data/tfrecords/training
+      specfile_reference_training_tf_records_dir: /home/jupyter/imported_files/files/facenet/data/tfrecords/training
+      validation_data_dir: ${{parent.jobs.convert_data.outputs.converted_data_dir}}
+      validation_data_subdir: data/validation
+      specfile_reference_validation_data_dir: /home/jupyter/imported_files/files/facenet/data/validation
+      validation_tf_records_dir: ${{parent.jobs.dataset_convert_val.outputs.tf_records_dir}}
+      validation_tf_records_subdir: data/tfrecords/validation
+      specfile_reference_validation_tf_records_dir: /home/jupyter/imported_files/files/facenet/data/tfrecords/validation
+      model_app_name: ${{parent.inputs.model_app_name}}
+      base_model_dir: ${{parent.jobs.download_model.outputs.base_model_dir}}
+      base_model_subdir: pretrain_models
+      specfile_reference_model_dir: /home/jupyter/imported_files/files/facenet/pretrain_models
+      original_specs: ${{parent.inputs.original_specs}}
+      key: ${{parent.inputs.key}}
+      model_name: model.tlt
+      model_subfolder: pretrain_models/facenet_vunpruned_v2.0
+      target_model_dir: ${{parent.jobs.download_model.outputs.base_model_dir}}
+      specs_file: facenet_train_resnet18_kitti.txt
+  tao_train_base:
+    type: command
+    component: azureml://registries/<registry_name>/components/tao_detectnet_v2_train/versions/3
+    compute: ${{parent.inputs.compute_train_node}}
+    inputs:
+      num_epochs: ${{parent.inputs.num_epochs}}
+      training_data_dir: ${{parent.jobs.convert_data.outputs.converted_data_dir}}
+      training_data_subdir: data/training
+      specfile_reference_training_data_dir: /home/jupyter/imported_files/files/facenet/data/training
+      training_tf_records_dir: ${{parent.jobs.dataset_convert_train.outputs.tf_records_dir}}
+      training_tf_records_subdir: data/tfrecords/training
+      specfile_reference_training_tf_records_dir: /home/jupyter/imported_files/files/facenet/data/tfrecords/training
+      validation_data_dir: ${{parent.jobs.convert_data.outputs.converted_data_dir}}
+      validation_data_subdir: data/validation
+      specfile_reference_validation_data_dir: /home/jupyter/imported_files/files/facenet/data/validation
+      validation_tf_records_dir: ${{parent.jobs.dataset_convert_val.outputs.tf_records_dir}}
+      validation_tf_records_subdir: data/tfrecords/validation
+      specfile_reference_validation_tf_records_dir: /home/jupyter/imported_files/files/facenet/data/tfrecords/validation
+      model_app_name: ${{parent.inputs.model_app_name}}
+      base_model_dir: ${{parent.jobs.download_model.outputs.base_model_dir}}
+      base_model_subdir: pretrain_models
+      specfile_reference_model_dir: /home/jupyter/imported_files/files/facenet/pretrain_models
+      original_specs: ${{parent.inputs.original_specs}}
+      num_gpus: ${{parent.inputs.num_gpus}}
+      key: ${{parent.inputs.key}}
+      name_string_for_the_model: 'resnet18_detector'
+      model_subfolder: experiment_dir_unpruned
+      specs_file: facenet_train_resnet18_kitti.txt
+    outputs:
+      trained_model_dir: ${{parent.outputs.unpruned_model_dir}}
+  tao_evaluate_trained_unpruned:
+    type: command
+    component: azureml://registries/<registry_name>/components/tao_detectnet_v2_evaluate/versions/3
+    compute: ${{parent.inputs.compute_train_node}}
+    inputs:
+      training_data_dir: ${{parent.jobs.convert_data.outputs.converted_data_dir}}
+      training_data_subdir: data/training
+      specfile_reference_training_data_dir: /home/jupyter/imported_files/files/facenet/data/training
+      training_tf_records_dir: ${{parent.jobs.dataset_convert_train.outputs.tf_records_dir}}
+      training_tf_records_subdir: data/tfrecords/training
+      specfile_reference_training_tf_records_dir: /home/jupyter/imported_files/files/facenet/data/tfrecords/training
+      validation_data_dir: ${{parent.jobs.convert_data.outputs.converted_data_dir}}
+      validation_data_subdir: data/validation
+      specfile_reference_validation_data_dir: /home/jupyter/imported_files/files/facenet/data/validation
+      validation_tf_records_dir: ${{parent.jobs.dataset_convert_val.outputs.tf_records_dir}}
+      validation_tf_records_subdir: data/tfrecords/validation
+      specfile_reference_validation_tf_records_dir: /home/jupyter/imported_files/files/facenet/data/tfrecords/validation
+      model_app_name: ${{parent.inputs.model_app_name}}
+      base_model_dir: ${{parent.jobs.download_model.outputs.base_model_dir}}
+      base_model_subdir: pretrain_models
+      specfile_reference_model_dir: /home/jupyter/imported_files/files/facenet/pretrain_models
+      original_specs: ${{parent.inputs.original_specs}}
+      key: ${{parent.inputs.key}}
+      model_name: resnet18_detector.tlt
+      model_subfolder: experiment_dir_unpruned/weights
+      target_model_dir: ${{parent.jobs.tao_train_base.outputs.trained_model_dir}}
+      specs_file: facenet_train_resnet18_kitti.txt
+  tao_prune:
+    type: command
+    component: azureml://registries/<registry_name>/components/tao_detectnet_v2_prune/versions/3
+    compute: ${{parent.inputs.compute_train_node}}
+    inputs:
+      model_app_name: ${{parent.inputs.model_app_name}}
+      unpruned_model_dir: ${{parent.jobs.tao_train_base.outputs.trained_model_dir}}
+      unprunned_model_subfolder: experiment_dir_unpruned/weights
+      unprunned_model_name: resnet18_detector.tlt
+      prunned_model_subfolder: experiment_dir_pruned
+      prunned_model_name: resnet18_nopool_bn_detectnet_v2_pruned.tlt
+      equalization_criterion: union
+      pth: "0.0000052"
+      key: ${{parent.inputs.key}}
+    outputs:
+      pruned_model_dir: ${{parent.outputs.pruned_model_dir}}
+  tao_train_pruned:
+    type: command
+    component: azureml://registries/<registry_name>/components/tao_detectnet_v2_train/versions/3
+    compute: ${{parent.inputs.compute_train_node}}
+    inputs:
+      num_epochs: ${{parent.inputs.num_epochs}}
+      training_data_dir: ${{parent.jobs.convert_data.outputs.converted_data_dir}}
+      training_data_subdir: data/training
+      specfile_reference_training_data_dir: /home/jupyter/imported_files/files/facenet/data/training
+      training_tf_records_dir: ${{parent.jobs.dataset_convert_train.outputs.tf_records_dir}}
+      training_tf_records_subdir: data/tfrecords/training
+      specfile_reference_training_tf_records_dir: /home/jupyter/imported_files/files/facenet/data/tfrecords/training
+      validation_data_dir: ${{parent.jobs.convert_data.outputs.converted_data_dir}}
+      validation_data_subdir: data/validation
+      specfile_reference_validation_data_dir: /home/jupyter/imported_files/files/facenet/data/validation
+      validation_tf_records_dir: ${{parent.jobs.dataset_convert_val.outputs.tf_records_dir}}
+      validation_tf_records_subdir: data/tfrecords/validation
+      specfile_reference_validation_tf_records_dir: /home/jupyter/imported_files/files/facenet/data/tfrecords/validation
+      model_app_name: ${{parent.inputs.model_app_name}}
+      base_model_dir: ${{parent.jobs.tao_prune.outputs.pruned_model_dir}}
+      base_model_subdir: experiment_dir_pruned
+      specfile_reference_model_dir: /home/jupyter/imported_files/files/facenet/experiment_dir_pruned
+      original_specs: ${{parent.inputs.original_specs}}
+      num_gpus: ${{parent.inputs.num_gpus}}
+      key: ${{parent.inputs.key}}
+      name_string_for_the_model: resnet18_detector_pruned
+      model_subfolder: experiment_dir_retrain
+      specs_file: facenet_retrain_resnet18_kitti.txt
+    outputs:
+      trained_model_dir: ${{parent.outputs.pruned_and_retrained_model_dir}}
+  tao_evaluate_trained_pruned:
+    type: command
+    component: azureml://registries/<registry_name>/components/tao_detectnet_v2_evaluate/versions/3
+    compute: ${{parent.inputs.compute_train_node}}
+    inputs:
+      training_data_dir: ${{parent.jobs.convert_data.outputs.converted_data_dir}}
+      training_data_subdir: data/training
+      specfile_reference_training_data_dir: /home/jupyter/imported_files/files/facenet/data/training
+      training_tf_records_dir: ${{parent.jobs.dataset_convert_train.outputs.tf_records_dir}}
+      training_tf_records_subdir: data/tfrecords/training
+      specfile_reference_training_tf_records_dir: /home/jupyter/imported_files/files/facenet/data/tfrecords/training
+      validation_data_dir: ${{parent.jobs.convert_data.outputs.converted_data_dir}}
+      validation_data_subdir: data/validation
+      specfile_reference_validation_data_dir: /home/jupyter/imported_files/files/facenet/data/validation
+      validation_tf_records_dir: ${{parent.jobs.dataset_convert_val.outputs.tf_records_dir}}
+      validation_tf_records_subdir: data/tfrecords/validation
+      specfile_reference_validation_tf_records_dir: /home/jupyter/imported_files/files/facenet/data/tfrecords/validation
+      model_app_name: ${{parent.inputs.model_app_name}}
+      base_model_dir: ${{parent.jobs.tao_prune.outputs.pruned_model_dir}}
+      base_model_subdir: experiment_dir_pruned
+      specfile_reference_model_dir: /home/jupyter/imported_files/files/facenet/experiment_dir_pruned
+      original_specs: ${{parent.inputs.original_specs}}
+      key: ${{parent.inputs.key}}
+      model_name: resnet18_detector_pruned.tlt
+      model_subfolder: experiment_dir_retrain/weights
+      target_model_dir: ${{parent.jobs.tao_train_pruned.outputs.trained_model_dir}}
+      specs_file: facenet_retrain_resnet18_kitti.txt
+  tao_inference_trained_pruned:
+    type: command
+    component: azureml://registries/<registry_name>/components/tao_detectnet_v2_inference/versions/3
+    compute: ${{parent.inputs.compute_train_node}}
+    inputs:
+      data_dir: ${{parent.jobs.convert_data.outputs.converted_data_dir}}
+      input_subfolder: validation/images
+      model_app_name: ${{parent.inputs.model_app_name}}
+      model_dir: ${{parent.jobs.tao_train_pruned.outputs.trained_model_dir}}
+      specfile_reference_model_dir: /home/jupyter/imported_files/files/facenet
+      original_specs: ${{parent.inputs.original_specs}}
+      specs_file: facenet_inference_kitti_tlt.txt
+      key: ${{parent.inputs.key}}
+      output_subfolder: tlt_infer_testing
+    outputs:
+      results_dir: ${{parent.outputs.trained_pruned_model_inference_dir}}

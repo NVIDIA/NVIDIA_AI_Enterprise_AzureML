@@ -1,0 +1,6 @@
+$schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
+name: NVIDIA-TAO-Toolkit
+version: 1
+description: Environment using TAO-Toolkit NVAIE container
+build:
+  path: ./env_tao

@@ -1,0 +1,6 @@
+$schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
+name: NVIDIA-rapids
+version: 1
+description: Environment using RAPIDS NVAIE container
+build:
+  path: ./env_rapids
