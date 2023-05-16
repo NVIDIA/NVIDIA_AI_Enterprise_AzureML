@@ -1,0 +1,36 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: triton-tao-deployment-aml-1
+endpoint_name: triton-tao-endpoint-aml-1
+model: azureml:DetectNet:1
+model_mount_path: /models 
+environment: 
+  name: triton-tao-env
+  image: registryname.azurecr.io/tao:latest
+  inference_config:
+      liveness_route:
+          path: /v2/health/live
+          port: 8000
+      readiness_route:
+          path: /v2/health/ready
+          port: 8000
+      scoring_route:
+          path: /
+          port: 8000
+instance_type: Standard_NC6s_v3
+request_settings:
+  request_timeout_ms: 10000
+  max_concurrent_requests_per_instance: 512
+  max_queue_wait_ms: 3000
+liveness_probe:
+  initial_delay: 300
+  timeout: 1
+  period: 5
+  success_threshold: 1
+  failure_threshold: 20
+readiness_probe:
+  initial_delay: 300
+  timeout: 1
+  period: 5
+  success_threshold: 1
+  failure_threshold: 20
+instance_count: 1

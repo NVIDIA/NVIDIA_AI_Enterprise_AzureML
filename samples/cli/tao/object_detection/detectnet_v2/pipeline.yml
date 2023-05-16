@@ -1,0 +1,44 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+experiment_name: NVIDIA_TAO_tfv3_22_05_tf1_15_4_DETECTNET_V2_JOB
+settings:
+  default_compute: azureml:<gpu-cluster>
+inputs:
+  model_app_name: detectnet_v2
+  class_list: car,cyclist,pedestrian
+  num_epochs: <num_epochs>
+  num_gpus: 1
+  key: 'tlt_encode'
+  original_specs:
+    type: uri_folder
+    path: ./specs/
+  config_files_dir: 
+    type: uri_folder
+    path: ./config_files/   
+  compute_train_node: <gpu-cluster>
+  dummy_validation_data_dir: 
+    type: uri_folder
+    path: ./
+  dummy_validation_tf_records_dir: 
+    type: uri_folder
+    path: ./ 
+outputs: 
+  triton_model_repository_dir:
+    type: uri_folder
+jobs:
+  detect_net_workflow:
+    type: pipeline
+    component: azureml://registries/<registry_name>/components/detectnet_v2_data_pipeline/versions/1
+    inputs:
+      class_list: ${{parent.inputs.class_list}}
+      num_epochs: ${{parent.inputs.num_epochs}}
+      num_gpus: ${{parent.inputs.num_gpus}}
+      key: ${{parent.inputs.key}}
+      compute_train_node: ${{parent.inputs.compute_train_node}}
+      original_specs: ${{parent.inputs.original_specs}}
+      config_files_dir: ${{parent.inputs.config_files_dir}}
+      model_app_name: ${{parent.inputs.model_app_name}}
+      dummy_validation_data_dir: ${{parent.inputs.dummy_validation_data_dir}}
+      dummy_validation_tf_records_dir: ${{parent.inputs.dummy_validation_tf_records_dir}}
+    outputs:
+      triton_model_repository_dir: ${{parent.outputs.triton_model_repository_dir}}

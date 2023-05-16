@@ -1,0 +1,25 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+experiment_name: NVIDIA_TAO_tfv3_22_05_tf1_15_4_FACENET_JOB
+settings:
+  default_compute: azureml:<gpu-cluster>
+inputs:
+  model_app_name: facenet
+  num_epochs: <num_epochs>
+  num_gpus: 1
+  key: 'nvidia_tlt'
+  original_specs:
+    type: uri_folder
+    path: ./specs/ 
+  compute_train_node: <gpu-cluster>
+jobs:
+  facenet_workflow:
+    type: pipeline
+    component: azureml://registries/<registry_name>/components/tao_facenet_pipeline/versions/2
+    inputs:
+      num_epochs: ${{parent.inputs.num_epochs}}
+      num_gpus: ${{parent.inputs.num_gpus}}
+      key: ${{parent.inputs.key}}
+      compute_train_node: ${{parent.inputs.compute_train_node}}
+      original_specs: ${{parent.inputs.original_specs}}
+      model_app_name: ${{parent.inputs.model_app_name}}
