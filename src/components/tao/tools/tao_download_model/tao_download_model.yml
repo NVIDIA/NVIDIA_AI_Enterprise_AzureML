@@ -1,0 +1,31 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: tao_download_model
+display_name: tao_download_model
+description: TAO Download Model Component. Auxiliary component that downloads and leverages the NGC REGISTRY CLI to allow the download of specific TAO pretreined models <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/tao/tools/tao_download_model/README.md>Reference file</a>
+version: 2
+type: command
+inputs:
+  model_app_name:
+    type: string
+    default: detectnet_v2
+  model_type:
+    type: string
+    default: pretrained_detectnet_v2
+  model_name:
+    type: string
+    default: resnet18
+  model_subdir:
+    type: string
+    default: pretrained_resnet18
+outputs:
+  base_model_dir:
+    type: uri_folder
+code: ./src
+environment: azureml://registries/<registry_name>/environments/nvidia_tao_tfv3_22_05_tf1_15_4/versions/1
+command: >-
+  bash ./tao_download_model.sh 
+  ${{inputs.model_app_name}} 
+  ${{inputs.model_type}} 
+  ${{inputs.model_name}} 
+  ${{inputs.model_subdir}} 
+  ${{outputs.base_model_dir}}

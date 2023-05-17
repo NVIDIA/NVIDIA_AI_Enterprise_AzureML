@@ -1,0 +1,86 @@
+set -x
+
+# map the output data location to the directory name used by the script
+
+export ETLT_MODEL_DIR=$1
+export ETLT_MODEL_NAME=$2
+export ETLT_MODEL_SUBFOLDER=$3
+export TRT_MODEL_NAME=$4
+export TRT_MODEL_SUBFOLDER=$5
+export TRT_MODEL_DIR=$6
+export KEY=$7
+export INPUT_DIMENSIONS=$8
+export OUTPUT_NODES=${9}
+export CAL_CACHE_DIR=${10}
+export CAL_CACHE_FILENAME=${11}
+export CAL_BATCH_SIZE=${12}
+export MAX_BATCH_SIZE=${13}
+export ENGINE_DATATYPE=${14}
+export MAX_WORKSPACE_SIZE=${15}
+export INPUTS_DIMENSION_ORDERING=${16}
+export OPTIMIZATION_PROFILES=${17}
+export STRICT_TYPE_CONSTRAINTS=${18}
+export DLA_CORE_INDEX=${19}
+
+mkdir ${TRT_MODEL_DIR}
+mkdir -p ${TRT_MODEL_DIR}/${TRT_MODEL_SUBFOLDER}
+
+ADDITIONAL_ARGS=""
+
+if [[ "${CAL_CACHE_FILENAME}" != "ND" ]]
+then
+    ADDITIONAL_ARGS="$ADDITIONAL_ARGS -c ${CAL_CACHE_DIR}/${ETLT_MODEL_SUBFOLDER}/${CAL_CACHE_FILENAME}"
+    ls ${CAL_CACHE_DIR}/${ETLT_MODEL_SUBFOLDER}/${CAL_CACHE_FILENAME}
+fi
+
+if [[ "${INPUTS_DIMENSION_ORDERING}" != "ND" ]]
+then
+    ADDITIONAL_ARGS="$ADDITIONAL_ARGS -i ${INPUTS_DIMENSION_ORDERING}"
+fi
+
+if [[ "${MAX_BATCH_SIZE}" != "ND" ]]
+then
+    ADDITIONAL_ARGS="$ADDITIONAL_ARGS -m ${MAX_BATCH_SIZE}"
+fi
+
+if [[ "${ENGINE_DATATYPE}" != "ND" ]]
+then
+    ADDITIONAL_ARGS="$ADDITIONAL_ARGS -t ${ENGINE_DATATYPE}"
+fi
+
+if [[ "${CAL_BATCH_SIZE}" != "ND" ]]
+then
+    ADDITIONAL_ARGS="$ADDITIONAL_ARGS -b ${CAL_BATCH_SIZE}"
+fi
+
+if [[ "${MAX_WORKSPACE_SIZE}" != "ND" ]]
+then
+    ADDITIONAL_ARGS="$ADDITIONAL_ARGS -w ${MAX_WORKSPACE_SIZE}"
+fi
+
+if [[ "${OPTIMIZATION_PROFILES}" != "ND" ]]
+then
+    ADDITIONAL_ARGS="$ADDITIONAL_ARGS -p ${OPTIMIZATION_PROFILES}"
+fi
+
+if [[ "${STRICT_TYPE_CONSTRAINTS}" != "ND" ]]
+then
+    ADDITIONAL_ARGS="$ADDITIONAL_ARGS -s"
+fi
+
+if [[ "${DLA_CORE_INDEX}" != "ND" ]]
+then
+    ADDITIONAL_ARGS="$ADDITIONAL_ARGS -u ${DLA_CORE_INDEX}"
+fi
+
+ls ${ETLT_MODEL_DIR}/${ETLT_MODEL_SUBFOLDER}/${ETLT_MODEL_NAME}
+
+converter ${ETLT_MODEL_DIR}/${ETLT_MODEL_SUBFOLDER}/${ETLT_MODEL_NAME} \
+                   -k $KEY \
+                   -d $INPUT_DIMENSIONS \
+                   -o $OUTPUT_NODES \
+                   -e ${TRT_MODEL_DIR}/${TRT_MODEL_SUBFOLDER}/${TRT_MODEL_NAME} \
+                   $ADDITIONAL_ARGS
+
+ls -lh ${TRT_MODEL_DIR}/${TRT_MODEL_SUBFOLDER}/
+

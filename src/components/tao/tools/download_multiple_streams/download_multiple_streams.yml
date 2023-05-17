@@ -1,0 +1,28 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: download_multiple_streams
+display_name: download_multiple_streams
+description: Auxiliary Component to download data streams from multiple source urls into the same output folder. It requires also information on the expected files types and an optional checksum value to verify the data was downloaded as expected <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/tao/tools/download_multiple_streams/README.md>Reference file</a>
+version: 1
+type: command
+inputs:
+  urls:
+    type: string
+    default: https://huggingface.co/datasets/wider_face/resolve/main/data/WIDER_train.zip,https://huggingface.co/datasets/wider_face/resolve/main/data/WIDER_val.zip,https://huggingface.co/datasets/wider_face/resolve/main/data/WIDER_test.zip,http://mmlab.ie.cuhk.edu.hk/projects/WIDERFace/support/bbx_annotation/wider_face_split.zip
+  file_types:
+    type: string
+    default: 'training_images,validations_images,testing_images,annotations'  
+  checksums:
+    type: string
+    default: 'NA'
+outputs:
+  data_dir:
+    type: uri_folder
+code: ./src
+environment: azureml://registries/<registry_name>/environments/nvidia_tao_tfv3_22_05_tf1_15_4/versions/1
+command: >-
+  bash ./download_multiple_streams.sh 
+  ${{inputs.urls}} 
+  ${{inputs.file_types}} 
+  ${{inputs.checksums}} 
+  ${{outputs.data_dir}}
+

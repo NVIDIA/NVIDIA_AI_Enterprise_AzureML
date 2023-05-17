@@ -1,0 +1,42 @@
+set -x
+
+# map the output data location to the directory name used by the script
+
+export SOURCE_MODEL=$1
+export CONFIG_FILE=$2
+export MODEL_REPOSITORY_DIR=$3
+export REPOSITORY_MODEL_NAME=$4
+export MODEL_FILENAME=$5
+export NEW_CONFIG_FILENAME=$6
+
+
+if [ -d "$MODEL_REPOSITORY_DIR" ]
+then
+  echo "Directory $MODEL_REPOSITORY_DIR exists."
+  if [ -d "${MODEL_REPOSITORY_DIR}/${REPOSITORY_MODEL_NAME}" ]
+  then
+    echo "Directory ${MODEL_REPOSITORY_DIR}/${REPOSITORY_MODEL_NAME} exists."
+    if [ -d "${MODEL_REPOSITORY_DIR}/${REPOSITORY_MODEL_NAME}/1" ]
+    then
+      echo "Directory ${MODEL_REPOSITORY_DIR}/${REPOSITORY_MODEL_NAME}/1 exists."
+    else
+      echo "Creating folder ${MODEL_REPOSITORY_DIR}/${REPOSITORY_MODEL_NAME}/1"
+      mkdir ${MODEL_REPOSITORY_DIR}/${REPOSITORY_MODEL_NAME}/1
+    fi
+  else
+    echo "Creating folder ${MODEL_REPOSITORY_DIR}/${REPOSITORY_MODEL_NAME}"
+    mkdir ${MODEL_REPOSITORY_DIR}/${REPOSITORY_MODEL_NAME}
+    echo "Creating folder ${MODEL_REPOSITORY_DIR}/${REPOSITORY_MODEL_NAME}/1"
+    mkdir ${MODEL_REPOSITORY_DIR}/${REPOSITORY_MODEL_NAME}/1
+  fi
+else
+  echo "Creating folder ${MODEL_REPOSITORY_DIR}"
+  mkdir $MODEL_REPOSITORY_DIR
+  echo "Creating folder ${MODEL_REPOSITORY_DIR}/${REPOSITORY_MODEL_NAME}"
+  mkdir ${MODEL_REPOSITORY_DIR}/${REPOSITORY_MODEL_NAME}
+  echo "Creating folder ${MODEL_REPOSITORY_DIR}/${REPOSITORY_MODEL_NAME}/1"
+  mkdir ${MODEL_REPOSITORY_DIR}/${REPOSITORY_MODEL_NAME}/1
+fi  
+
+cp ${SOURCE_MODEL} ${MODEL_REPOSITORY_DIR}/${REPOSITORY_MODEL_NAME}/1/${MODEL_FILENAME}
+cp ${CONFIG_FILE} ${MODEL_REPOSITORY_DIR}/${REPOSITORY_MODEL_NAME}/${NEW_CONFIG_FILENAME}
