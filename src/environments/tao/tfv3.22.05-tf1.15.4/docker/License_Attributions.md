@@ -4,19 +4,19 @@ matplotlib	PSF license
 
 psutil		BSD 3-Clause License
 
-tqdm		MIT licence
+tqdm		MIT license
 
 pandas		BSD 3-Clause License
 
 scipy		BSD license
 
-numpy		BSD licens
+numpy		BSD license
 
 AzureML		MIT License
 
 scikit-learn	BSD license
 
-unzip		MIT Licens
+unzip		MIT License
 
 ipykernel	BSD-3-Clause license
 
