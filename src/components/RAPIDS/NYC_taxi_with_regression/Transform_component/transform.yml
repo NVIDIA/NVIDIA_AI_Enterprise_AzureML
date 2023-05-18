@@ -5,6 +5,8 @@ display_name: TaxiFeatureEngineering
 tags:
   NVAIE: '3.1'
 version: 1
+description: <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/RAPIDS/README.md>READ ME</a>
+
 type: command
 inputs:
   clean_data: 
