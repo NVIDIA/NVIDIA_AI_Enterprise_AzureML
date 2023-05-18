@@ -1,6 +1,6 @@
 $schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
 name: NVIDIA-tensorrt
 version: 1
-description: Environment using TENSORRT NVAIE container
+description: Environment using TENSORRT NVAIE container. <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Environments/TensorRT/env_tensorrt/License_Attributions.md>License Attritutions</a> 
 build:
   path: ./env_tensorrt

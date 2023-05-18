@@ -1,6 +1,6 @@
 $schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
 name: NVIDIA-TAO-Toolkit
 version: 1
-description: Environment using TAO-Toolkit NVAIE container
+description: Environment using TAO-Toolkit NVAIE container. <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Environments/TAO-Toolkit/env_tao/License_Attributions.md>License Attritutions</a> 
 build:
   path: ./env_tao

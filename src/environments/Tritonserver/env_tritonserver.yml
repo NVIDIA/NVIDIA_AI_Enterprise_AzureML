@@ -1,6 +1,6 @@
 $schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
 name: NVIDIA-tritonserver
 version: 1
-description: Environment using TRITONSERVER NVAIE container
+description: Environment using TRITONSERVER NVAIE container. <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Environments/Tritonserver/env_tritonserver/License_Attributions.md>License Attritutions</a> 
 build:
   path: ./env_tritonserver

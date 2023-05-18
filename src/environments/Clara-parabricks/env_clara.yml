@@ -1,6 +1,6 @@
 $schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
 name: NVIDIA-clara
 version: 1
-description: Environment using CLARA-PARABRICKS NVAIE container
+description: Environment using CLARA-PARABRICKS NVAIE container. <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Environments/Clara-parabricks/env_clara/License_Attributions.md>License Attritutions</a> 
 build:
   path: ./env_clara
