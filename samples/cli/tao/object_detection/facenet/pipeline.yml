@@ -1,10 +1,17 @@
 $schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
 type: pipeline
-experiment_name: NVIDIA_TAO_tfv3_22_05_tf1_15_4_FACENET_JOB
+experiment_name: NVIDIA_TAO_FACENET_JOB
 settings:
   default_compute: azureml:<gpu-cluster>
 inputs:
+  urls: "https://huggingface.co/datasets/wider_face/resolve/main/data/WIDER_train.zip,https://huggingface.co/datasets/wider_face/resolve/main/data/WIDER_val.zip,https://huggingface.co/datasets/wider_face/resolve/main/data/WIDER_test.zip,http://mmlab.ie.cuhk.edu.hk/projects/WIDERFace/support/bbx_annotation/wider_face_split.zip"
+  file_types: "training_images,validations_images,testing_images,annotations"
+  checksums: 'NA'
+  class_list: face
   model_app_name: facenet
+  model_type: facenet
+  model_name: unpruned_v2.0
+  model_subdir: pretrain_models
   num_epochs: <num_epochs>
   num_gpus: 1
   key: 'nvidia_tlt'
@@ -15,11 +22,18 @@ inputs:
 jobs:
   facenet_workflow:
     type: pipeline
-    component: azureml://registries/<registry_name>/components/tao_facenet_pipeline/versions/2
+    component: azureml://registries/<registry_name>/components/tao_facenet_pipeline/versions/1
     inputs:
+      urls: ${{parent.inputs.urls}}
+      file_types: ${{parent.inputs.file_types}}
+      checksums: ${{parent.inputs.checksums}}
+      class_list: ${{parent.inputs.class_list}}
       num_epochs: ${{parent.inputs.num_epochs}}
       num_gpus: ${{parent.inputs.num_gpus}}
       key: ${{parent.inputs.key}}
       compute_train_node: ${{parent.inputs.compute_train_node}}
       original_specs: ${{parent.inputs.original_specs}}
       model_app_name: ${{parent.inputs.model_app_name}}
+      model_type: ${{parent.inputs.model_type}}
+      model_name: ${{parent.inputs.model_name}}
+      model_subdir: ${{parent.inputs.model_subdir}}

@@ -2,8 +2,11 @@ $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.jso
 name: convert_multiple_streams_wider_to_kitti
 display_name: convert_multiple_streams_wider_to_kitti
 description: Convert Multiple Streams Wider to Kitti; Format Conversion Auxiliary Component to convert data from the Wider format to the Kitti Format. The multiple streams information must be passed as comma separated lists <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/tao/tools/convert_multiple_streams_wider_to_kitti/README.md>Reference file</a>
-version: 2
+version: 1
 type: command
+tags:
+    NVIDIA AI Enterprise: ""
+    Preview: ""
 inputs:
   source_data_dir:
     type: uri_folder

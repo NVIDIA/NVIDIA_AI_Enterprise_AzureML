@@ -2,8 +2,11 @@ $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.jso
 name: triton_create_model_repository
 display_name: triton_create_model_repository
 description: Triton Create Model Repository Component; This component creates a Model Repository format for the model to be deployed as an AzureML Triton Inference endpoint <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/triton/triton_create_model_repository/README.md>Reference file</a>
-version: 2
+version: 1
 type: command
+tags:
+    NVIDIA AI Enterprise: ""
+    Preview: ""
 inputs:
   model_app_name:
     type: string

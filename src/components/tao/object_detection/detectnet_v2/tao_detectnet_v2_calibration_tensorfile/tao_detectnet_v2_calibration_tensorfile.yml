@@ -3,6 +3,9 @@ name: tao_detectnet_v2_calibration_tensorfile
 display_name: tao_detectnet_v2_calibration_tensorfile
 description: Wrapper for TAO command detectnet_v2 calibration_tensorfile. It generates the INT8 tensorfile, that is a binary file that contains the preprocessed training samples, which may be used to calibrate the model <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/tao/object_detection/detectnet_v2/tao_detectnet_v2_calibration_tensorfile/README.md>Reference file</a>
 version: 1
+tags:
+    NVIDIA AI Enterprise: ""
+    Preview: ""
 type: command
 inputs:
   model_app_name:
@@ -63,7 +66,7 @@ outputs:
   output_dir:
     type: uri_folder
 code: ./src
-environment: azureml://registries/<registry_name>/environments/tao-toolkit-4.0.0-tf1.15.5/versions/1
+environment: azureml://registries/<registry_name>/environments/nvidia_tao_tfv3_22_05_tf1_15_4/versions/1
 command: >-
   bash update_and_calibration_tensorfile.sh 
   ${{inputs.original_specs}} 

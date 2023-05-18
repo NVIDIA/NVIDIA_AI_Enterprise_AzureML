@@ -2,8 +2,11 @@ $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.jso
 name: tao_download_model
 display_name: tao_download_model
 description: TAO Download Model Component. Auxiliary component that downloads and leverages the NGC REGISTRY CLI to allow the download of specific TAO pretreined models <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/tao/tools/tao_download_model/README.md>Reference file</a>
-version: 2
+version: 1
 type: command
+tags:
+    NVIDIA AI Enterprise: ""
+    Preview: ""
 inputs:
   model_app_name:
     type: string

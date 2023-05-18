@@ -2,7 +2,10 @@ $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.jso
 name: tao_detectnet_v2_prune
 display_name: tao_detectnet_v2_prune
 description: Wrapper for TAO command detectnet_v2 prune. Pruning removes parameters from the model to reduce the model size without compromising the integrity of the model itself <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/tao/object_detection/detectnet_v2/tao_detectnet_v2_prune/README.md>Reference file</a>
-version: 3
+version: 1
+tags:
+    NVIDIA AI Enterprise: ""
+    Preview: ""
 type: command
 inputs:
   model_app_name:
@@ -46,8 +49,8 @@ inputs:
 outputs:
   pruned_model_dir:
     type: uri_folder
-code: ./
-environment: azureml://registries/<registry_name>/environments/nvidia_tao_tfv3_22_05_tf1_15_4/versions/2
+code: ./src
+environment: azureml://registries/<registry_name>/environments/nvidia_tao_tfv3_22_05_tf1_15_4/versions/1
 command: >-
   bash ./tao_detectnet_v2_prune.sh 
   ${{inputs.unpruned_model_dir}}/${{inputs.model_app_name}}/

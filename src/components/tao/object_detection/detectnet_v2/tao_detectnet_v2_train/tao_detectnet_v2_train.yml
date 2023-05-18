@@ -4,6 +4,9 @@ display_name: tao_detectnet_v2_train
 description: Wrapper for TAO command detectnet_v2 train. After creating TFRecords ingestible by the TAO training and setting up a spec file, one is now ready to start training an object detection network using this component. It allows the specification of the number of epochs to be used <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/tao/object_detection/detectnet_v2/tao_detectnet_v2_train/README.md>Reference file</a> 
 version: 1
 type: command
+tags:
+    NVIDIA AI Enterprise: ""
+    Preview: ""
 inputs:
   model_app_name:
     type: string
@@ -77,7 +80,7 @@ outputs:
   trained_model_dir:
     type: uri_folder
 code: ./src
-environment:  azureml://registries/<registry_name>/environments/nvidia_tao_tfv3_22_05_tf1_15_4/versions/2
+environment:  azureml://registries/<registry_name>/environments/nvidia_tao_tfv3_22_05_tf1_15_4/versions/1
 command: >-
   bash ./update_and_train.sh 
   ${{inputs.original_specs}} 

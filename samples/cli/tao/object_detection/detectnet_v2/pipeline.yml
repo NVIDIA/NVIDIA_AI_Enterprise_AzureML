@@ -1,10 +1,16 @@
 $schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
 type: pipeline
-experiment_name: NVIDIA_TAO_tfv3_22_05_tf1_15_4_DETECTNET_V2_JOB
+experiment_name: NVIDIA_TAO_DETECTNET_V2_JOB
 settings:
   default_compute: azureml:<gpu-cluster>
 inputs:
+  urls: "https://s3.eu-central-1.amazonaws.com/avg-kitti/data_object_image_2.zip,https://s3.eu-central-1.amazonaws.com/avg-kitti/data_object_label_2.zip"
+  file_types: "IMAGES,LABELS"
+  checksums: '^351c5a2aa0cd9238b50174a3a62b846bc5855da256b82a196431d60ff8d43617$,^4efc76220d867e1c31bb980bbf8cbc02599f02a9cb4350effa98dbb04aaed880$' 
   model_app_name: detectnet_v2
+  model_type: pretrained_detectnet_v2
+  model_name: resnet18
+  model_subdir: pretrained_resnet18
   class_list: car,cyclist,pedestrian
   num_epochs: <num_epochs>
   num_gpus: 1
@@ -16,10 +22,10 @@ inputs:
     type: uri_folder
     path: ./config_files/   
   compute_train_node: <gpu-cluster>
-  dummy_validation_data_dir: 
+  validation_data_dir: 
     type: uri_folder
     path: ./
-  dummy_validation_tf_records_dir: 
+  validation_tf_records_dir: 
     type: uri_folder
     path: ./ 
 outputs: 
@@ -30,6 +36,9 @@ jobs:
     type: pipeline
     component: azureml://registries/<registry_name>/components/detectnet_v2_data_pipeline/versions/1
     inputs:
+      urls: ${{parent.inputs.urls}}
+      file_types: ${{parent.inputs.file_types}}
+      checksums: ${{parent.inputs.checksums}}
       class_list: ${{parent.inputs.class_list}}
       num_epochs: ${{parent.inputs.num_epochs}}
       num_gpus: ${{parent.inputs.num_gpus}}
@@ -38,7 +47,10 @@ jobs:
       original_specs: ${{parent.inputs.original_specs}}
       config_files_dir: ${{parent.inputs.config_files_dir}}
       model_app_name: ${{parent.inputs.model_app_name}}
-      dummy_validation_data_dir: ${{parent.inputs.dummy_validation_data_dir}}
-      dummy_validation_tf_records_dir: ${{parent.inputs.dummy_validation_tf_records_dir}}
+      model_type: ${{parent.inputs.model_type}}
+      model_name: ${{parent.inputs.model_name}}
+      model_subdir: ${{parent.inputs.model_subdir}}
+      validation_data_dir: ${{parent.inputs.validation_data_dir}}
+      validation_tf_records_dir: ${{parent.inputs.validation_tf_records_dir}}
     outputs:
       triton_model_repository_dir: ${{parent.outputs.triton_model_repository_dir}}

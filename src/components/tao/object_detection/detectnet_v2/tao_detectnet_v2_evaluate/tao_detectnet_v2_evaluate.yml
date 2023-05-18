@@ -2,7 +2,10 @@ $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.jso
 name: tao_detectnet_v2_evaluate
 display_name: tao_detectnet_v2_evaluate
 description: Wrapper for TAO command detectnet_v2 evaluate, which is used to evaluate the performance of a model. It uses the same configuration specs as the TAO detectnet_v2 train command <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/tao/object_detection/detectnet_v2/tao_detectnet_v2_evaluate/README.md>Reference file</a>
-version: 3
+version: 1
+tags:
+    NVIDIA AI Enterprise: ""
+    Preview: ""
 type: command
 inputs:
   training_data_dir:
@@ -69,7 +72,7 @@ inputs:
     type: string
     default: ND
 code: ./src
-environment: azureml://registries/<registry_name>/environments/nvidia_tao_tfv3_22_05_tf1_15_4/versions/2
+environment: azureml://registries/<registry_name>/environments/nvidia_tao_tfv3_22_05_tf1_15_4/versions/1
 command: >-
   bash update_and_evaluate.sh 
   ${{inputs.original_specs}} 
