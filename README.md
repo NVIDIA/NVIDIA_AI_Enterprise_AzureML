@@ -1,6 +1,6 @@
 # NVIDIA AI Enterprise AzureML Registry (Private Preview)
 
-The Registry contains AzureML Resources that would enable Azure Users to set up end-to-end MLOPs workflows using NVIDIA AI Enterprise Software. This private preview includes ssoftware from the following NVIDIA AI Enterprise SDKs
+The Registry contains AzureML Resources that would enable Azure Machine Learning Users to set up end-to-end MLOPs workflows using NVIDIA AI Enterprise Software.
 
 ## NVIDIA AI Enterprise
 
@@ -23,6 +23,8 @@ Modular reusable pieces of code, with parameterized inputs and outputs
 They define entire workflows, by interconnecting the inputs and outputs of several command components
 
 ## Supported NVIDIA AI Enterprise Software
+
+This private preview includes software from the following NVIDIA AI Enterprise SDKs
 
 ### TAO Toolkit
 
@@ -58,9 +60,5 @@ It is first indexed by AzureML Resource Type and then by NVIDIA AI Enterprise SD
 
 It contains examples of how to use the AzureML Resources contained in the NVIDIA AI Enterprise AzureML Registry to implement end-to-end MLOPs workflows, from data acquisition to model endpoint deployment
 
-## Additional Resources
 
-### Video 1: Body Pose Model
-
-### Video 2: Learning Multiple Object Detection Models 
 
