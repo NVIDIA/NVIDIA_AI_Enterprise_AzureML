@@ -1,15 +1,14 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 type: command
 
-description: Wrapper for gaze in deepstream-tao-app. <a href=https://https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/Deepstream/gaze/README.md>Reference file</a>
+description: Wrapper for gesture in deepstream-tao-app. <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/Deepstream/gesture/README.md>Reference file</a>
 
 tags:
   'NVIDIA AI Enterprise': '3.1'
   Preview: ''
 
-
-name: deepstream_gaze
-display_name: deepstream_gaze
+name: deepstream_gesture
+display_name: deepstream_gesture
 version: 1
 
 inputs:

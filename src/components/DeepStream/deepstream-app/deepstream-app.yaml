@@ -1,15 +1,15 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 type: command
 
-description: Wrapper for faciallandmark in deepstream-tao-app. <a href=https://https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/Deepstream/faciallandmark/README.md>Reference file</a>
+description: Wrapper for deepstream-app in deepstream samples. <a href=//https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/Deepstream/deepstream-app/README.md>Reference file</a>
 
 tags:
   'NVIDIA AI Enterprise': '3.1'
   Preview: ''
 
 
-name: deepstream_faciallandmark
-display_name: deepstream_faciallandmark
+name: deepstream_app
+display_name: deepstream_app
 version: 1
 
 inputs:
@@ -21,6 +21,8 @@ inputs:
     type: string
   model:
     type: uri_folder
+  model_name:
+    type: string    
 outputs:
   sample_output_data:
     type: uri_folder
@@ -35,6 +37,7 @@ command: >-
   --conn_str '${{inputs.conn_str}}'
   --container_name ${{inputs.container_name}}
   --model ${{inputs.model}}
+  --model_name ${{inputs.model_name}}  
   --output_data ${{outputs.sample_output_data}}
 
 resources:

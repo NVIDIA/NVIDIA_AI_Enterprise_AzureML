@@ -1,15 +1,14 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 type: command
 
-description: Wrapper for emotion in deepstream-tao-app. <a href=https://https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/Deepstream/emotion/README.md>Reference file</a>
+description: Wrapper for bodypose in deepstream-tao-app. <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/Deepstream/bodypose2d/README.md>Reference file</a>
 
 tags:
   'NVIDIA AI Enterprise': '3.1'
   Preview: ''
 
-
-name: deepstream_emotion
-display_name: deepstream_emotion
+name: deepstream_bodypose2d
+display_name: deepstream_bodypose2d
 version: 1
 
 inputs:

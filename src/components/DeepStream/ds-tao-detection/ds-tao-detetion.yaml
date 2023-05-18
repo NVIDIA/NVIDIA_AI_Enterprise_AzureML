@@ -1,15 +1,14 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 type: command
 
-description: Wrapper for deepstream-app in deepstream samples. <a href=https://https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/Deepstream/deepstream-app/README.md>Reference file</a>
+description: Wrapper for ds-tao-detection in deepstream-tao-app. <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/Deepstream/ds-tao-detection/README.md>Reference file</a>
 
 tags:
   'NVIDIA AI Enterprise': '3.1'
   Preview: ''
 
-
-name: deepstream_app
-display_name: deepstream_app
+name: deepstream_ds_tao_detection
+display_name: deepstream_ds_tao_detection
 version: 1
 
 inputs:
@@ -22,7 +21,7 @@ inputs:
   model:
     type: uri_folder
   model_name:
-    type: string    
+    type: string        
 outputs:
   sample_output_data:
     type: uri_folder

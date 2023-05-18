@@ -1,14 +1,15 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 type: command
 
-description: Wrapper for lpr in deepstream-lpr-python-app. <a href=https://https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/Deepstream/lpr/README.md>Reference file</a>
+description: Wrapper for faciallandmark in deepstream-tao-app. <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/Deepstream/faciallandmark/README.md>Reference file</a>
 
 tags:
   'NVIDIA AI Enterprise': '3.1'
   Preview: ''
 
-name: deepstream_lpr
-display_name: deepstream_lpr
+
+name: deepstream_faciallandmark
+display_name: deepstream_faciallandmark
 version: 1
 
 inputs:
