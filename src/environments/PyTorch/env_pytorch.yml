@@ -1,6 +1,6 @@
 $schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
 name: NVIDIA-pytorch
 version: 1
-description: Environment using PYTORCH NVAIE container
+description: Environment using PYTORCH NVAIE container. <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Environments/Pytorch/env_pytorch/License_Attributions.md>License Attritutions</a> 
 build:
   path: ./env_pytorch

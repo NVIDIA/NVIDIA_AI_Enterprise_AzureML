@@ -1,5 +1,6 @@
 $schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
 name: ds_6_2_triton
 version: 1
+description: Environment using Deepstream NVAIE container. <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Environments/Deepstream/triton/src/License_Attributions.md>License Attritutions</a> 
 build:
   path: ./src

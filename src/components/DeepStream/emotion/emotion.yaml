@@ -1,15 +1,15 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 type: command
 
-description: Wrapper for ds-tao-segmentation in deepstream-tao-app. <a href=https://https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/Deepstream/ds-tao-segmentation/README.md>Reference file</a>
+description: Wrapper for emotion in deepstream-tao-app. <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/Deepstream/emotion/README.md>Reference file</a>
 
 tags:
   'NVIDIA AI Enterprise': '3.1'
   Preview: ''
 
 
-name: deepstream_ds_tao_segmentation
-display_name: deepstream_ds_tao_segmentation
+name: deepstream_emotion
+display_name: deepstream_emotion
 version: 1
 
 inputs:
@@ -21,8 +21,6 @@ inputs:
     type: string
   model:
     type: uri_folder
-  model_name:
-    type: string    
 outputs:
   sample_output_data:
     type: uri_folder
@@ -37,7 +35,6 @@ command: >-
   --conn_str '${{inputs.conn_str}}'
   --container_name ${{inputs.container_name}}
   --model ${{inputs.model}}
-  --model_name ${{inputs.model_name}}
   --output_data ${{outputs.sample_output_data}}
 
 resources:

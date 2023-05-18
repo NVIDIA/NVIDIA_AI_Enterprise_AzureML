@@ -1,3 +1,3 @@
 #!/bin/bash
 
-az ml component create --file spec.yaml --registry-name $REGISTRY
+az ml component create --file bodypose2d.yaml --registry-name $REGISTRY

@@ -1,14 +1,15 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 type: command
 
-description: Wrapper for mdx-perception in deepstream-tao-app. <a href=https://https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/Deepstream/mdx-perception/README.md>Reference file</a>
+description: Wrapper for gaze in deepstream-tao-app. <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/Deepstream/gaze/README.md>Reference file</a>
 
 tags:
   'NVIDIA AI Enterprise': '3.1'
   Preview: ''
 
-name: deepstream_mdx_perception
-display_name: deepstream_mdx_perception
+
+name: deepstream_gaze
+display_name: deepstream_gaze
 version: 1
 
 inputs:
@@ -20,9 +21,6 @@ inputs:
     type: string
   model:
     type: uri_folder
-  model_name:
-    type: string
-    enum: ['retail_object_detection_recognition', 'peoplenet_reidentification']     
 outputs:
   sample_output_data:
     type: uri_folder
@@ -37,7 +35,6 @@ command: >-
   --conn_str '${{inputs.conn_str}}'
   --container_name ${{inputs.container_name}}
   --model ${{inputs.model}}
-  --model_name ${{inputs.model_name}}
   --output_data ${{outputs.sample_output_data}}
 
 resources:
