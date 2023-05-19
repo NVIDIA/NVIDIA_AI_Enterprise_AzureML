@@ -2,7 +2,7 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 name: prep_taxi_data
 display_name: PrepTaxiData
-description: <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/RAPIDS/README.md>READ ME</a>
+description: Component for preparing/cleaning the raw data <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/RAPIDS/NYC_taxi_with_regression/Prep_component/README.md>READ ME</a>
 version: 1
 tags:
   'NVIDIA AI Enterprise': '3.1'

@@ -3,7 +3,7 @@ $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.jso
 name: train_linear_regression_model
 display_name: TrainLinearRegressionModel
 version: 1
-description: <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/RAPIDS/README.md>READ ME</a>
+description: Component for training the model using Linear Regression <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/RAPIDS/NYC_taxi_with_regression/Train_component/README.md>READ ME</a>
 tags:
   'NVIDIA AI Enterprise': '3.1'
   Preview: ''

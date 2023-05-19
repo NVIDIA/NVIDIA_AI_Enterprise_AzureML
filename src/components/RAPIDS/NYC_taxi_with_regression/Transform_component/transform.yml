@@ -2,7 +2,7 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 name: taxi_feature_engineering
 version: 1
-description: <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/RAPIDS/README.md>READ ME</a>
+description: Component for applying transformation to the cleaned data <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/RAPIDS/NYC_taxi_with_regression/Tranform_component/README.md>READ ME</a>
 display_name: TaxiFeatureEngineering
 tags:
   'NVIDIA AI Enterprise': '3.1'
