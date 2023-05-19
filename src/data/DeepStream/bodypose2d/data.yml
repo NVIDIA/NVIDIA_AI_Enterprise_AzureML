@@ -1,0 +1,8 @@
+$schema: https://azuremlschemas.azureedge.net/latest/data.schema.json
+name: bodypose2d_config
+description: bodypose2d_config
+tags: 
+  'NVIDIA AI Enterprise': 3.1
+  Preview: ''
+type: uri_folder
+path: data/

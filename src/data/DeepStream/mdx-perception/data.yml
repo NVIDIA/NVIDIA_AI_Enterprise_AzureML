@@ -1,0 +1,8 @@
+$schema: https://azuremlschemas.azureedge.net/latest/data.schema.json
+name: mdx_perception_config
+description: mdx_perception_config
+tags: 
+  'NVIDIA AI Enterprise': 3.1
+  Preview: ''
+type: uri_folder
+path: data/
