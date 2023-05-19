@@ -1,7 +1,7 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 type: command
 
-description: Wrapper for deepstream-app in deepstream samples. <a href=//https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/Deepstream/deepstream-app/README.md>Reference file</a>
+description: Wrapper for deepstream-app in deepstream samples. <a href=//https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/DeepStream/deepstream-app/README.md>Reference file</a>
 
 tags:
   'NVIDIA AI Enterprise': '3.1'
@@ -29,7 +29,7 @@ outputs:
 
 code: ./src
 
-environment: azureml://registries/NVIDIARegistryTest1/environments/ds_6_2_triton/versions/1
+environment: azureml://registries/<registry_name>/environments/ds_6_2_triton/versions/1
 
 command: >-
   python run.py  
