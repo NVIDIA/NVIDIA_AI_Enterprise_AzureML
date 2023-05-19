@@ -1,5 +1,6 @@
 ## Running pipeline
 
+
 The steps in this README should be run only when you have registered all the components and data. I have used the URLs of the registered components in the `yml` file. To run the pipeline
 ```
 $ cd samples/cli/RAPIDS
