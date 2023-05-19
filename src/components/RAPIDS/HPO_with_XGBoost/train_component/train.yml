@@ -1,0 +1,28 @@
+# <component>
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: train_with_parquet_data
+version: 1
+tags:
+  'NVIDIA AI Enterprise': '3.1'
+  Preview: ''
+display_name: TrainWithParquetData
+type: command
+inputs:
+  training_data:
+    type: uri_file
+  test_split_ratio:
+    type: number
+    min: 0
+    max: 1
+    default: 0.2  
+outputs:
+  model_output:
+    type: mlflow_model
+environment: azureml://registries/NVIDIARegistryTest1/environments/NVIDIA-rapids/versions/1
+code: ./src
+command: >-
+  python train.py 
+  --training_data ${{inputs.training_data}} 
+  --model_output ${{outputs.model_output}}
+  --test_split_ratio ${{inputs.test_split_ratio}}
+# </component>

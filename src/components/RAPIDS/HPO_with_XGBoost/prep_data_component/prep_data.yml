@@ -1,0 +1,23 @@
+# <component>
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: prep_parquet_data
+version: 1
+tags:
+  'NVIDIA AI Enterprise': '3.1'
+  Preview: ''
+display_name: PrepParquetData
+type: command
+inputs:
+  raw_data:
+    type: uri_file
+    
+outputs:
+  prep_data:
+    type: uri_file
+environment: azureml://registries/NVIDIARegistryTest1/environments/NVIDIA-rapids/versions/1
+code: ./src
+command: >-
+  python prep.py 
+  --raw_data ${{inputs.raw_data}} 
+  --prep_data ${{outputs.prep_data}}
+# </component>
