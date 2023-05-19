@@ -1,17 +1,31 @@
 ## License Attributions
 
 AzureML MIT License
-matplotlib	PSF license
+
+matplotlib	PSF License
+
 psutil		BSD 3-Clause License
-tqdm		MIT licence
+
+tqdm		MIT License
+
 pandas		BSD 3-Clause License
-scipy		BSD license
-numpy		BSD license
+
+scipy		BSD License
+
+numpy		BSD License
+
 AzureML		MIT License
-scikit-learn	BSD license
+
+scikit-learn	BSD License
+
 unzip		MIT License
-ipykernel	BSD-3-Clause license.
-ipython		BSD-3-Clause license.
+
+ipykernel	BSD-3-Clause License
+
+ipython		BSD-3-Clause License
+
 mlflow		Apache License 2.0
+
 pillow		HPND License
-jupyterlab	BSD license
+
+jupyterlab	BSD License
