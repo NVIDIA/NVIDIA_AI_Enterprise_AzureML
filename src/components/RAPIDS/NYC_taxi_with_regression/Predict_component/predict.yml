@@ -15,8 +15,7 @@ inputs:
 outputs:
   predictions:
     type: uri_folder
-#environment: azureml:NVIDIA-rapids@latest
-environment: azureml://registries/NVIDIARegistryTest1/environments/NVIDIA-rapids/versions/1
+environment: azureml://registries/<REGISTRY>/environments/NVIDIA-rapids/versions/1
 code: ./predict_src
 command: >-
   python predict.py 
