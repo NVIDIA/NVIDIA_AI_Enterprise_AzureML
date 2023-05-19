@@ -1,0 +1,5 @@
+$schema: https://azuremlschemas.azureedge.net/latest/data.schema.json
+name: 3M_trips_data
+description: Training dataset for NYC taxi fare using with HPO example
+type: uri_file
+path: merged_data.parquet
