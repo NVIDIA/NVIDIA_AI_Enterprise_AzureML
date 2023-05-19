@@ -1,0 +1,38 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+display_name: deepstream-bodypose2d
+description: Read video from blob and output video to blob
+
+inputs:
+  pipeline_conn_str: "DefaultEndpointsProtocol=https;AccountName=josephwstorageaccount;AccountKey=uy0fYfjWfLFkH/TCtVB71DMYtpDvfq/5J+0zqLXFIK+kBgVoUCR/C+LiqBY6n0cdfkaeaGrIbchEkMl97Hxc8w==;EndpointSuffix=core.windows.net"
+  pipeline_container_name: azureml
+  pipeline_model: azureml://registries/NVIDIARegistryTest1/data/bodypose2d/versions/1
+
+outputs:
+  pipeline_sample_output_data:
+    mode: upload
+
+jobs:
+  ds_job:
+    type: command
+    environment: azureml://registries/NVIDIARegistryTest1/environments/deepstream6_2_triton/versions/1
+    component: azureml:deepstream_bodypose_2d@latest
+    compute: gpu-Standard-NC16as-T4-v3
+    inputs:
+      sample_input_data: 
+        type: uri_folder
+        path: azureml://registries/NVIDIARegistryTest1/data/bodypose2d_config/versions/1      
+      conn_str: ${{parent.inputs.pipeline_conn_str}}
+      container_name: ${{parent.inputs.pipeline_container_name}}
+      model: 
+        type: uri_folder
+        path: azureml://registries/NVIDIARegistryTest1/models/bodypose2d/versions/1      
+    outputs:
+      sample_output_data: ${{parent.outputs.pipeline_sample_output_data}}    
+    resources:
+      instance_count: 1
+    distribution:
+        type: mpi
+        process_count_per_instance: 1
+
+        
