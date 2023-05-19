@@ -15,7 +15,7 @@ inputs:
 outputs:
   prep_data:
     type: uri_file
-environment: azureml://registries/NVIDIARegistryTest1/environments/NVIDIA-rapids/versions/1
+environment: azureml://registries/<REGISTRY>/environments/NVIDIA-rapids/versions/1
 code: ./src
 command: >-
   python prep.py 
