@@ -1,0 +1,40 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+display_name: hpo_with_xgboost_using_rapids
+description: Use XGBoost with Nvidia RAPIDS
+tags:
+  Preview: ''
+  'NVIDIA AI Enterprise': '3.1'
+# <inputs_and_outputs>
+
+outputs: 
+  pipeline_job_trained_model:
+    type: mlflow_model
+    mode: rw_mount
+# </inputs_and_outputs>
+
+# <jobs>
+settings:
+  default_datastore: azureml:workspaceblobstore
+  default_compute: azureml:mayani-gpuT4-cluster
+  continue_on_step_failure: false
+
+jobs:
+  prep_job:
+    type: command
+    component: azureml://registries/NVIDIARegistryTest1/components/prep_parquet_data/versions/3
+    inputs:
+      raw_data: #using local data, will crate an anonymous data asset
+        type: uri_file
+        path: azureml://subscriptions/b7d41fc8-d35d-41db-92ed-1f7f1d32d4d9/resourcegroups/mayani-rg/workspaces/mayani-ws2-europe/datastores/workspaceblobstore/paths/UI/2023-05-17_161351_UTC/merged_data.parquet
+    outputs:
+      prep_data: 
+
+  train_job:
+    type: command
+    component: azureml://registries/NVIDIARegistryTest1/components/train_with_parquet_data/versions/2
+    inputs:
+      training_data: ${{parent.jobs.prep_job.outputs.prep_data}}
+    outputs:
+      model_output: ${{parent.outputs.pipeline_job_trained_model}} 
+# </jobs>
