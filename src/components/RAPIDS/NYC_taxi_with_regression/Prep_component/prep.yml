@@ -2,7 +2,7 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 name: prep_taxi_data
 display_name: PrepTaxiData
-description: Component for Taking in Raw NYC Taxi Data <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/RAPIDS/README.md>READ ME</a>
+description: <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/RAPIDS/README.md>READ ME</a>
 version: 1
 tags:
   'NVIDIA AI Enterprise': '3.1'
@@ -16,7 +16,6 @@ outputs:
   prep_data:
     type: uri_folder
 code: ./prep_src
-#environment: azureml:NVIDIA-rapids@latest
 environment: azureml://registries/NVIDIARegistryTest1/environments/NVIDIA-rapids/versions/1
 command: >-
   python prep.py 

@@ -4,7 +4,8 @@ name: score_model
 version: 1
 description: <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/RAPIDS/README.md>READ ME</a>
 tags:
-  NVAIE: '3.1'
+  'NVIDIA AI Enterprise': '3.1'
+  Preview: ''
 display_name: ScoreModel
 type: command
 inputs:
@@ -15,7 +16,6 @@ inputs:
 outputs:
   score_report:
     type: uri_folder
-#environment: azureml:NVIDIA-rapids@latest
 environment: azureml://registries/NVIDIARegistryTest1/environments/NVIDIA-rapids/versions/1
 code: ./score_src
 command: >-

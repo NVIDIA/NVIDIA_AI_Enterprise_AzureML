@@ -4,8 +4,8 @@ name: predict_taxi_fares
 version: 1
 description: <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/RAPIDS/README.md>READ ME</a>
 tags:
-  NVAIE: '3.1'
-display_name: PredictTaxiFares
+  'NVIDIA AI Enterprise': '3.1'
+  Preview: ''
 type: command
 inputs:
   model_input:

@@ -20,4 +20,13 @@ az ml component create --file predict.yml --registry-name $REGISTRY
 cd ../Score_component
 az ml component create --file score.yml --registry-name $REGISTRY
 
-cd ../ 
+# Now Register components for XGBoost sample: first register prep component
+cd ../HPO_with_XGBoost/prep_data_component
+az ml component create --file prep_data.yml --registry-name $REGISTRY
+
+# Register the train component
+cd ../train_component
+az ml component create --file train.yml --registry-name $REGISTRY
+
+cd ../../
+
