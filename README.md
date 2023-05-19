@@ -1,5 +1,5 @@
 # NVIDIA AI Enterprise AzureML Registry (Private Preview)
-[test]
+
 The Registry contains AzureML Resources that would enable Azure Machine Learning Users to set up end-to-end MLOPs workflows using NVIDIA AI Enterprise Software.
 
 ## NVIDIA AI Enterprise
