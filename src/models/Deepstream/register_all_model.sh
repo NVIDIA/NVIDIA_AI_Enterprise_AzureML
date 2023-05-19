@@ -2,6 +2,9 @@
 
 #export REGISTRY="NVIDIARegistryTest1"
 
+./download_models.sh
+./copy_models.sh
+
 cd bodypose2d
 chmod 777 register_model.sh
 ./register_model.sh

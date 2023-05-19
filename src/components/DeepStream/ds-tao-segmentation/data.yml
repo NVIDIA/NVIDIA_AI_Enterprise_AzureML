@@ -1,8 +1,0 @@
-$schema: https://azuremlschemas.azureedge.net/latest/data.schema.json
-name: ds-tao-segmentation_config
-description: ds-tao-segmentation_config
-tags: 
-  'NVIDIA AI Enterprise': 3.1
-  Preview: ''
-type: uri_folder
-path: data/
