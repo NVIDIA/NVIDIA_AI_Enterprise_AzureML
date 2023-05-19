@@ -32,7 +32,7 @@ jobs:
 
   train_job:
     type: command
-    component: azureml://registries/NVIDIARegistryTest1/components/train_with_parquet_data/versions/2
+    component: azureml://registries/NVIDIARegistryTest1/components/train_with_parquet_data/versions/3
     inputs:
       training_data: ${{parent.jobs.prep_job.outputs.prep_data}}
     outputs:
