@@ -2,7 +2,7 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 name: predict_taxi_fares
 version: 1
-description: <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/Components/RAPIDS/README.md>READ ME</a>
+description: Component for making prediction using trained model<a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/RAPIDS/NYC_taxi_with_regression/Predict_component/README.md>READ ME</a>
 tags:
   'NVIDIA AI Enterprise': '3.1'
   Preview: ''
