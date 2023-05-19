@@ -11,8 +11,6 @@ cd  inference/src
 #./register.sh
 cd ../../train/src
 #./register.sh
-pwd
-ls
 cd ../../../../RAPIDS
 ./register_env.sh
 
