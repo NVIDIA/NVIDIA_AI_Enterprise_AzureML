@@ -1,32 +1,35 @@
 #!/bin/bash
 
-#Register prep component
-cd Prep_component
-az ml component create --file prep.yml --registry-name $REGISTRY
+export REGISTRY=""
 
-#Register transform component
-cd ../Transform_component
-az ml component create --file transform.yml --registry-name $REGISTRY
 
-#Register train component
-cd ../Train_component
-az ml component create --file train.yml --registry-name $REGISTRY
+export AZURE_ML_CLI_PRIVATE_FEATURES_ENABLED=true
 
-#Register predict component
-cd ../Predict_component
-az ml component create --file predict.yml --registry-name $REGISTRY
+##Create Triton Components by Default
+export COMPONENTS_DIR=./
 
-#Register score component
-cd ../Score_component
-az ml component create --file score.yml --registry-name $REGISTRY
+SUB='pipeline'
+###pipeline components should be created after all regular command components have been created
+for component_file in $(find $COMPONENTS_DIR -name '*.yml');
+do
+    if [[ "$component_file" != *"$SUB"* ]]; then
+        cp ${component_file} ${component_file}.backup
+        sed -i "s#<REGISTRY>#${REGISTRY}#g" $component_file
+        echo "az ml component create --file ${component_file} --registry-name ${REGISTRY}"
+        az ml component create --file ${component_file} --registry-name ${REGISTRY};
+        mv ${component_file}.backup ${component_file}
+    fi
+done;
 
-# Now Register components for XGBoost sample: first register prep component
-cd ../HPO_with_XGBoost/prep_data_component
-az ml component create --file prep_data.yml --registry-name $REGISTRY
+for component_file in $(find $COMPONENTS_DIR -name '*.yml');
+do
+    if [[ "$component_file" == *"$SUB"* ]]; then
+        cp ${component_file} ${component_file}.backup
+        sed -i "s#<REGISTRY>#${REGISTRY}#g" $component_file        
+        echo "az ml component create --file ${component_file} --registry-name ${REGISTRY}"
+        az ml component create --file ${component_file} --registry-name ${REGISTRY};
+        mv ${component_file}.backup ${component_file}
+    fi
+done;
 
-# Register the train component
-cd ../train_component
-az ml component create --file train.yml --registry-name $REGISTRY
-
-cd ../../
 
