@@ -1,0 +1,8 @@
+$schema: https://azuremlschemas.azureedge.net/latest/data.schema.json
+name: detectnet_V2_config
+description: Spec files for detectnet_V2 TAO model
+tags: 
+  NVIDIA AI Enterprise: ''
+  Preview: ''
+type: uri_folder
+path: specs/

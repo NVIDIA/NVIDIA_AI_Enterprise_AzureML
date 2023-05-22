@@ -1,0 +1,8 @@
+$schema: https://azuremlschemas.azureedge.net/latest/data.schema.json
+name: facenet_config
+description: Spec files for facenet TAO model
+tags: 
+  NVIDIA AI Enterprise: ''
+  Preview: ''
+type: uri_folder
+path: specs/
