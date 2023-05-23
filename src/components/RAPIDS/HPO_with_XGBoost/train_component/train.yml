@@ -1,6 +1,6 @@
 # <component>
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
-name: train_with_parquet_data
+name: rapids_train_with_parquet_data
 version: 1
 description: Component for training the cleaned and filtered data <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/blob/main/src/components/RAPIDS/HPO_with_XGBoost/train_component/README.md>READ ME</a>
 tags:

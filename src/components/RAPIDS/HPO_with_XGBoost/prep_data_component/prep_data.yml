@@ -1,6 +1,6 @@
 # <component>
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
-name: prep_parquet_data
+name: rapids_prep_parquet_data
 version: 1
 description: Component for Preparing Data <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/blob/main/src/components/RAPIDS/HPO_with_XGBoost/prep_data_component/README.md>READ ME</a>
 tags:

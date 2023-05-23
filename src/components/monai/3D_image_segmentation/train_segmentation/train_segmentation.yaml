@@ -1,20 +1,18 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
-name: train_segmentation
-version: "0.4.0"
-display_name: Train segmentation model
+name: monai_train_segmentation
+display_name: Monai Train segmentation model
 type: command
-description: Component to train a model
+description: Component to train a model <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/blob/main/src/components/monai/3D_image_segmentation/train_segmentation/README.md>Reference file</a>
 is_deterministic: true
+version: 1
 tags:
-  Preview: ''
-
+    NVIDIA AI Enterprise: ""
+    Preview: ""
 distribution:
   type: pytorch
  
 shm_size:
   type: string
-
-
 # (input_data_dir, best_model_name, max_epochs):
 inputs:
   input_data:
@@ -40,4 +38,4 @@ code: ./src
 command: >-
   python run.py $[[--epochs ${{inputs.max_epochs}}]] --initial_lr 0.00025 --train_batch_size 1 --val_batch_size 1 --input_data ${{inputs.input_data}} --best_model_name ${{inputs.best_model_name}} --model ${{outputs.model}}
 
-environment: "azureml://registries/NVIDIARegistryTest1/environments/monai_train_env/versions/1"
+environment: "azureml://registries/<REGISTRY>/environments/monai_train_env/versions/1"

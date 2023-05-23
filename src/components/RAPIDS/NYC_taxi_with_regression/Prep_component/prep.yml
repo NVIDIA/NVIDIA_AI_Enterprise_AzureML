@@ -1,6 +1,6 @@
 # <component>
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
-name: prep_taxi_data
+name: rapids_prep_taxi_data
 display_name: PrepTaxiData
 description: Component for preparing/cleaning the raw data <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/RAPIDS/NYC_taxi_with_regression/Prep_component/README.md>READ ME</a>
 version: 1

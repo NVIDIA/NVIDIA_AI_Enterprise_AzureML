@@ -1,6 +1,6 @@
 # <component>
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
-name: score_model
+name: rapids_score_model
 version: 1
 description: Component which contains the scoring scripts <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/RAPIDS/NYC_taxi_with_regression/Score_component/README.md>READ ME</a>
 tags:
