@@ -1,0 +1,8 @@
+$schema: https://azuremlschemas.azureedge.net/latest/data.schema.json
+name: bodypose_config
+description: Spec files for TAO BodyPose. 
+tags: 
+  NVIDIA AI Enterprise: ''
+  Preview: ''
+type: uri_folder
+path: specs/

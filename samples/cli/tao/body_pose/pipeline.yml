@@ -1,0 +1,33 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+experiment_name: NVIDIA_TAO_BPNET_JOB
+settings:
+  default_compute: azureml:<gpu-cluster>
+inputs:
+  model_app_name: bpnet
+  num_epochs: <num_epochs>
+  num_gpus: 1
+  key: 'nvidia_tlt'
+  original_specs:
+    type: uri_folder
+    path: ./specs/
+  compute_train_node: <gpu-cluster>
+  dummy_validation_data_dir: 
+    type: uri_folder
+    path: ./
+  dummy_validation_tf_records_dir: 
+    type: uri_folder
+    path: ./ 
+jobs:
+  body_pose_workflow:
+    type: pipeline
+    component: azureml://registries/<registry_name>/components/tao_body_pose_pipeline/versions/1
+    inputs:
+      num_epochs: ${{parent.inputs.num_epochs}}
+      num_gpus: ${{parent.inputs.num_gpus}}
+      key: ${{parent.inputs.key}}
+      compute_train_node: ${{parent.inputs.compute_train_node}}
+      original_specs: ${{parent.inputs.original_specs}}
+      model_app_name: ${{parent.inputs.model_app_name}}
+      dummy_validation_data_dir: ${{parent.inputs.dummy_validation_data_dir}}
+      dummy_validation_tf_records_dir: ${{parent.inputs.dummy_validation_tf_records_dir}}

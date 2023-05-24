@@ -1,0 +1,130 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: tao_body_pose_dataset_convert_and_train
+display_name: tao_body_pose_dataset_convert_and_train
+description: Wrapper for TAO commandS bpnet dataset_convert and bpnet train. The bpnet app requires the raw input data to be converted to TFRecords for optimized iteration across the data batches, which is accomplished with this component <a href=https://github.com/mreyesgomez/NVIDIA_AzureML_Components_and_Pipelines/tree/main/components/tao/tfv3.22.05-tf1.15.4/object_detection/detectnet_v2/tao_detectnet_v2_dataset_convert/README.md>Reference file</a>. This is also used for training due to some path constraints in TAO BodyPose spec file design. 
+version: 1
+type: command
+inputs:
+  specs_dir:
+    type: uri_folder
+  downloaded_data_dir:
+    type: uri_folder
+  dataset_export_spec:
+    type: string
+    default: coco_spec.json
+  specfile_reference_data_dir:
+    type: string
+    default: data_pose_config
+  train_mode:
+    type: string
+  val_mode:
+    type: string
+  relative_train_mask_directory:
+    type: string
+  relative_val_mask_directory:
+    type: string
+  model_app_name:
+    type: string
+  num_epochs:
+    type: number
+    default: 5
+  training_data_dir:
+    type: uri_folder
+  training_data_subdir:
+    type: string
+  specfile_reference_root_data_dir:
+    type: string
+  validation_data_dir:
+    type: uri_folder
+  validation_data_subdir:
+    type: string
+    default: ND
+  specfile_reference_validation_data_dir:
+    type: string
+    default: ND
+  specfile_reference_training_tf_records_dir:
+    type: string
+  specfile_reference_validation_tf_records_dir:
+    type: string
+    default: ND
+  base_model_dir:
+    type: uri_folder
+  base_model_subdir:
+    type: string
+    default: ND
+  specfile_reference_model_dir:
+    type: string
+  original_train_specs:
+    type: uri_folder
+  specs_file:
+    type: string
+    default: bpnet_train_m1_coco.yaml
+  num_gpus:
+    type: number
+    default: 1
+  key:
+    type: string
+    default: tlt_encode 
+  model_name:
+    type: string
+    default: model.tlt
+  model_subfolder:
+    type: string
+    default: exp_m1_unpruned
+  gpu_index:
+    type: string
+    default: ND
+  use_amp:
+    type: string
+    default: ND
+  log_file:
+    type: string
+    default: ND
+  specfile_model_pose_dir:
+    type: string
+    default:  /workspace/examples/bpnet/model_pose_config/bpnet_18joints.json
+  specfile_data_pose_dir:
+    type: string
+    default: /workspace/examples/bpnet/data_pose_config/coco_spec.json
+outputs:
+  updated_dir:
+    type: uri_folder
+  data_dir:
+    type: uri_folder
+  unpruned_model_dir:
+    type: uri_folder
+code: ./
+environment: azureml://registries/<registry_name>/environments/tao-toolkit-4.0.0-tf1.15.5/versions/1
+command: >-
+  bash ./update_and_convert_and_train.sh 
+  ${{inputs.specs_dir}} 
+  ${{inputs.downloaded_data_dir}} 
+  ${{inputs.dataset_export_spec}} 
+  ${{outputs.data_dir}}
+  ${{inputs.specfile_reference_data_dir}} 
+  ${{inputs.train_mode}}
+  ${{inputs.val_mode}} 
+  ${{inputs.relative_train_mask_directory}}
+  ${{inputs.relative_val_mask_directory}}
+  ${{outputs.updated_dir}}
+  ${{inputs.original_train_specs}}
+  ${{inputs.specs_file}}
+  ${{inputs.num_epochs}}
+  ${{inputs.specfile_reference_root_data_dir}} 
+  ${{inputs.validation_data_dir}}/${{inputs.validation_data_subdir}}
+  ${{inputs.specfile_reference_validation_data_dir}} 
+  ${{inputs.specfile_reference_training_tf_records_dir}} 
+  ${{inputs.specfile_reference_validation_tf_records_dir}} 
+  ${{inputs.key}} 
+  ${{inputs.base_model_dir}}/${{inputs.model_app_name}}/${{inputs.base_model_subdir}}
+  ${{inputs.specfile_reference_model_dir}}
+  ${{inputs.num_gpus}} 
+  ${{inputs.model_name}} 
+  ${{inputs.model_subfolder}} 
+  ${{outputs.unpruned_model_dir}}/${{inputs.model_app_name}}
+  ${{inputs.gpu_index}} 
+  ${{inputs.use_amp}} 
+  ${{inputs.log_file}}
+  ${{inputs.specfile_model_pose_dir}}
+  ${{inputs.specfile_data_pose_dir}}
+
