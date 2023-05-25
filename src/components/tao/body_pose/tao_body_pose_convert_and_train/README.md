@@ -1,6 +1,7 @@
 ## Pre-processing the Dataset
-#### This component is a wrapper for the TAO bpnet dataset_convert command
+#### This component is a wrapper for the TAO `bpnet dataset_convert` command and `bpnet train` command.
 #### Excerpt from the [BodyPoseNet Documentation](https://docs.nvidia.com/tao/tao-toolkit/text/bodypose_estimation/bodyposenet.html)
+
 The BodyPoseNet app requires the raw input data to be converted to TFRecords for optimized iteration across the data batches. This can be done using the <span style="color:red;font-weight:700;font-size:12px"> dataset_convert </span> subtask under bpnet. Currently, the COCO format is supported.
 
 The following outlines the bpnet dataset conversion command:
@@ -11,32 +12,32 @@ The following outlines the bpnet dataset conversion command:
                             -m <'train'/'test'>
 </pre>
 
-### Required Arguments
-* <span style="color:red;font-weight:700;font-size:12px">-d, --dataset_spec </span>: The path to the JSON dataset spec containing the config for exporting .tfrecords.
-* <span style="color:red;font-weight:700;font-size:12px"> -o, --output_filename </span>: The output file name. Note that this will be appended with <span style="color:red;font-weight:700;font-size:12px"> -fold-<num>-of-<total> </span>
 
-### Optional Arguments
-* <span style="color:red;font-weight:700;font-size:12px"> -h, --help </span>: Show the help message.
-* <span style="color:red;font-weight:700;font-size:12px"> -m, --mode </span>: This corresponds to the train_data and test_data fields in the spec. The default value is train.
-* <span style="color:red;font-weight:700;font-size:12px"> --check_files </span>: Check if the files, including images and masks, exist in the given root data directory.
-* <span style="color:red;font-weight:700;font-size:12px"> --generate_masks </span>: Generate and save masks of regions with unlabeled people. This is used for training.
+After generating Tfrecords and masks ingestible by the TAO training (done in dataset_convert), you are now ready to start training the bodypose estimation network. This
+is automatically done as the next step in this component. 
 
-The required spec file, contains many other arguments, please refer to the [spec file documentation](https://docs.nvidia.com/tao/tao-toolkit/text/bodypose_estimation/bodyposenet.html#dataset-preparation) to learn more about them. Some of such parameters refer to the specific location of data folders, which have specific hard coded entries on the spec file. However, in the case of an AzureML Job Run, the root directories are unknown before the job runs. Directories are assigned dynamically during execution. Therefore, the Component requires to know both the dynamic location during run time and the hard coded location on the spec file to do the substitution on the fly before executing the TAO bpnet dataset_convert. The Component first updates the spec files and then passes the updated spec files to the TAO command during execution.
+The following outlines the bpnet train command:
 
-### Required Arguments to be used for spec file substitution
-* <span style="color:red;font-weight:700;font-size:12px">dataset full path:</span> The AzureML location of the dataset to be converted.
-* <span style="color:red;font-weight:700;font-size:12px">dataset reference:</span> The hard coded dataset location on the spec file.
-* <span style="color:red;font-weight:700;font-size:12px">annotations full path:</span> The AzureML location of the annotation data.
-* <span style="color:red;font-weight:700;font-size:12px">annotations reference:</span> The hard coded annotation data location on the spec file.
+<pre style="background-color:rgba(0, 0, 0, 0.0470588)"><font size="2">tao bpnet train
+                            -e <path/to/train_spec>
+                            -r <path/to/result directory>
+                            -k <key>
+                            --gpus <num_gpus>
+</pre>
 
-### Components Inputs and Outputs
+
+The required spec files contain many other arguments, please refer to the [TAO BodyPoseNet documentation](https://docs.nvidia.com/tao/tao-toolkit/text/bodypose_estimation/bodyposenet.html) to learn more about them. Some of such parameters refer to the specific location of data folders, which have specific hard coded entries on the spec file. However, in the case of an AzureML Job Run, the root directories are unknown before the job runs. Directories are assigned dynamically during execution. Therefore, the Component requires to know both the dynamic location during run time and the hard coded location on the spec file to do the substitution on the fly before executing the TAO `bpnet dataset_convert` and `train`. The Component first updates the spec files and then passes the updated spec files to the TAO command during execution.
+
+
+### Component Inputs and Outputs
 * inputs:
-    * specs_dir
-    * data_dir
-    * dataset_export_spec
-    * output_filename
-    * specfile_reference_data_dir:
-    * mode
-    * relative_mask_directory
+    * specs_dir: directory with the original specs files
+    * downloaded_data_dir: directory with the downloaded training data
+    * training_data_dir: directory with the downloaded training data
+    * validation_data_dir: directory with the downloaded validation data
+    * base_model_dir: directory with the downloaded pre-trained TAO bpnet model
+    * original_specs_dir: directory with the original specs files
 * outputs:
-    * tf_records_dir
+    * updated_data_dir: directory with converted TFrecords, masks, and updated spec files
+    * data_dir: directory with the original input data to the component
+    * unpruned_model_dir: directory with the trained unpruned model

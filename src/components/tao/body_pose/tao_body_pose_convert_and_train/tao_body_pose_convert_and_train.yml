@@ -1,7 +1,7 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 name: tao_body_pose_dataset_convert_and_train
 display_name: tao_body_pose_dataset_convert_and_train
-description: Wrapper for TAO commandS bpnet dataset_convert and bpnet train. The bpnet app requires the raw input data to be converted to TFRecords for optimized iteration across the data batches, which is accomplished with this component <a href=https://github.com/mreyesgomez/NVIDIA_AzureML_Components_and_Pipelines/tree/main/components/tao/tfv3.22.05-tf1.15.4/object_detection/detectnet_v2/tao_detectnet_v2_dataset_convert/README.md>Reference file</a>. This is also used for training due to some path constraints in TAO BodyPose spec file design. 
+description: Wrapper for TAO commandS bpnet dataset_convert and bpnet train. The bpnet app requires the raw input data to be converted to TFRecords for optimized iteration across the data batches, which is accomplished with this component <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/blob/64ab93099bb8ba8a6ee552031d39f3e7e4827d02/src/pipelines/tao/object_detection/bodypose/tao_body_pose_pipeline/README.md>Reference file</a>. This is also used for training due to some path constraints in TAO BodyPose spec file design. 
 version: 1
 type: command
 inputs:

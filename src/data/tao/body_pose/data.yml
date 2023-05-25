@@ -1,6 +1,6 @@
 $schema: https://azuremlschemas.azureedge.net/latest/data.schema.json
 name: bodypose_config
-description: Spec files for TAO BodyPose. 
+description: Spec files for TAO BodyPose. <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/blob/64ab93099bb8ba8a6ee552031d39f3e7e4827d02/src/data/tao/body_pose/README.md>Reference file</a>
 tags: 
   NVIDIA AI Enterprise: ''
   Preview: ''

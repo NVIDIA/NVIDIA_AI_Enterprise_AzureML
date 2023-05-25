@@ -3,7 +3,7 @@ type: pipeline
 name: tao_body_pose_pipeline
 version: 1
 display_name: pipeline component for body pose workflow
-description: Body pose AzureML Pipeline Component using TAO bpnet command components. It executes several actions such as dowmloading data and base model, and model training <a href=https://github.com/mreyesgomez/NVIDIA_AzureML_Components_and_Pipelines/tree/main/components/tao/tfv3.22.05-tf1.15.4/object_detection/detectnet_v2/tao_detectnet_v2_pipeline/README.md>Reference file</a>
+description: Body pose AzureML Pipeline Component using TAO bpnet command components. It executes several actions such as dowmloading data and base model, and model training <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/blob/64ab93099bb8ba8a6ee552031d39f3e7e4827d02/src/pipelines/tao/object_detection/bodypose/tao_body_pose_pipeline/README.md>Reference file</a>
 inputs:
   model_app_name:
     type: string
