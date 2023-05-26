@@ -1,9 +1,9 @@
 $schema: https://azuremlschemas.azureedge.net/latest/pipelineComponent.schema.json
 type: pipeline
 name: tao_facenet_pipeline
-version: 1
-display_name: pipeline component with TAO facenet workflow
-description: Face Detect AzureML Pipeline Component using TAO DetectNet_v2 Command Components. The FaceDetect model detects one or more faces in a given image or video. Some of the major steps covered in the pipeline are, but not limited to Take a pretrained resnet18 model and train a ResNet-18 FaceNet model on the WIDERFACE dataset, Prune the trained FaceNet model, Retrain the pruned model to recover lost accuracy, Export the pruned model, Run Inference on the trained model <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/blob/main/src/components/tao/object_detection/facenet/tao_facenet_pipeline/README.md>Reference file</a>
+version: 2
+display_name: tao pipeline component with TAO facenet workflow
+description: Face Detect AzureML Pipeline Component using TAO DetectNet_v2 Command Components. The FaceDetect model detects one or more faces in a given image or video. Some of the major steps covered in the pipeline are, but not limited to Take a pretrained resnet18 model and train a ResNet-18 FaceNet model on the WIDERFACE dataset, Prune the trained FaceNet model, Retrain the pruned model to recover lost accuracy, Export the pruned model, Run Inference on the trained model <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/blob/main/src/pipelines/tao/object_detection/facenet/tao_facenet_pipeline/README.md>Reference file</a>
 tags:
     NVIDIA AI Enterprise: ""
     Preview: ""
