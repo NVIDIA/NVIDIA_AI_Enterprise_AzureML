@@ -2,9 +2,9 @@
 
 source scripts/config_files/config.sh
 
-export pipeline_file=../${product_subfolder}/pipeline.yml
+export pipeline_file=./${product_subfolder}/pipeline.yml
 
-export running_pipeline_file=../${product_subfolder}/pipeline_run.yml
+export running_pipeline_file=./${product_subfolder}/pipeline_run.yml
 
 cp $pipeline_file $running_pipeline_file
 

@@ -1,9 +1,9 @@
 $schema: https://azuremlschemas.azureedge.net/latest/pipelineComponent.schema.json
 type: pipeline
-name: detectnet_v2_data_pipeline
+name: tao_detectnet_v2_data_pipeline
 version: 1
-display_name: pipeline component with detectnet_v2 workflow
-description: Object Detection AzureML Pipeline Component using TAO DetectNet_v2 Command Components. It executes several actions such as dowmloading data and base model, model retraining, model prunning with retraining  and model quantization with retraining <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/tao/object_detection/detectnet_v2/tao_detectnet_v2_pipeline/README.md>Reference file</a>
+display_name: tao pipeline component with detectnet_v2 workflow
+description: Object Detection AzureML Pipeline Component using TAO DetectNet_v2 Command Components. It executes several actions such as dowmloading data and base model, model retraining, model prunning with retraining  and model quantization with retraining <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/blob/main/src/pipelines/tao/object_detection/detectnet_v2/tao_detectnet_v2_pipeline/README.md>Reference file</a>
 tags:
     NVIDIA AI Enterprise: ""
     Preview: ""
