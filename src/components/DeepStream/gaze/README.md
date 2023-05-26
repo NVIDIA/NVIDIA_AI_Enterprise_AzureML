@@ -1,5 +1,7 @@
 # Gaze DeepStream Component
 
+![](https://developer.nvidia.com/sites/default/files/akamai/TLT/gaze_use_case_image_IX.png)
+
 Gaze Deepstream sample is part of deepstream_tao_app, GitHub is [Here](https://github.com/NVIDIA-AI-IOT/deepstream_tao_apps/tree/master/apps/tao_others/deepstream-gaze-app)
 
 It uses the following models together

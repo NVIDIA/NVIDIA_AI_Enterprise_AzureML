@@ -1,5 +1,7 @@
 # DeepStream LPR Component
 
+![](https://github.com/NVIDIA-AI-IOT/deepstream_lpr_app/raw/master/lpr.png)
+
 LPR Deepstream sample is part of NVIDIA-AI-IOT sample, GitHub is [Here](https://github.com/NVIDIA-AI-IOT/deepstream_lpr_app)
 
 It uses the following models together
