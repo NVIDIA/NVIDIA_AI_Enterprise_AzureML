@@ -20,4 +20,5 @@ parser.add_argument("--test_split_ratio", type=float, help="ratio of train test 
 * `--model_output`: This is the output model which is generated at the end of training. The output model is in the mlflow format.
 
 On the AzureML studio, it looks like the following
+
 ![image](imgs/train_component.png)
