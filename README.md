@@ -6,9 +6,14 @@ The Registry contains AzureML Resources that would enable Azure Machine Learning
 
 NVIDIA AI Enterprise is an end-to-end platform for building accelerated production AI.
 
-it includes a library of full-stack software including NVIDIA AI Workflows, frameworks, pretrained models and infrastructure optimization which streamline the development and deployment of production-ready applications for generative AI, speech AI, vision AI, cybersecurity, and more.
+It includes a library of full-stack software including NVIDIA AI Workflows, frameworks, pretrained models and infrastructure optimization which streamline the development and deployment of production-ready applications for generative AI, speech AI, vision AI, cybersecurity, and more.
+It is comprised of several sdk.
+
 
 ## AzureML Resources
+
+### AzureML Registry
+[Registries in Azure Machine Learning](https://techcommunity.microsoft.com/t5/ai-machine-learning-blog/announcing-registries-in-azure-machine-learning-to/ba-p/3649242)  are organization wide repositories of machine learning assets such as models, environments, and components. Registries provide a central platform for cataloging and operationalizing machine learning models across various personas, teams and environments involved in the machine learning lifecycle. 
 
 ### AzureML Environments
 
