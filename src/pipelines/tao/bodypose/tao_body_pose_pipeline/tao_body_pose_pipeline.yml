@@ -1,0 +1,88 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineComponent.schema.json
+type: pipeline
+name: tao_body_pose_pipeline
+version: 1
+display_name: pipeline component for body pose workflow
+description: Body pose AzureML Pipeline Component using TAO bpnet command components. It executes several actions such as dowmloading data and base model, and model training <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/blob/64ab93099bb8ba8a6ee552031d39f3e7e4827d02/src/pipelines/tao/object_detection/bodypose/tao_body_pose_pipeline/README.md>Reference file</a>
+inputs:
+  model_app_name:
+    type: string
+  num_epochs:
+    type: integer
+  num_gpus:
+    type: integer
+  key:
+    type: string
+  compute_train_node:
+    type: string
+  original_specs:
+    type: uri_folder
+  dummy_validation_data_dir: 
+    type: uri_folder
+  dummy_validation_tf_records_dir: 
+    type: uri_folder
+outputs:
+  downloaded_data_dir:
+    type: uri_folder
+  updated_spec_dir:
+    type: uri_folder
+  data_dir:
+    type: uri_folder
+  base_model_dir:
+    type: uri_folder
+  unpruned_model_dir:
+    type: uri_folder
+jobs: 
+  download_data:
+    type: command
+    component: azureml://registries/<registry_name>/components/download_multiple_streams/versions/1
+    compute: ${{parent.inputs.compute_train_node}}
+    inputs:
+      urls: "http://images.cocodataset.org/zips/train2017.zip,http://images.cocodataset.org/zips/val2017.zip,http://images.cocodataset.org/annotations/annotations_trainval2017.zip"
+      file_types: "TRAINING_IMAGES,VALIDATION_IMAGES,LABELS"
+    outputs:
+      downloaded_data_dir: ${{parent.outputs.downloaded_data_dir}}
+  download_model:
+    type: command
+    component: azureml://registries/<registry_name>/components/tao_download_model/versions/1
+    compute: ${{parent.inputs.compute_train_node}}
+    inputs:
+      model_app_name: ${{parent.inputs.model_app_name}}
+      model_type: bodyposenet
+      model_name: trainable_v1.0
+      model_subdir: pretrained_model
+    outputs:
+      base_model_dir: ${{parent.outputs.base_model_dir}}
+  dataset_convert_train:
+    type: command
+    component: azureml://registries/<registry_name>/components/tao_body_pose_dataset_convert_and_train/versions/1
+    compute: ${{parent.inputs.compute_train_node}}
+    inputs:
+      specs_dir: ${{parent.inputs.original_specs}}
+      downloaded_data_dir: ${{parent.jobs.download_data.outputs.downloaded_data_dir}}
+      dataset_export_spec: coco_spec.json
+      specfile_reference_data_dir: /workspace/tao-experiments/bpnet/data
+      train_mode: train
+      val_mode: val
+      relative_train_mask_directory: train_mask2017
+      relative_val_mask_directory: val_mask2017
+      num_epochs: ${{parent.inputs.num_epochs}}
+      training_data_dir: ${{parent.jobs.download_data.outputs.downloaded_data_dir}}
+      training_data_subdir: data/train2017
+      specfile_reference_root_data_dir: /workspace/tao-experiments/bpnet/data
+      specfile_reference_training_tf_records_dir: /workspace/tao-experiments/bpnet/train/data/train-records
+      validation_data_dir: ${{parent.inputs.dummy_validation_data_dir}}
+      model_app_name: ${{parent.inputs.model_app_name}}
+      base_model_dir: ${{parent.jobs.download_model.outputs.base_model_dir}}
+      specfile_reference_model_dir: /workspace/tao-experiments/bpnet/pretrained_model/bodyposenet_vtrainable_v1.0/model.tlt
+      original_train_specs: ${{parent.inputs.original_specs}}
+      num_gpus: ${{parent.inputs.num_gpus}}
+      key: ${{parent.inputs.key}}
+      model_name: 'model.tlt'
+      model_subfolder: exp_m1_unpruned
+      specs_file: bpnet_train_m1_coco.yaml
+      specfile_model_pose_dir: /workspace/examples/bpnet/model_pose_config/bpnet_18joints.json
+    outputs:
+      data_dir: ${{parent.outputs.data_dir}}
+      updated_dir: ${{parent.outputs.updated_spec_dir}}
+      unpruned_model_dir: ${{parent.outputs.unpruned_model_dir}}
