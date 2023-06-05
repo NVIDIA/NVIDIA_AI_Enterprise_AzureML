@@ -1,6 +1,6 @@
-# MONAI 3D Segmentation
+# MONAI 3D Segmentation sample
 
-In this sample, you will:
+In this tutorial, you will:
 
 * Provision a fully functional environment in your own Azure subscription
 * Run a sample of MONAI machine learning pipeline in Azure ML
@@ -22,7 +22,7 @@ To enjoy this quick deployment, you will need to:
 
 | Button | Description |
 | :-- | :-- |
-| [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fvonodiripsa%2Fmonai-3D-segmentation%2Fmain%2Fbrats-mri-segmentation-segresnet%2Fdeployment%2Farm%2Fmonai-setup.json) | This setup is intended only for demo purposes. The data is still accessible by the users of your subscription when opening the storage accounts, and data exfiltration is possible. |
+| [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FNVIDIA%2NVIDIA_AI_Enterprise_AzureML%2Fmain%2samples%2Fpython%2F3D-image-segmentation%2monai%2Fdeployment%2Farm%2Fmonai-setup.json) | This setup is intended only for demo purposes. The data is still accessible by the users of your subscription when opening the storage accounts, and data exfiltration is possible. |
 
 > Notes:
 >
@@ -32,42 +32,27 @@ To enjoy this quick deployment, you will need to:
 2.  Once the automatic deployment is finished you can open new workspace
     and after that related Machine Learning Studio
 
-3.  Next you need to create a compute instance to run tutorial
-    notebooks. Click Compute icon in the vertical menu on the left. Next
+3.  Next you need to create a compute instance to do development work in  Machine Learning Studio. Click Compute icon in the vertical menu on the left. Next
     select Compute instances and [create
-    one](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-create-manage-compute-instance?view=azureml-api-2&tabs=azure-studio).
+    one](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-create-manage-compute-instance?view=azureml-api-2&tabs=azure-studio).    
+    
+3.  Once you have dev compute instance running you need to open Notebooks File Explorer with your notebooks to run. In the beginning it will be empty
 
-> **NOTES:**
->
-> To run the current version of the tutorial (all steps) you need
-> Standard_NC96ads_A100. For some notebook steps you can use smaller
-> sizes.
-
-4.  Make sure that automatically created **monai-cluster** is based on
-    Standard_NC96ads_A100 too.
-
-5.  Once you have your compute instance running. Click Notebooks and
-    Terminal icon.
+5.  Click on Open terminal button and open SSH client to your Compute Instance. In this session clone NVIDIA/NVIDIA_AI_Enterprise_AzureML repository (or just what you will use)
 
 <img src="media/image1.png" width="50%" />
 
+6. Refresh Notebook File Explorer to see that you have samples and src under your name in Notebook File exploreer
 
-After that you need to clone the repository to have the latest code in
-your workspace.
+7. Open MONAI sample notebooks and run them
 
-6.  Next you need to get data from
-    [Kaggle](https://www.kaggle.com/datasets/dschettler8845/brats-2021-task1).
-    In this tutorial we are using only BraTS2021_Training_Data.tar.
-
-7.  You need to put the file in existing or new [Azure Blob
-    Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal)
-    . To do it fast you can use
-    [azcopy](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-blobs-upload)
-
-8.  After you have data in a blob storage. You need to create [Azure ML
-    data
-    asset](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-create-data-assets?view=azureml-api-2&tabs=Studio)
-    (file type) using "From Azure storage" option.
+> **NOTES:**
+>
+> The current sampleas are tested using
+> Standard_NC96ads_A100, but you could use smaller Azure sizes or clusters too.
+>
+> The sample is using [Kaggle](https://www.kaggle.com/datasets/dschettler8845/brats-2021-task1).
+> BraTS2021_Training_Data.tar.
 
 ## Running 1.load-train-model.ipynb 
 
