@@ -40,8 +40,6 @@ To enjoy this quick deployment, you will need to:
 
 5.  Click on Open terminal button and open SSH client to your Compute Instance. In this session clone NVIDIA/NVIDIA_AI_Enterprise_AzureML repository (or just what you will use)
 
-<img src="media/image1.png" width="50%" />
-
 6. Refresh Notebook File Explorer to see that you have samples and src under your name in Notebook File exploreer
 
 7. Open MONAI sample notebooks and run them
@@ -54,146 +52,14 @@ To enjoy this quick deployment, you will need to:
 > The sample is using [Kaggle](https://www.kaggle.com/datasets/dschettler8845/brats-2021-task1).
 > BraTS2021_Training_Data.tar.
 
-## Running 1.load-train-model.ipynb 
+## Running sample notebooks 
 
-1.  To run the tutorial, you need to go open the first notebook
+The sample has 3 notebooks:
 
-<img src="media/image2.png" alt="Graphical user interface, application Description automatically
-generated" style="zoom:50%;" />
-
-2.  Make sure your compute instance is still running.
-
-3.  Download config.json file to simplify MLClient creation. After
-    downloading you need to upload it to notebooks folder (like on the
-    previous image.
-
-> **Loading and training**
-
-1.  In the open 1.load-train-model notebook correct tar_location value
-    using your data asset url
-
-![Graphical user interface, application Description automatically
-generated](media/image3.png){width="6.5in"
-
-2.  Make sure you select SDK v2 Python kernel .
-
-> <img src="media/image4.png" alt="Graphical user interface, text Description automatically
-> generated" width="75%" />
-
-3.  Start running the notebook step by step.
-
-4.  The first step (on the previous image) will install required
-    libraries on the compute instance.
-
-5.  You don't need to run it again on the same compute instance.
-
-> **Notebook steps definition**
-
-In the notebook we are following MONAI tutorial and using Azure ML
-components to run it. After installing required libraries and importing
-them in the notebook we are setting names and references to existing
-data (training dataset from AzureML workspace data asset and validation
-and visualization samples from tutorial github.
-
-Next, we are creating MLClient using default crepdentials and workspace
-parameters from config json file. After that we convert the
-multi-classes labels into multi-labels segmentation task and setup
-transforms for training and validation.
-
-In the next cell you can view the image. Currently it supported only
-under VSCode. The image will look like this.
-
-<img src="media/image5.png" width="75%" />
-
-In the next section we are assigning Compute instance to MLClient. If we
-already have it running it will just assign it or create a new one and
-assign.
-
-In the next step we are creating or just assigning previously created
-Azure ML environment to run training pipeline. Yml specification of the
-environment is in train-env.yml file under notebooks folder.
-
-The notebook is based on Azure ML SDK 2. To demonstrate power of new
-components and pipelines in the next steps we are loading upload and
-train components created by related yml files in components folder.
-
-After setting required parameters we are creating and submitting the
-segmentation pipeline. After it finishes it will create the result model
-like the one saved in ginthub.
+ - [Loading Data and Training the Model](./notebooks/load_and_train.ipynb)
+ - [Deploy trained Model](./notebooks/deploy_model.ipynb)
+ - [Test the model using End Point](./notebooks/test_model.ipynb)
 
 > **NOTES:**
 >
->You can run all cells. If for some reason it fails you could rerun
->failed steps or use Azure ML to fix problems. For example, if it fails
->during environment building you can rebuild it using Environments
->window.
->
->If some steps of the pipeline fail you can open Pipelines window and
->check logs for the whole pipeline or different steps/components. Just
->double-click failed step and Use Outputs + logs.
->
->By the way, the result model will be saved together with other outputs
->in model folder
->
->Make sure training environment name is matching environment name in .yaml
->file for used environment
-
-
-
-<img src="media/image6.png" alt="Graphical user interface, application Description automatically
-generated" width="35%" height="35%"  />
-
-## Running 2.deploy-model.ipynb notebook
-
-As prerequisites you have to successfully finish
-1.load-train-model.ipynb notebook.
-
-1.  Using Azure ML UI register best trained model generated in outputs
-    by 1.load-train-model.ipynb notebook. To do that select Model in
-    Azure ML vertical menu and select "+Register" and "From local
-    files".
-
-2.  After that just follow the wizard
-
-<img src="media/image7.png" alt="Graphical user interface, application Description automatically
-generated" width="75%" height="75%"  />
-
-<img src="media/image8.png" alt="Graphical user interface, application Description automatically
-generated" width="75%" height="75%"  />
-
-<img src="media/image9.png" alt="Graphical user interface, application Description automatically
-generated" width="75%" height="75%"  />
-
-3.  Open 2.deploy-model.ipynb notebook and run all cells.
-
-**Notebook steps definition**
-
-Import required libraries. Create MLClient. Specify global variable.
-
-Load previously registered model (latest version).
-
-Create online End Point.
-
-Create inference scoring environment based on scoring-env.yaml
-
-Deploy the new Endpoint. This operation will take long time. Make sure
-it is performed with specified timeout and using score.py
-
-Assign 100% of Endpoint traffic to the notebook deployment.
-
-> **NOTES:**
->
->Make sure Endpoint name is unique for the region
-
-
-## Running 3.test-model.ipynb notebook
-
-As prerequisites you have to successfully finish
-1.load-train-model.ipynb and 2.deploy-model.ipynb notebooks.
-
-The notebook logic is self-documentes. It sends a request to Azure ML Endpoint with trained model, 
-gets and visualize a responce demonstrating good match with ground truth segmentation 
-
-<img src="media/image10.png" alt="Graphical user interface, application Description automatically
-generated" width="75%" height="75%"  />
-
+> If you are more familiar with cli based approach then use related MONAI samplea
