@@ -1,8 +1,8 @@
 # NVIDIA AI Enterprise AzureML Registry (Private Preview)
 
-The contents on this repository provide the source code and samples of usage for the Resources contained in the [NVIDIA AI Enterprise AzureML Community Registry](https://ml.azure.com/registries/NVIDIA-AI-Enterprise-Preview) 
+The [contents](#nvidia-ai-enterprise-azureml-github-repository-contents-description) on this repository provide the source code and samples of usage for the Resources contained in the [NVIDIA AI Enterprise AzureML Community Registry](https://ml.azure.com/registries/NVIDIA-AI-Enterprise-Preview) 
 
-<img src="imgs/NVIDIAIEnterprisePreviewRegistry.png" width="700">
+<img src="imgs/NVIDIAIEnterprisePreviewRegistry.png" width="900">
 
 The Registry contains AzureML Resources that would enable Azure Machine Learning Users to set up end-to-end MLOPs workflows using NVIDIA AI Enterprise Software.
 
