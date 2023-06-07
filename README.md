@@ -1,6 +1,13 @@
 # NVIDIA AI Enterprise AzureML Registry (Private Preview)
 
+The contents on this repository provide the source code and samples of usage for the Resources contained in the [NVIDIA AI Enterprise AzureML Community Registry](https://ml.azure.com/registries/NVIDIA-AI-Enterprise-Preview) 
+
+<img src="imgs/NVIDIAIEnterprisePreviewRegistry.png" width="700">
+
 The Registry contains AzureML Resources that would enable Azure Machine Learning Users to set up end-to-end MLOPs workflows using NVIDIA AI Enterprise Software.
+
+## Access to the Private Preview
+The Registry is for now in private preview, to request access, please fill this [form](https://www.nvidia.com/en-us/data-center/solutions/mlops/?nvmid=reg-btn)
 
 ## NVIDIA AI Enterprise
 
@@ -10,18 +17,16 @@ It includes a library of full-stack software including NVIDIA AI Workflows, fram
 It is comprised of several sdk.
 
 
-## AzureML Resources
+## Azure Machine Learning Resources
 
-### AzureML Registry
+### Azure Maschine Learning Registries
 [Registries in Azure Machine Learning](https://techcommunity.microsoft.com/t5/ai-machine-learning-blog/announcing-registries-in-azure-machine-learning-to/ba-p/3649242)  are organization wide repositories of machine learning assets such as models, environments, and components. Registries provide a central platform for cataloging and operationalizing machine learning models across various personas, teams and environments involved in the machine learning lifecycle. 
 
-### AzureML Environments
-
-Contains the libraries that a given piece of code needs to run inside AzureML
+### Azure Machine Learning Environments
+[Azure Machine Learning Environments](https://learn.microsoft.com/en-us/azure/machine-learning/concept-environments?view=azureml-api-2) are an encapsulation of the environment that a piece of code requires to run inside Azure Machine Learning. The environments are managed and versioned entities that enable reproducible, auditable, and portable machine learning workflows across a variety of compute targets.
 
 ### AzureML Command Components
-
-Modular reusable pieces of code, with parameterized inputs and outputs
+An [Azure Machine Learning Command Component](https://learn.microsoft.com/en-us/azure/machine-learning/concept-component?view=azureml-api-2) is a self-contained piece of code that does one step in a machine learning pipeline. A component is analogous to a function - it has a name, inputs, outputs, and a body. 
 
 ### AzureML Pipeline Components
 
@@ -51,7 +56,7 @@ NVIDIA Triton™, an open-source inference serving software, standardizes AI mod
 
 DeepStream SDK is a complete streaming analytics toolkit based on GStreamer for AI-based multi-sensor processing, video, audio, and image understanding. It’s ideal for vision AI developers, software partners, startups, and OEMs building IVA apps and services. Developers can now create stream processing pipelines that incorporate neural networks and other complex processing tasks such as tracking, video encoding/decoding, and video rendering. DeepStream pipelines enable real-time analytics on video, image, and sensor data.
 
-## NVIDIA AI Enterprise AzureML GitHub Repo
+## NVIDIA AI Enterprise AzureML GitHub Repository Contents Description
 The [NVIDIA AI Enterprise AzureML GitHub Repo](https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main) has two types of documents contained into two main folders: src and samples
 
 
