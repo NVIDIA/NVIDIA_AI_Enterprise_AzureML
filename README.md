@@ -1,6 +1,6 @@
 # NVIDIA AI Enterprise AzureML Registry (Private Preview)
 
-The [contents](#nvidia-ai-enterprise-azureml-github-repository-contents-description) on this repository provide the source code and samples of usage for the Resources contained in the [NVIDIA AI Enterprise AzureML Community Registry](https://ml.azure.com/registries/NVIDIA-AI-Enterprise-Preview) 
+The [contents](#nvidia-ai-enterprise-azureml-github-repository-contents-description) on this repository provide the source code and end-to-end application pipelines(#end-to-end-application-pipelines-showcased) implemented using the Resources contained in the [NVIDIA AI Enterprise AzureML Community Registry](https://ml.azure.com/registries/NVIDIA-AI-Enterprise-Preview) 
 
 <img src="imgs/NVIDIAIEnterprisePreviewRegistry.png" width="900">
 
@@ -19,7 +19,7 @@ It is comprised of several sdk.
 
 ## Azure Machine Learning Resources
 
-### Azure Maschine Learning Registries
+### Azure Machine Learning Registries
 [Registries in Azure Machine Learning](https://techcommunity.microsoft.com/t5/ai-machine-learning-blog/announcing-registries-in-azure-machine-learning-to/ba-p/3649242)  are organization wide repositories of machine learning assets such as models, environments, and components. Registries provide a central platform for cataloging and operationalizing machine learning models across various personas, teams and environments involved in the machine learning lifecycle. 
 
 ### Azure Machine Learning Environments
@@ -95,14 +95,12 @@ The folder has four subfolders:
 * scripts: It provides auxiliary optional scripts to help users set up the context to run the material in the samples folder
 
     * To install the SDK v2 and the Azure CLI and its extension for Machine LEarning service, the user should run:
-
-
+    
         **‘bash scripts/install_libs.sh’**
     
     * The user needs to provide its credentials: subscription_id, Azure Machine Learning Workspace and the Azure Resource Group the workspace belongs to, in the config file located at: scripts/config_files/config.sh
 
     Then the user could login into the CLI by running:
-       
 
         **‘bash scripts/set_credentials.sh’**
 
@@ -113,7 +111,7 @@ The folder has four subfolders:
 
 * python: Contains applications that are launched using the Azure Machine Learning Python Interface over a Jupyter Notebook
 
-#### End-to-end application pipelines showcased
+### End-to-end application pipelines showcased
 
 * [TAO Street Object Detection Pipeline:](https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/samples/cli/tao/object_detection/detectnet_v2) Object detection is a popular computer vision technique that can detect one or multiple objects in a frame and place bounding boxes around them. This sample pipeline provided here, contains a ResNet18 model that you can retrain on an AzureML Compute Cluster, to identify a new set of objects: Car,Cyclist and Pedestrian, simply by running this pipeline.
 
