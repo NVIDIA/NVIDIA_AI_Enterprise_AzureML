@@ -87,7 +87,7 @@ It contains examples of how to use the Azure Machine Learning Resources containe
 
 * [Compute Target](https://learn.microsoft.com/en-us/azure/machine-learning/concept-compute-target?view=azureml-api-2) [quota](https://learn.microsoft.com/en-us/azure/quotas/quickstart-increase-quota-portal) for the [Azure VmSizes that support GPUs](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes-gpu)
 
-* Have a Compute Target, that supports GPUs available, in Azure Machine Learning. Here is [how to create a Compute Target](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-create-attach-compute-cluster?view=azureml-api-2) Users could use the optional script scripts/set_compute_cluster.sh script below
+* A Compute Target, that supports GPUs. Here is [how to create a Compute Target](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-create-attach-compute-cluster?view=azureml-api-2) Users could use the optional script scripts/set_compute_cluster.sh script below
 
 #### Subfolders
 The folder has four subfolders:
