@@ -1,6 +1,6 @@
 # NVIDIA AI Enterprise AzureML Registry (Private Preview)
 
-The [contents](#nvidia-ai-enterprise-azureml-github-repository-contents-description) on this repository provide the source code and end-to-end application pipelines(#end-to-end-application-pipelines-showcased) implemented using the Resources contained in the [NVIDIA AI Enterprise AzureML Community Registry](https://ml.azure.com/registries/NVIDIA-AI-Enterprise-Preview) 
+The [contents](#nvidia-ai-enterprise-azureml-github-repository-contents-description) on this repository provide the source code and [end-to-end application pipelines](#end-to-end-application-pipelines-showcased) implemented using the Resources contained in the [NVIDIA AI Enterprise AzureML Community Registry](https://ml.azure.com/registries/NVIDIA-AI-Enterprise-Preview) 
 
 <img src="imgs/NVIDIAIEnterprisePreviewRegistry.png" width="900">
 
