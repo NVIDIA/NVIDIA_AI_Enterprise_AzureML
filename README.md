@@ -61,14 +61,77 @@ The [NVIDIA AI Enterprise AzureML GitHub Repo](https://github.com/NVIDIA/NVIDIA_
 
 
 ### src folder
-Has the AzureML CLI 2.0 files use to publish the AzureML Resources into the NVIDIA AI Enterprise AzureML Registry
+Has the Azure Command Line Interface (CLI) 2.0 files used to publish the AzureML Resources into the NVIDIA AI Enterprise AzureML Registry
 
-It is first indexed by AzureML Resource Type and then by NVIDIA AI Enterprise SDK
+It is first indexed by AzureML Resource Type
 
+* environments: Contains the files to produce all the Azure Machine Learning Environments published in the Registry
+* components: Contains the files to produce all the Azure Machine Learning Command Components published in the Registry
+* pipelines: Contains the files to produce all the Azure Machine Learning Pipeline Components published in the Registry
+* data: Contains the files to publish Azure Machine Learning Datasets into the Registry that are used in the apps showcased in the samples folder 
+* models: Contains the files to publish Azure Machine Learning Models into the Registry that are used in the apps showcased in the samples folder 
+
+Each AzureML Resource Type is then organized by the NVIDIA AI Enterprise SDK the resources are based on
 
 ### samples folder
 
-It contains examples of how to use the AzureML Resources contained in the NVIDIA AI Enterprise AzureML Registry to implement end-to-end MLOPs workflows, from data acquisition to model endpoint deployment
+It contains examples of how to use the Azure Machine Learning Resources contained in the NVIDIA AI Enterprise AzureML Registry to implement end-to-end MLOPs workflows, from data acquisition to model endpoint deployment
+
+#### Pre-requisites
+
+* An Azure Machine Learning workspace. For more information, see [Create an Azure Machine Learning workspace](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-manage-workspace?view=azureml-api-2&tabs=python)
+
+* [Install the SDK v2](https://learn.microsoft.com/en-us/python/api/overview/azure/ai-ml-readme?view=azure-python) Users could use the optional scripts/install_libraries.sh script below
+
+* [Install the Azure CLI and its extension for Machine Learning service (v2)](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-configure-cli?view=azureml-api-2&tabs=public) Users could use the optional scripts/install_libraries.sh script below
+
+* [Compute Target](https://learn.microsoft.com/en-us/azure/machine-learning/concept-compute-target?view=azureml-api-2) [quota](https://learn.microsoft.com/en-us/azure/quotas/quickstart-increase-quota-portal) for the [Azure VmSizes that support GPUs](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes-gpu)
+
+* Have a Compute Target, that supports GPUs available, in Azure Machine Learning. Here is [how to create a Compute Target](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-create-attach-compute-cluster?view=azureml-api-2) Users could use the optional script scripts/set_compute_cluster.sh script below
+
+#### Subfolders
+The folder has four subfolders:
+
+* scripts: It provides auxiliary optional scripts to help users set up the context to run the material in the samples folder
+
+    * To install the SDK v2 and the Azure CLI and its extension for Machine LEarning service, the user should run:
+
+
+        **‘bash scripts/install_libs.sh’**
+    
+    * The user needs to provide its credentials: subscription_id, Azure Machine Learning Workspace and the Azure Resource Group the workspace belongs to, in the config file located at: scripts/config_files/config.sh
+
+    Then the user could login into the CLI by running:
+       
+
+        **‘bash scripts/set_credentials.sh’**
+
+
+* compute: The applications contained in the folder are run as Azure Machine Learning Jobs inside the Azure Machine Leaning Studio, jobs are executed by an Azure Machine Learning Compute Cluster, this folder provides optional mechanisms for user to set up Azure Machine Learning clusters that support NVIDIA GPUs
+
+* cli: Contains applications that are launched using the Azure Machine Learning Command Line Interface
+
+* python: Contains applications that are launched using the Azure Machine Learning Python Interface over a Jupyter Notebook
+
+#### End-to-end application pipelines showcased
+
+* [TAO Street Object Detection Pipeline:](https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/samples/cli/tao/object_detection/detectnet_v2) Object detection is a popular computer vision technique that can detect one or multiple objects in a frame and place bounding boxes around them. This sample pipeline provided here, contains a ResNet18 model that you can retrain on an AzureML Compute Cluster, to identify a new set of objects: Car,Cyclist and Pedestrian, simply by running this pipeline.
+
+* [TAO Face Detection Pipeline:](https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/samples/cli/tao/object_detection/facenet) This pipeline detects one or more faces in a given image or video. Compared to the FaceirNet model, this model gives better results with RGB images and smaller faces. The model is based on the NVIDIA DetectNet_v2 detector with ResNet18 as a feature extractor. This architecture, also known as GridBox object detection, uses bounding-box regression on a uniform grid on the input image.
+
+* [RAPIDS NYC Taxi Data Regression Pipeline:](https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/samples/cli/RAPIDS/NYC_taxi_with_regression) This is an end-to-end machine learning pipeline which runs a linear regression to predict taxi fares in NYC, using RAPIDS CUDF and CUML Libraries
+
+* [RAPIDS XGBoost Hyper Parameter Optimization pipeline:](https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/samples/cli/RAPIDS/HPO_with_XGBoost) In this pipeline a Hyper Paramater Optimization technique is used to optimize the parameters of an XGBoost Model
+
+* [RAPIDS XGBoost Hyper Parameter Optimization pipeline:](https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/samples/cli/RAPIDS/HPO_with_XGBoost) In this pipeline a Hyper Paramater Optimization technique is used to optimize the parameters of an XGBoost Model
+
+* [MONAI Brain tumor 3D image segmentation pipeline:](https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/samples/cli/3D-image_segmentation/monai) This pipeline is based on the [MONAI 3d brain tumor segmentation tutorial](https://github.com/Project-MONAI/tutorials/blob/main/3d_segmentation/swin_unetr_brats21_segmentation_3d.ipynb) and shows how to construct a training workflow of multi-labels segmentation task.
+
+* [MONAI 3D segmentation Notebook:](https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/samples/python/3D-image-segmentation/monai) In this notebook, the user will run a sample of MONAI machine learning pipeline in Azure ML
+it is based on the following MONAI tutorial: https://github.com/Project-MONAI/tutorials/blob/main/3d_segmentation/brats_segmentation_3d.ipynb
+
+* [Deepstream Inference Pipeline](https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/samples/cli/DeepStream) In this pipeline a model from the Registry is deployed using the Deepstream Framework
+
 
 
 
