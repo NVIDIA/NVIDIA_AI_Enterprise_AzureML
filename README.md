@@ -121,8 +121,6 @@ The folder has four subfolders:
 
 * [RAPIDS XGBoost Hyper Parameter Optimization pipeline:](https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/samples/cli/RAPIDS/HPO_with_XGBoost) In this pipeline a Hyper Paramater Optimization technique is used to optimize the parameters of an XGBoost Model
 
-* [RAPIDS XGBoost Hyper Parameter Optimization pipeline:](https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/samples/cli/RAPIDS/HPO_with_XGBoost) In this pipeline a Hyper Paramater Optimization technique is used to optimize the parameters of an XGBoost Model
-
 * [MONAI Brain tumor 3D image segmentation pipeline:](https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/samples/cli/3D-image_segmentation/monai) This pipeline is based on the [MONAI 3d brain tumor segmentation tutorial](https://github.com/Project-MONAI/tutorials/blob/main/3d_segmentation/swin_unetr_brats21_segmentation_3d.ipynb) and shows how to construct a training workflow of multi-labels segmentation task.
 
 * [MONAI 3D segmentation Notebook:](https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/samples/python/3D-image-segmentation/monai) In this notebook, the user will run a sample of MONAI machine learning pipeline in Azure ML
