@@ -2,8 +2,9 @@
 
 source scripts/config_files/config.sh
 
-export pipeline_file=pipelines/${nvidia_product}/${container}/${product_subfolder}/pipeline.yml
-export running_pipeline_file=pipelines/${nvidia_product}/${container}/${product_subfolder}/pipeline_run.yml
+export pipeline_file=./pipeline.yml
+
+export running_pipeline_file=./pipeline_run.yml
 
 cp $pipeline_file $running_pipeline_file
 

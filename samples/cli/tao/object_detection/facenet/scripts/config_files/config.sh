@@ -23,12 +23,7 @@
 
 subscription_id="xxxx-xxxx-xxxx-xxxx-xxxxxxx"
 resource_group="MyResourceGreup"
-registry_name="RegistryTest_05_17"
-#registry_name="NVIDIA-AI-Enterprise-Preview"
+registry_name="NVIDIA-AI-Enterprise-Preview"
 workspace="MyWorkspace"
-nvidia_product="tao"
 compute_name="myCompute"
-product_subfolder="object_detection/detectnet_v2"
-#product_subfolder="object_detection/facenet"
-pipeline_path=pipelines/${nvidia_product}/${product_subfolder}
 num_epochs="4"

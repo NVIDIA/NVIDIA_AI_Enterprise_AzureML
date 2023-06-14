@@ -21,8 +21,9 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-subscription_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-resource_group="user_resource_group"
-workspace="user_workspace"
+subscription_id="xxxx-xxxx-xxxx-xxxx-xxxxxxx"
+resource_group="MyResourceGroup"
 registry_name="NVIDIA-AI-Enterprise-Preview"
-vmsize="standard-nc6s-v3"
+workspace="MyWorkspace"
+compute_name="MyCompute"
+num_epochs="4"

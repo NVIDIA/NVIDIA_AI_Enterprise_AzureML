@@ -2,16 +2,33 @@
 
 This pipeline implements this [NGC Notebook](https://catalog.ngc.nvidia.com/orgs/nvidia/resources/tao_detectnet) 
 
+## How to run the pipeline
+
+The user should edit the config file in scripts/config_files/config.sh
+
+<img src="imgs/configfile.png" width="600">
+
+To state its Azure subscription id, the Azure Machine Learning workspace, where the job would be executed, the Resource Group corresponding to the Workspace and the name of the Azure Machine Learning Compute Target under the Workspace to be used to execute the job  
+
+Parameter num_epochs defines the number of epochs to be used while running the Train Component in the pipeline, in order to produce a model with production level performance, the user should use a value for num_epochs larger than 100, if so the user should expect the job to run for several hours. For demostration purposes the default value of 4 is appropiate
+
+To set up its credentials, the user should run the following script:
+
+<pre style="background-color:rgba(0, 0, 0, 0.0470588)"><font size="2">bash scripts/set_credentials.sh
+</pre>
+
+Then to submit the pipeline, the user should run the following script:
+<pre style="background-color:rgba(0, 0, 0, 0.0470588)"><font size="2">bash scripts/run_pipeline.sh
+</pre> 
+
 ## <span style="color:green;font-weight:700;font-size:24px">Object Detection Pipeline</span> 
 
 Object detection is a popular computer vision technique that can detect one or multiple objects in a frame and place bounding boxes around them. This sample pipeline provided here, contains a ResNet18 model that you can retrain on an AzureML Compute Cluster, to identify a new set of objects: Car,Cyclist and Pedestrian, simply by running this pipeline.
 
 <img src="imgs/detectnetexample.png" width="900">
 
-The Pipeline yml executes the Pipeline Component: 
+The Pipeline yml executes this [Pipeline Component](https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/blob/main/src/pipelines/tao/object_detection/detectnet_v2/tao_detectnet_v2_pipeline)
 
-<pre style="background-color:rgba(0, 0, 0, 0.0470588)"><font size="2">NVIDIA_AzureML_Components_and_Pipelines/components/tao/tfv3.22.05-tf1.15.4/object_detection/detectnet_v2/tao_detectnet_v2_pipeline
-</pre>
 
 Some of the major steps covered in the pipeline are, but not limited to: 
 
