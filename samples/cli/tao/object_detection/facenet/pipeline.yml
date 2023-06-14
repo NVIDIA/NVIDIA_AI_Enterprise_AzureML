@@ -16,8 +16,8 @@ inputs:
   num_gpus: 1
   key: 'nvidia_tlt'
   original_specs:
-    type: uri_folder
-    path: ./specs/ 
+      type: uri_folder
+      path: azureml://registries/<registry_name>/data/facenet_config/versions/1
   compute_train_node: <gpu-cluster>
 jobs:
   facenet_workflow:
