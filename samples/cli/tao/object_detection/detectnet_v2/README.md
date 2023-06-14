@@ -6,7 +6,7 @@ This pipeline implements this [NGC Notebook](https://catalog.ngc.nvidia.com/orgs
 
 The user should edit the config file in scripts/config_files/config.sh
 
-<img src="imgs/configfile.png" width="600">
+<img src="imgs/configfile.png" width="500">
 
 To state its Azure subscription id, the Azure Machine Learning workspace, where the job would be executed, the Resource Group corresponding to the Workspace and the name of the Azure Machine Learning Compute Target under the Workspace to be used to execute the job  
 
