@@ -1,0 +1,45 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+experiment_name: NVIDIA_NEMO_MULTITASK_PROMPT_AND_PTTUNING_JOB
+settings:
+  default_compute: azureml:<gpu-cluster>
+inputs:
+  urls: https://raw.githubusercontent.com/NVIDIA/NeMo/<BRANCH>/scripts/dataset_processing/nlp/squad/prompt_learning_squad_preprocessing.py,https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v1.1.json,https://rajpurkar.github.io/SQuAD-explorer/dataset/dev-v1.1.json,https://raw.githubusercontent.com/NVIDIA/NeMo/<BRANCH>/examples/nlp/language_modeling/conf/megatron_gpt_prompt_learning_config.yaml,https://api.ngc.nvidia.com/v2/models/nvidia/nemo/megatron_gpt_345m/versions/1/files/megatron_gpt_345m.nemo
+  file_types: python_file,train_json,dev_json,config_file,model_file
+  checksums: 'NA'
+  local_subdirs: script,data/SQUAD,data/SQUAD,config,model
+  script_subdir: script
+  script_filename: prompt_learning_squad_preprocessing.py
+  parameters: "--data-dir#data_dir"
+  data_subdir: data/SQUAD
+  place_holder: data_dir 
+  config_subdir: config
+  config_filename: megatron_gpt_prompt_learning_config.yaml
+  model_filename: megatron_gpt_345m.nemo
+  model_subdir: model
+  train_filename: squad_short_train.jsonl
+  val_filename: squad_short_val.jsonl
+  compute_train_node: <gpu-cluster>
+outputs:
+  data_dir:
+    type: uri_folder
+  processed_data_dir:
+    type: uri_folder    
+jobs:
+  multitask_prompt_and_pttuning_workflow:
+    type: pipeline
+    component: azureml://registries/<registry_name>/components/nemo_multitask_prompt_and_ptuning_pipeline/versions/9
+    inputs:
+      urls: ${{parent.inputs.urls}}
+      file_types: ${{parent.inputs.file_types}}
+      checksums: ${{parent.inputs.checksums}}
+      local_subdirs: ${{parent.inputs.local_subdirs}}
+      script_subdir: ${{parent.inputs.script_subdir}}
+      script_filename: ${{parent.inputs.script_filename}}
+      parameters: ${{parent.inputs.parameters}}
+      data_subdir: ${{parent.inputs.data_subdir}}
+      place_holder: ${{parent.inputs.place_holder}}
+      compute_train_node: ${{parent.inputs.compute_train_node}}
+    outputs:
+      data_dir: ${{parent.outputs.data_dir}}
+      processed_data_dir: ${{parent.outputs.processed_data_dir}}

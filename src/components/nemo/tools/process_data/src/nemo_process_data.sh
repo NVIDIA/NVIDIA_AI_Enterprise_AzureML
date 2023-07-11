@@ -1,0 +1,26 @@
+set -x
+
+# map the output data location to the directory name used by the script
+
+export SCRIPT_FILE=$1
+export PARAMETERS=$2
+export DATA_DIR=$3
+export DATA_SUBDIR=$4
+export PLACE_HOLDER=$5
+export PROCESSED_DATA_DIR=$6
+
+
+DATA_DIR=$DATA_DIR/$DATA_SUBDIR
+PROCESSED_DATA_DIR=$PROCESSED_DATA_DIR/$DATA_SUBDIR
+
+mkdir -p $PROCESSED_DATA_DIR
+
+cp -r $DATA_DIR/* $PROCESSED_DATA_DIR
+
+PARAMETERS=${PARAMETERS/$PLACE_HOLDER/"$PROCESSED_DATA_DIR"}
+PARAMETERS=${PARAMETERS/'#'/" "}
+
+python $SCRIPT_FILE $PARAMETERS
+
+ls $PROCESSED_DATA_DIR
+
