@@ -1,0 +1,51 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: nemo_lora
+display_name: NeMo LoRA Fine-Tune
+type: command
+description: Component to run low-rank adaptation (LoRA) fine-tuning technique. <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/blob/main/src/components/monai/3D_image_segmentation/train_segmentation/README.md>Reference file</a>
+is_deterministic: true
+version: 1
+tags:
+    NVIDIA AI Enterprise: ""
+    Preview: ""
+# distribution:
+#   type: pytorch
+# shm_size:
+#   type: string
+# # (input_data_dir, best_model_name, max_epochs):
+inputs:
+  customization_name:
+    type: string
+    description: a name for your model customization
+  input_data_folder:
+    type: uri_folder
+    description: the input folder for training and test data files
+  train_file:
+    type: string
+    description: the name of the .jsonl training data file
+  test_file:
+    type: string
+    description: the name of the .jsonl test data file
+  base_model:
+    type: string
+    description: pretrained NeMo GPT model used for customization
+    default: GPT-5B
+  batch_size:
+    type: int
+    description: the number of samples propogated concurrently through the network before the model parameters are updated in one iteration of training
+    default: 8
+  learning_rate:
+    type: string
+    description: how much to adjust the model parameters in response to the loss gradient
+    default: "0.0001"
+outputs:
+  finetuned-model:
+    type: uri_folder
+    description: the LoRA fine-tuned model
+
+code: ./src
+
+command: >-
+  python run.py $[[--epochs ${{inputs.max_epochs}}]] --initial_lr 0.00025 --train_batch_size 1 --val_batch_size 1 --input_data ${{inputs.input_data}} --best_model_name ${{inputs.best_model_name}} --model ${{outputs.model}}
+
+environment: "azureml://registries/<REGISTRY>/environments/monai_train_env/versions/1"
