@@ -6,8 +6,8 @@ description: Component to run low-rank adaptation (LoRA) fine-tuning technique. 
 is_deterministic: true
 version: 1
 tags:
-    NVIDIA AI Enterprise: ""
-    Preview: ""
+    # NVIDIA AI Enterprise: ""
+    # Preview: ""
 # distribution:
 #   type: pytorch
 # shm_size:
@@ -23,9 +23,9 @@ inputs:
   train_file:
     type: string
     description: the name of the .jsonl training data file
-  test_file:
+  val_file:
     type: string
-    description: the name of the .jsonl test data file
+    description: the name of the .jsonl val data file
   base_model:
     type: string
     description: pretrained NeMo GPT model used for customization
@@ -38,14 +38,24 @@ inputs:
     type: string
     description: how much to adjust the model parameters in response to the loss gradient
     default: "0.0001"
+  orig_config_path:
+    type: uri_folder
+    description: location of the original config file for training
 outputs:
-  finetuned-model:
+  output_dir:
+    type: uri_folder
+    description: output directory for the checkpoints, config file, and model
+  finetuned_model:
     type: uri_folder
     description: the LoRA fine-tuned model
 
 code: ./src
 
 command: >-
-  python run.py $[[--epochs ${{inputs.max_epochs}}]] --initial_lr 0.00025 --train_batch_size 1 --val_batch_size 1 --input_data ${{inputs.input_data}} --best_model_name ${{inputs.best_model_name}} --model ${{outputs.model}}
+  python modify_config.py 
+  --config-path ${{inputs.orig_config_path}} --model ${{inputs.base_model}} --input-data-folder ${{inputs.input_data_folder}}
+  --train-file ${{inputs.train_file}} --val-file ${{inputs.val_file}} --output-dir ${{outputs.output_dir}} 
+#python /NeMo/examples/nlp/language_modeling/tuning/megatron_gpt_peft_tuning.py --config-path  ${{inputs.config_path}}
+#python run.py $[[--epochs ${{inputs.max_epochs}}]] --initial_lr 0.00025 --train_batch_size 1 --val_batch_size 1 --input_data ${{inputs.input_data}} --best_model_name ${{inputs.best_model_name}} --model ${{outputs.model}}
 
-environment: "azureml://registries/<REGISTRY>/environments/monai_train_env/versions/1"
+environment: "azureml://registries/michxu-registry/environments/hwolff-bignlp-train/versions/1"
