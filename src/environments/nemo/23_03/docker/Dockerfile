@@ -7,7 +7,7 @@ RUN pip install 'matplotlib>=3.3,<3.4' \
                 'tqdm>=4.59,<4.60' \
                 'pandas>=1.1,<1.2' \
                 'scipy>=1.5,<1.6' \
-                'numpy>=1.10,<1.20' \
+                'numpy>=1.20' \
                 'azureml-core==1.45.0' \
                 'azureml-defaults==1.45.0' \
                 'azureml-mlflow==1.45.0' \

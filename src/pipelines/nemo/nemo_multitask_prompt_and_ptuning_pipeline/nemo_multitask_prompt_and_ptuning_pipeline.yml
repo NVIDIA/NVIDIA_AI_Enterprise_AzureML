@@ -1,7 +1,7 @@
 $schema: https://azuremlschemas.azureedge.net/latest/pipelineComponent.schema.json
 type: pipeline
 name: nemo_multitask_prompt_and_ptuning_pipeline
-version: 9
+version: 23
 display_name: nemo pipeline component with multitask prompt and ptuning
 description: etects one or more faces in a given image or video. Some of the major steps covered in the pipeline are, but not limited to Take a pretrained resnet18 model and train a ResNet-18 FaceNet model on the WIDERFACE dataset, Prune the trained FaceNet model, Retrain the pruned model to recover lost accuracy, Export the pruned model, Run Inference on the trained model <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/blob/main/src/pipelines/tao/object_detection/facenet/tao_facenet_pipeline/README.md>Reference file</a>
 tags:
@@ -48,10 +48,12 @@ outputs:
     type: uri_folder
   new_config_dir:
     type: uri_folder
+  pytorch_lightning_trainer_config_dir:
+    type: uri_folder
 jobs: 
   download_data:
     type: command
-    component: azureml://registries/NVIDIA-NGC-Test/components/download_multiple_streams/versions/7
+    component: azureml://registries/<registry_name>/components/download_multiple_streams/versions/7
     compute: ${{parent.inputs.compute_train_node}}
     inputs:
       urls: ${{parent.inputs.urls}}
@@ -62,7 +64,7 @@ jobs:
       data_dir: ${{parent.outputs.data_dir}}
   process_data:
     type: command
-    component: azureml://registries/NVIDIA-NGC-Test/components/nemo_process_data/versions/4
+    component: azureml://registries/<registry_name>/components/nemo_process_data/versions/4
     compute: ${{parent.inputs.compute_train_node}}
     inputs:
       script_dir: ${{parent.jobs.download_data.outputs.data_dir}}
@@ -76,12 +78,12 @@ jobs:
       processed_data_dir: ${{parent.outputs.processed_data_dir}}    
   p_tuning_model_config_setup:
     type: command
-    component: azureml://registries/NVIDIA-NGC-Test/components/p_tuning_model_config_setup/versions/1
+    component: azureml://registries/<registry_name>/components/nemo_p_tuning_model_config_setup/versions/1
     compute: ${{parent.inputs.compute_train_node}}
     inputs:
       source_config_dir: ${{parent.jobs.download_data.outputs.data_dir}}
-      source_config_subdir: ${{parent.inputs.config_subdir}
-      source_config_filename: ${{parent.inputs.config_filename}}
+      source_config_subdir: ${{parent.inputs.source_config_subdir}}
+      source_config_filename: ${{parent.inputs.source_config_filename}}
       data_dir: ${{parent.jobs.download_data.outputs.data_dir}}
       data_subdir: ${{parent.inputs.data_subdir}}
       train_filename: ${{parent.inputs.train_filename}}
@@ -89,5 +91,15 @@ jobs:
       model_dir: ${{parent.jobs.download_data.outputs.data_dir}}
       model_subdir: ${{parent.inputs.model_subdir}}
       model_filename: ${{parent.inputs.model_filename}}
-outputs:
-  new_config_dir: ${{parent.outputs.processed_data_dir}} 
+    outputs:
+      new_config_dir: ${{parent.outputs.new_config_dir}} 
+  pytorch_lightning_trainer_build:
+    type: command
+    component: azureml://registries/<registry_name>/components/nemo_pytorch_lightning_trainer_builder/versions/1
+    compute: ${{parent.inputs.compute_train_node}}
+    inputs:
+      source_config_dir: ${{parent.jobs.p_tuning_model_config_setup.outputs.new_config_dir}}
+      source_config_subdir: ""
+      source_config_filename: ${{parent.inputs.source_config_filename}}
+    outputs:
+      new_config_dir: ${{parent.outputs.pytorch_lightning_trainer_config_dir}}     

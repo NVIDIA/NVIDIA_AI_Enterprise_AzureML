@@ -1,0 +1,26 @@
+# <component>
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: nemo_pytorch_lightning_trainer_builder
+display_name: nemo_pytorch_lightning_trainer_builder
+description: Component for specifying the hyperparameters which the model needs
+version: 1
+tags:
+  'NVIDIA AI Enterprise': '4'
+  Preview: ''
+type: command
+inputs:
+  source_config_dir:
+    type: uri_folder
+  source_config_subdir:
+    type: string
+  source_config_filename:
+    type: string
+outputs:
+  new_config_dir:
+    type: uri_folder
+code: ./src
+environment:  azureml://registries/NVIDIA-NGC-Test/environments/nvidia_nemo_23_03/versions/2
+command: >-
+  python3 ./nemo_pytorch_lightning_trainer.py --source_config_file ${{inputs.source_config_dir}}/${{inputs.source_config_subdir}}/${{inputs.source_config_filename}} --dest_config_file ${{outputs.new_config_dir}}/${{inputs.source_config_filename}}
+
+# </component>

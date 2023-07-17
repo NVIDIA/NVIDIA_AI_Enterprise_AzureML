@@ -1,0 +1,54 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: nemo_p_tuning_model_config_setup
+display_name: nemo_p_tuning_model_config_setup
+description: It allows the specification of the number of epochs to be used <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/tao/object_detection/detectnet_v2/tao_detectnet_v2_train/README.md>Reference file</a> 
+version: 1
+type: command
+tags:
+    NVIDIA AI Enterprise: ""
+    Preview: ""
+inputs:
+  source_config_dir:
+    type: uri_folder
+  source_config_subdir:
+    type: string
+  source_config_filename:
+    type: string
+  data_dir:
+    type: uri_folder
+  data_subdir:
+    type: string
+  train_filename:
+    type: string
+  val_filename:
+    type: string
+  model_dir:
+    type: uri_folder
+  model_subdir:
+    type: string
+  model_filename:
+    type: string
+  model_micro_batch_size:
+    type: string
+    default: ND
+  model_task_templates:
+    type: string
+    default: ND
+  model_new_tasks:
+    type: string
+    default: ND  
+outputs:
+  new_config_dir:
+    type: uri_folder
+code: ./src
+environment:  azureml://registries/<registry_name>/environments/nvidia_nemo_23_03/versions/2
+command: >-
+  python3 ./nemo_p_tuning_model_config_setup.py
+  --source_config_file ${{inputs.source_config_dir}}/${{inputs.source_config_subdir}}/${{inputs.source_config_filename}} 
+  --model_file ${{inputs.model_dir}}/${{inputs.model_subdir}}/${{inputs.model_filename}} 
+  --train_file ${{inputs.data_dir}}/${{inputs.data_subdir}}/${{inputs.train_filename}} 
+  --val_file ${{inputs.data_dir}}/${{inputs.data_subdir}}/${{inputs.val_filename}} 
+  --dest_config_file ${{outputs.new_config_dir}}/${{inputs.source_config_filename}}
+  --model_micro_batch_size ${{inputs.model_micro_batch_size}}
+  --model_task_templates ${{inputs.model_task_templates}}
+  --model_new_tasks ${{inputs.model_new_tasks}}
