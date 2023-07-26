@@ -1,0 +1,19 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+type: command
+
+name: next_item_train_ensemble
+display_name: next-item-train-ensemble
+version: 1
+description: Train component for Next Item 
+inputs: 
+  train_input: 
+    type: uri_folder
+outputs:
+  train_output:
+    type: custom_model
+
+code: ./src
+
+environment: azureml://registries/<registry_name>/environments/Merlin/versions/2
+
+command: python fit-workflow-and-model.py --input-location ${{inputs.train_input}} --output-location ${{outputs.train_output}} --date 2014-05-08

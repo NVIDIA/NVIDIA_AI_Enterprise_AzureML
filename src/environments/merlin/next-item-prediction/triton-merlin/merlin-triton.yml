@@ -1,0 +1,15 @@
+name: triton-nextitem-env-from-yaml
+version: 1
+build: 
+  path: ./docker
+description: Merlin inference container - merlin v 22:12
+inference_config:
+    liveness_route:
+        path: /v2/health/live
+        port: 8000
+    readiness_route:
+        path: /v2/health/ready
+        port: 8000
+    scoring_route:
+        path: /
+        port: 8000

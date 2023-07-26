@@ -14,6 +14,3 @@ do
     az ml component create --file ${component_file} --registry-name ${registry_name};
     mv ${component_file}.backup ${component_file}
 done;
-
-
-

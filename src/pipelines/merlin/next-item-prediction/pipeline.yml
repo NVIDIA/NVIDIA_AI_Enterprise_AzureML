@@ -1,0 +1,37 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+
+display_name: next item prediction 
+description: pipeline job for next item prediction
+
+settings:
+  default_compute: azureml:michxu-gpu
+
+outputs:
+  final_pipeline_output:
+    mode: rw_mount
+
+jobs:
+  data_gen: 
+    type: command 
+    component: azureml://registries/michxu-registry/components/next_item_data_gen/versions/5
+    outputs: 
+      data_gen_output: 
+        mode: rw_mount 
+
+  data_prep:
+    type: command
+    component: azureml://registries/michxu-registry/components/next_item_data_prep_test/versions/23
+    inputs: 
+      data_prep_input: ${{parent.jobs.data_gen.outputs.data_gen_output}}
+    outputs:
+      data_prep_output: 
+        mode: rw_mount
+    
+  train: 
+    type: command 
+    component: azureml://registries/michxu-registry/components/next_item_train_ensemble/versions/19
+    inputs: 
+      train_input: ${{parent.jobs.data_prep.outputs.data_prep_output}}
+    outputs: 
+      train_output: ${{parent.outputs.final_pipeline_output}}
