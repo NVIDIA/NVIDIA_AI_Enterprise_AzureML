@@ -14,6 +14,6 @@ outputs:
 
 code: ./src
 
-environment: azureml://registries/<registry_name>/environments/Merlin/versions/2
+environment: azureml://registries/<registry_name>/environments/Merlin/versions/1
 
 command: python fit-workflow-and-model.py --input-location ${{inputs.train_input}} --output-location ${{outputs.train_output}} --date 2014-05-08

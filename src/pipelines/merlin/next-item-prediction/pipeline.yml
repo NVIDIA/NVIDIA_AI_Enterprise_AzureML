@@ -5,7 +5,7 @@ display_name: next item prediction
 description: pipeline job for next item prediction
 
 settings:
-  default_compute: azureml:michxu-gpu
+  default_compute: azureml:<gpu-cluster>
 
 outputs:
   final_pipeline_output:
@@ -14,14 +14,14 @@ outputs:
 jobs:
   data_gen: 
     type: command 
-    component: azureml://registries/michxu-registry/components/next_item_data_gen/versions/5
+    component: azureml://registries/michxu-registry/components/next_item_data_gen/versions/1
     outputs: 
       data_gen_output: 
         mode: rw_mount 
 
   data_prep:
     type: command
-    component: azureml://registries/michxu-registry/components/next_item_data_prep_test/versions/23
+    component: azureml://registries/michxu-registry/components/next_item_data_prep_test/versions/1
     inputs: 
       data_prep_input: ${{parent.jobs.data_gen.outputs.data_gen_output}}
     outputs:
@@ -30,7 +30,7 @@ jobs:
     
   train: 
     type: command 
-    component: azureml://registries/michxu-registry/components/next_item_train_ensemble/versions/19
+    component: azureml://registries/michxu-registry/components/next_item_train_ensemble/versions/1
     inputs: 
       train_input: ${{parent.jobs.data_prep.outputs.data_prep_output}}
     outputs: 

@@ -11,6 +11,6 @@ outputs:
 
 code: ./src
 
-environment: azureml://registries/<registry_name>/environments/Merlin/versions/2
+environment: azureml://registries/<registry_name>/environments/Merlin/versions/1
 
 command: python datagen.py --output-location ${{outputs.data_gen_output}} --start-date 2014-04-01 --end-date 2014-09-30

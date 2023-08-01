@@ -1,10 +1,9 @@
 #!/bin/bash
-
 source scripts/config_files/config.sh
 export AZURE_ML_CLI_PRIVATE_FEATURES_ENABLED=true
 
 ##Create merlin components by default
-export COMPONENTS_DIR=components/merlin/
+export COMPONENTS_DIR=components/merlin/next-item-prediction
 
 for component_file in $(find $COMPONENTS_DIR -name '*.yml');
 do

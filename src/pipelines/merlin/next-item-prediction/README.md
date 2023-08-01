@@ -8,3 +8,8 @@ The next item prediction pipeline is designed to help companies build effective,
 This pipeline contains:
 - Data preprocessing with Merlin
 - Training the model 
+
+If running the pipeline for the first time, make sure to run the following scripts in this order: 
+- set_environment.sh
+- set_components.sh
+- submit_job_pipeline.sh 
