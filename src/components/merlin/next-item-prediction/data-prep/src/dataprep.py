@@ -19,7 +19,6 @@ def preprocess_data(input_location: str, output_location: str, start_date: str, 
     output_folder = Path(output_location) 
     output_folder.mkdir(parents = True, exist_ok=True)
     output_file_name = "preprocessed.parquet"
-    # output_file = output_folder/"preprocessed.parquet"
 
     data = Path(input_location)
     data = os.path.join(data, "raw-data.parquet")
