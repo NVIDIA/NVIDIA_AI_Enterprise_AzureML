@@ -7,6 +7,11 @@ The next item prediction pipeline is designed to help companies build effective,
 
 For more information, the website is linked [here]()
 
-This pipeline contains:
+The pipeline contains:
 - Data preprocessing with Merlin
 - Training the model 
+
+The full workflow includes: 
+- Setting up an endpoint + Triton deployment 
+- Sending an inference reqeust 
+
