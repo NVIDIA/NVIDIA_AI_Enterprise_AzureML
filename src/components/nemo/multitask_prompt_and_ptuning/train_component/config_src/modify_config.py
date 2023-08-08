@@ -41,8 +41,18 @@ config.model.new_tasks = ["squad"]
 
 print(MegatronGPTModel.list_available_models())
 
-config.model.language_model_path = f"{args.model}"
+# create the temp directory
+source_folder = args.model
+model_source_folder = "/tmp/nemo_source_model"
+os.mkdir(model_source_folder)
+shutil.copytree(source_folder, model_source_folder, dirs_exist_ok = True)
+
+
+config.model.language_model_path = f"{model_source_folder}"
 print(config.model.language_model_path)
+
+print("config.model.language_model_path {0}".format(config.model.language_model_path))
+os.system("ls {0}".format(config.model.language_model_path))
 
 config.exp_manager.checkpoint_callback_params.save_nemo_on_train_end= True
 config.exp_manager.checkpoint_callback_params.always_save_nemo= True
@@ -99,6 +109,8 @@ print("exp dir:",exp_dir)
 # Set some of the learning parameters
 config.model.optim.lr = 1e-4
 config.model.precision = config.trainer.precision
+
+
 
 # First P-Tuning session
 model = MegatronGPTPromptLearningModel(cfg=config.model, trainer=trainer)

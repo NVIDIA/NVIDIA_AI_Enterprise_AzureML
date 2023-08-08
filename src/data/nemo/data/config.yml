@@ -1,0 +1,8 @@
+$schema: https://azuremlschemas.azureedge.net/latest/data.schema.json
+name: megatron_gpt_prompt_learning_config
+description: Config file for megatron gpt prompt learning
+tags: 
+  NVIDIA AI Enterprise: ''
+  Preview: ''
+type: uri_file
+path: config/megatron_gpt_prompt_learning_config.yaml

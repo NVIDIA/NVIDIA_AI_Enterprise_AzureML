@@ -1,0 +1,50 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineComponent.schema.json
+type: pipeline
+name: nemo_multitask_prompt_and_p_tuning_pipeline
+version: 4
+display_name: nemo pipeline component with multitask prompt and ptuning
+description: etects one or more faces in a given image or video. Some of the major steps covered in the pipeline are, but not limited to Take a pretrained resnet18 model and train a ResNet-18 FaceNet model on the WIDERFACE dataset, Prune the trained FaceNet model, Retrain the pruned model to recover lost accuracy, Export the pruned model, Run Inference on the trained model <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/blob/main/src/pipelines/tao/object_detection/facenet/tao_facenet_pipeline/README.md>Reference file</a>
+tags:
+    NVIDIA AI Enterprise: ""
+    Preview: ""
+inputs:
+  raw_data: 
+    type: uri_folder 
+  config_path: 
+    type: uri_file
+  model:
+    type: custom_model
+  compute_train_node:
+    type: string
+outputs:
+  prep_data:
+    type: uri_folder
+  train_dir:
+    type: uri_folder
+jobs: 
+  prep_data:
+    type: command
+    component: azureml://registries/<registry_name>/components/nemo_prep_squad_data_ptuning/versions/2
+    compute: ${{parent.inputs.compute_train_node}}
+    inputs:
+      raw_data: ${{parent.inputs.raw_data}}
+    outputs:
+      prep_data: ${{parent.outputs.prep_data}}    
+  p_tuning_model:
+    type: command
+    component: azureml://registries/<registry_name>/components/nemo_config_for_ptuning/versions/7
+    compute: ${{parent.inputs.compute_train_node}}
+    inputs:
+      config_path: ${{parent.inputs.config_path}}
+      model: ${{parent.inputs.model}}
+      processed_data_dir: ${{parent.jobs.prep_data.outputs.prep_data}}
+    outputs:
+      output_dir: ${{parent.outputs.train_dir}}
+  inference_with_ptuned:
+    type: command
+    component: azureml://registries/<registry_name>/components/nemo_inference_component_ptuning/versions/4
+    compute: ${{parent.inputs.compute_train_node}}
+    inputs:
+      trained_result_dir: ${{parent.jobs.p_tuning_model.outputs.output_dir}}
+      model: ${{parent.inputs.model}}
+  

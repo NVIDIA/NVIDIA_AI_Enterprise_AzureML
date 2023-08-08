@@ -1,0 +1,31 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: nemo_process_data
+display_name: nemo_process_data
+description: It allows the specification of the number of epochs to be used <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/components/tao/object_detection/detectnet_v2/tao_detectnet_v2_train/README.md>Reference file</a> 
+version: 6
+type: command
+tags:
+    NVIDIA AI Enterprise: ""
+    Preview: ""
+inputs:
+  script_dir:
+    type: uri_folder
+  script_subdir:
+    type: string
+  script_filename:
+    type: string
+  parameters:
+    type: string
+  data_dir:
+    type: uri_folder
+  data_subdir:
+    type: string
+  place_holder:
+    type: string  
+outputs:
+  processed_data_dir:
+    type: uri_folder
+code: ./src
+environment:  azureml://registries/<registry_name>/environments/nvidia_nemo_23_03/versions/2
+command: >-
+  bash ./nemo_process_data.sh ${{inputs.script_dir}}/${{inputs.script_subdir}}/${{inputs.script_filename}} ${{inputs.parameters}} ${{inputs.data_dir}} ${{inputs.data_subdir}} ${{inputs.place_holder}} ${{outputs.processed_data_dir}}
