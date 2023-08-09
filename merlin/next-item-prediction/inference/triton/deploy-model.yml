@@ -1,11 +1,11 @@
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
 name: next-item-deployment
 endpoint_name: next-item-endpoint
-model: azureml:next-item:1
+model: azureml:next-item:8
 model_mount_path: /models/ensemble
 environment: 
   name: triton-nextitem-env
-  image: <acr>.azurecr.io/merlin-triton:latest #replace acr w/ workspace ACR 
+  image: 3cb09b94adb64ab596a4ac0e95432bbc.azurecr.io/merlin-triton:latest #image based on dockerfile in this directory. pushed directly to workspace ACR. replace with own
   inference_config:
       liveness_route:
           path: /v2/health/live

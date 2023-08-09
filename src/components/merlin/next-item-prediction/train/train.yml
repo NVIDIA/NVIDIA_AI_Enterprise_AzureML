@@ -10,7 +10,7 @@ inputs:
     type: uri_folder
 outputs:
   train_output:
-    type: custom_model
+    type: triton_model
 
 code: ./src
 

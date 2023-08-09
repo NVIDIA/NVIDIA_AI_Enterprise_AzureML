@@ -9,7 +9,10 @@ We use a script to generate 1,000,000 user/item interactions per day for an 85 d
 - Category - the context of the click. This could be an item category i.e. sport.
 
 Both this and the data-prep components of this workflow can be swapped out for your own data. There are many tools people use to prepare this data, from Spark jobs to SQL in data warehouses. In order to have a drop-in replacement for our training data, you must produce parquet files with the following fields and types:
-[image of parquet fields + types](parquet-sample.png)
+
+<img src="parquet-sample.png" width="500">
+
+More information is available [here](https://docs.nvidia.com/ai-enterprise/workflows-recommender-systems-ai/0.1.0/combined-development.html#understanding-schemas).
 
 ## Component inputs & outputs: 
 - inputs: N/A
