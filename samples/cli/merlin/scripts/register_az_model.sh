@@ -1,5 +1,5 @@
 #!/bin/bash
 
-az ml model create --type triton_model --name next-item --version 1 --path <job_output>/mymodel/ensemble/
+source scripts/config_files/config_deployment.sh
 
-#replace <job_output> w/ output of pipeline job 
+az ml model create --type triton_model --name ${model_name} --version ${model_version} --path azureml://jobs/${model_job_id}/outputs/${model_job_output_name}/ensemble/

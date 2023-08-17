@@ -1,6 +1,8 @@
 #!/bin/bash
 
-source scripts/config_files/config.sh
+source scripts/config_files/config_deployment.sh
 
-az ml online-deployment create -f ./deployments/${container}/${workflow}/deploy-model.yml
+sed -i "s/acr_name/${acr_name}/g" ./inference/triton/deploy-model.yml
+
+az ml online-deployment create -f ./inference/triton/deploy-model.yml
 

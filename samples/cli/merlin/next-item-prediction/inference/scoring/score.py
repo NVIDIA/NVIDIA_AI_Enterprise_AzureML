@@ -75,17 +75,10 @@ def main(base_url, token):
             "timestamp": [timestamps[:5]],
         }
     )
-    # print(pd.DataFrame.to_json(df))
-    # print("\n")
 
     # Branches to convert_df_to_triton_input() function. 
     # Reformatted data is assigned to inputs variable
     inputs = convert_df_to_triton_input(df.columns, df, httpclient.InferInput)
-    # print(df)
-    # print("\n")
-    # for input in inputs: 
-    #     print(input)
-    #     print("\n")
 
     output_names = ["output"]
 
@@ -96,7 +89,6 @@ def main(base_url, token):
     N_THREAD = 1
 
     scoring_uri = base_url[8:]
-    print("the scoring_uri is: " + scoring_uri + "\n")
 
     with httpclient.InferenceServerClient(
         url=scoring_uri,
@@ -134,11 +126,4 @@ def main(base_url, token):
 
 if __name__ == "__main__":
     main()
-    print("finished running")
-
-'''
-issue resolved: 
-1) token not updated 
-2) header wasn't in the client.infer line 
-'''
-
+    print("Finished running")
