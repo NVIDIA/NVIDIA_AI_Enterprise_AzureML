@@ -6,12 +6,12 @@ This pipeline implements the [Next Item Prediction Workflow](https://docs.nvidia
 
 The user should edit the following config file in scripts/config_files/config.sh
 
-<img src=" add it in thanks">
+<img src="imgs/config.png">
 
-The ACR parameter can be left blank till the deployment step. 
-The remaining parameters are defined here: 
+The parameters are defined here: 
 - subscription_id = user's subscription id
 - resource_group = resource group the user intends to run the pipeline under 
+- registry_name = name of the registry that the user is working with
 - worksapce = workspace the user intends to run the pipeline in 
 - compute_name = compute instance the user intends to run the pipeline on 
 
@@ -40,11 +40,20 @@ The pipeline produces a model can be deployed as an AzureML Triton Inference End
 ## Deployment config file
 The info required for deployments is located in ```scripts/config_files/config_deployment.sh```. Notes for each field are included below: 
 
-### Model Job ID
-The model_job_id help identify the component that produced the to-be-deployed model. This information is availble through the Azure Portal.
+<img src = "imgs/deployment_config.png">
+
+### Model Job ID & Model Job Output Name
+The model_job_id identifies the component that produced the to-be-deployed model, while the job output name is title of the final component's output. This information is availble through the Azure Portal. For this specific pipeline, the model_job_out_name is train_output (boxed in red), and the job_id is boxed in orange in the image below. 
+
+<img src = "imgs/model_job_id_name.png">
 
 ### Contaier Registry Identification
 The variable registry_name is the Azure Container Registry that's asosciated with the provided Workspace. This information is availble through the Azure Portal. 
+
+<img src = "imgs/workspaceregistry.png">
+
+### Model Name and Version
+Variables "model_name" and "model_version" correspond to the Model Name Version the model will be registered under
 
 ## Deploying the model
 Now, we can register the model and deploy it in AzureML with NVIDIA Triton Inference Server™, an open-source inference serving software that helps standardize model deployment and execution and delivers fast and scalable AI in production. We'll first register the model, then build and push the Triton container to the Azure Container Registry (ACR), then create the inference endpoint and the model deployment. 
@@ -58,11 +67,11 @@ bash scripts/register_model.sh
 
 Once the model is registered, we can verify its existence by clicking the Model tab in the AzureML workspace portal. 
 
-blha blah ablhj inmagesf hgo here
+<img src = "imgs/model_list.png">
 
 We can further verify that the model is registered under the expected Triton model subfolder structure by clicking at the "Artifacts" tabs under the model dashboard. 
 
-more photos weewoo image here! 
+<img src = "imgs/model_artifacts.png">
 
 ### Setting up Inference Libraries
 
@@ -78,6 +87,9 @@ bash scripts/push_triton_to_acr
 This will build and tag the Triton image like this: ```{registry_name}.azurecr.io/merlin-trition:latest```, then push it to the ACR 
 
 Once the script finishes running, navigate to the provided ACR in Azure Portal to see your pushed container image 
+
+<img src = "imgs/acr_container.png">
+
 
 ### Creating the Azure ML Endpoint and Deployment
 To create the endpoint, run the following script: 
@@ -97,7 +109,6 @@ description: Endpoint for Next Item Prediciton workflow
 
 The endpoint information can be found under the 'Endpoints' tab in the Workspace UI on AzureML Studio. 
 
-image here!
 
 Once the endpoint is properly set up, we can create the deployment by running the following script: 
 
@@ -113,7 +124,7 @@ The file also provides the VM Size to be used for the deployment (Standard_NC8as
 
 Once the script finishes running, we can view the deployment information on the endpoint's webpage. We can also see information about the deployed model by navigating to the "Deployment Logs" tab. 
 
-image(s) here! 
+<img src = "imgs/endpoint_deployment.png">
 
 ## Sending inference requests 
 
