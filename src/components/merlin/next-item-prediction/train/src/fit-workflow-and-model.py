@@ -8,13 +8,11 @@ from shutil import copyfile
 from typing import Tuple
 
 import cloudpickle
-import mlflow.pytorch
 from merlin.io.dataset import Dataset
 from merlin_standard_lib import Schema
 from numba import config
 
 import layers
-import mlflow
 from layers import InverseIDLookupModel, TopkT4RecModel, reverse_id_mapping
 from model_train import train_t4r_model
 from nvt_workflow import define_nvt_workflow
