@@ -22,6 +22,7 @@ config = OmegaConf.load(f"{args.config_path}")
 config.model.data.train_ds = [f"{args.processed_data_dir}/squad_short_train.jsonl"]
 config.model.data.validation_ds = [f"{args.processed_data_dir}/squad_short_val.jsonl"]
 
+
 # Define the prompt template
 config.model.task_templates = [   
     {
@@ -47,7 +48,7 @@ print(config.model.language_model_path)
 config.exp_manager.checkpoint_callback_params.save_nemo_on_train_end= True
 config.exp_manager.checkpoint_callback_params.always_save_nemo= True
 config.exp_manager.checkpoint_callback_params.save_best_model= True
-config.model.virtual_prompt_style = VirtualPromptStyle.P_TUNING
+config.model.virtual_prompt_style = 'p-tuning'
 config.model.p_tuning.dropout = 0.0
 config.model.p_tuning.num_layers = 2
 config.model.global_batch_size = 2
