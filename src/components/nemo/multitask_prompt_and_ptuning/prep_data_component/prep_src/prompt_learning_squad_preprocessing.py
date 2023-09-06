@@ -14,6 +14,7 @@
 
 import argparse
 import json
+import subprocess
 
 from tqdm import tqdm
 
@@ -57,7 +58,7 @@ def main():
     parser.add_argument("--include-topic-name", action='store_true')
     parser.add_argument("--random-seed", type=int, default=1234)
     parser.add_argument("--sft-format", action='store_true')
-    parser.add_argument("--out-dir", type=str,default="prep_data")
+    parser.add_argument("--out-dir", type=str,default=".")
     args = parser.parse_args()
 
     train_data_dict = json.load(open(f"{args.data_dir}/{args.train_file}"))
@@ -69,6 +70,18 @@ def main():
     save_name_base = f"{args.out_dir}/{args.save_name_base}"
 
     process_data(train_data, val_data, save_name_base, args.include_topic_name, args.sft_format)
+
+    #The following will trim the train and val files to use subset for training. This is done to reduce training time 
+    train_input_file = f"{args.out_dir}/squad_train.jsonl"
+    train_output_file = f"{args.out_dir}/squad_short_train.jsonl"
+    train_command = f"head -2000 {train_input_file} > {train_output_file}"
+    subprocess.run(train_command, shell=True)
+
+    # Extract subset of lines from squad_val.jsonl
+    val_input_file = f"{args.out_dir}/squad_val.jsonl"
+    val_output_file = f"{args.out_dir}/squad_short_val.jsonl"
+    val_command = f"head -200 {val_input_file} > {val_output_file}"
+    subprocess.run(val_command, shell=True)
 
 
 def process_data(train_data, val_data, save_name_base, include_topic, sft_format):
