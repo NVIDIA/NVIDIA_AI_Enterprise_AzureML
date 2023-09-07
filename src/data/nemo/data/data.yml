@@ -1,0 +1,8 @@
+$schema: https://azuremlschemas.azureedge.net/latest/data.schema.json
+name: multitask_prompt_and_ptuning_megatron_gpt_345m_data
+description: Data files for multitask prompt and ptuning of megatron_gpt_345m.nemo
+tags: 
+  NVIDIA AI Enterprise: ''
+  Preview: ''
+type: uri_folder
+path: SQuAD/

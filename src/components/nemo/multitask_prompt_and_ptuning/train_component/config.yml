@@ -3,7 +3,7 @@ $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.jso
 name: config_for_ptuning
 display_name: Get Model Config
 description: Component for specifying the hyperparameters which the model needs
-version: 29
+version: 1
 tags:
   'NVIDIA AI Enterprise': '4'
   Preview: ''
@@ -20,7 +20,7 @@ outputs:
   output_dir:
     type: uri_folder
 code: ./config_src
-environment: azureml://registries/NVIDIARegistryTest1/environments/NVIDIA-NEMO/versions/1
+environment: azureml://registries/<registry_name>/environments/NVIDIA-NEMO/versions/1
 command: >-
   python modify_config.py --model ${{inputs.model}} --config-path ${{inputs.config_path}} --processed-data-dir ${{inputs.processed_data_dir}} --output-dir ${{outputs.output_dir}}
 

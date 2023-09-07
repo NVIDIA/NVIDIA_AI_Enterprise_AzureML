@@ -3,7 +3,7 @@ $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.jso
 name: prep_squad_data_ptuning
 display_name: Prep Squad Data
 description: Component for processing the SQuAD data
-version: 11
+version: 1
 tags:
   'NVIDIA AI Enterprise': '4'
   Preview: ''
@@ -17,7 +17,7 @@ outputs:
     type: uri_folder
     
 code: ./prep_src
-environment: azureml://registries/NVIDIARegistryTest1/environments/NVIDIA-NEMO/versions/1
+environment: azureml://registries/<registry_name>/environments/NVIDIA-NEMO/versions/1
 command: >-
   python prompt_learning_squad_preprocessing.py 
   --data-dir ${{inputs.raw_data}} --out-dir ${{outputs.prep_data}}

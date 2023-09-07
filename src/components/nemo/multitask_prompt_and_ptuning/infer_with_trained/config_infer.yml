@@ -3,7 +3,7 @@ $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.jso
 name: inference_component_ptuning
 display_name: Infer P tuned model
 description: Component for performing inference for the p-tuned model
-version: 41
+version: 1
 tags:
   'NVIDIA AI Enterprise': '4'
   Preview: ''
@@ -16,7 +16,7 @@ inputs:
   model:
     type: uri_file
 code: ./infer_src
-environment: azureml://registries/NVIDIARegistryTest1/environments/NVIDIA-NEMO/versions/1
+environment: azureml://registries/<registry_name>/environments/NVIDIA-NEMO/versions/1
 command: >-
   python infer_with_trained.py
   --trained-result-dir ${{inputs.trained_result_dir}} --model ${{inputs.model}}

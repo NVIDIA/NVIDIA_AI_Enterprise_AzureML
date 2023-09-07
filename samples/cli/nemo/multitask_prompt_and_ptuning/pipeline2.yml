@@ -1,0 +1,34 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+experiment_name: NVIDIA_NEMO_MULTITASK_PROMPT_&_PTTUNING_JOB2
+settings:
+  default_compute: azureml:<gpu-cluster>
+inputs:
+  raw_data: 
+    type: uri_folder
+    path: azureml://registries/<registry_name>/data/multitask_prompt_and_ptuning_megatron_gpt_345m_data/versions/2
+  config_path: 
+    type: uri_file
+    path: azureml://registries/<registry_name>/data/megatron_gpt_prompt_learning_config/versions/2
+  model:
+    type: custom_model
+    path: azureml://registries/<registry_name>/models/megatron_gpt_345m_nemo/versions/3
+    path: azureml://locations/<location>/workspaces/<workspace_registry_container_id>/models/megatron_gpt_345m_nemo_w/versions/3
+  compute_train_node: <gpu-cluster>
+outputs:
+  prep_data:
+    type: uri_folder
+  train_dir:
+    type: uri_folder
+jobs:
+  multitask_prompt_and_pttuning_workflow:
+    type: pipeline
+    component: azureml://registries/<registry_name>/components/nemo_multitask_prompt_and_p_tuning_pipeline/versions/6
+    inputs:
+      raw_data: ${{parent.inputs.raw_data}}
+      config_path: ${{parent.inputs.config_path}}
+      model: ${{parent.inputs.model}}
+      compute_train_node: ${{parent.inputs.compute_train_node}}
+    outputs:
+      prep_data: ${{parent.outputs.prep_data}}
+      train_dir: ${{parent.outputs.train_dir}}
