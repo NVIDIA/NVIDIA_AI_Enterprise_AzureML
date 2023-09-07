@@ -6,13 +6,13 @@ settings:
 inputs:
   raw_data: 
     type: uri_folder
-    path: azureml://registries/<registry_name>/data/multitask_prompt_and_ptuning_megatron_gpt_345m_data/versions/2
+    path: azureml://registries/<registry_name>/data/multitask_prompt_and_ptuning_megatron_gpt_345m_data/versions/1
   config_path: 
     type: uri_file
-    path: azureml://registries/<registry_name>/data/megatron_gpt_prompt_learning_config/versions/2
+    path: azureml://registries/<registry_name>/data/megatron_gpt_prompt_learning_config/versions/1
   model:
     type: custom_model
-    path: azureml://registries/<registry_name>/models/megatron_gpt_345m_nemo/versions/3
+    path: azureml://registries/<registry_name>/models/megatron_gpt_345m_nemo/versions/1
   compute_train_node: <gpu-cluster>
 outputs:
   prep_data:
@@ -22,7 +22,7 @@ outputs:
 jobs:
   multitask_prompt_and_pttuning_workflow:
     type: pipeline
-    component: azureml://registries/<registry_name>/components/nemo_multitask_prompt_and_p_tuning_pipeline/versions/6
+    component: azureml://registries/<registry_name>/components/nemo_multitask_prompt_and_p_tuning_pipeline/versions/1
     inputs:
       raw_data: ${{parent.inputs.raw_data}}
       config_path: ${{parent.inputs.config_path}}
