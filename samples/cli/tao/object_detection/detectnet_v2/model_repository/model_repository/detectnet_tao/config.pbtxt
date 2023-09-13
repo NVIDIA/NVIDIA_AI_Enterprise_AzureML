@@ -1,0 +1,24 @@
+name: "detectnet_tao"
+platform: "tensorrt_plan"
+max_batch_size: 16
+input [
+  {
+    name: "input_1"
+    data_type: TYPE_FP32
+    format: FORMAT_NCHW
+    dims: [ 3,384,1248 ]
+  }
+]
+output [
+  {
+    name: "output_bbox/BiasAdd"
+    data_type: TYPE_FP32
+    dims: [ 12,24,78 ]
+  },
+  {
+    name: "output_cov/Sigmoid"
+    data_type: TYPE_FP32
+    dims: [ 3,24,78 ]
+  }
+]
+dynamic_batching { }

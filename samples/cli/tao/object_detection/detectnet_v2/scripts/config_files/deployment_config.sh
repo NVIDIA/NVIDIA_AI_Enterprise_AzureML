@@ -21,13 +21,11 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-subscription_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+subscription_id="ab221ca4-f098-422d-ab2f-5073b3851e68"
 resource_group="NVIDIA_COMPONENTS_AND_PIPELINES"
-workspace="NVIDIA_COMPONENTS_TEST"
-model_job_id="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-model_job_output_name="triton_model_repository_dir/model_repository"
+workspace="NVIDIA_COMPONENTS_TEST8"
 model_name="DetectNet"
 model_version=1
-registryname="XXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+registryname="nvidiacomponentstest8registry"
 
 
