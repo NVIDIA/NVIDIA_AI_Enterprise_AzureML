@@ -7,7 +7,8 @@ cp scripts/auxiliary_files/tao_client_aml.py tao-toolkit-triton-apps/tao_triton/
 cp scripts/auxiliary_files/clustering_config_detectnet.prototxt tao-toolkit-triton-apps/tao_triton/python/clustering_specs/
 
 cd tao-toolkit-triton-apps
-sudo apt install python3.8-venv -y
+sudo apt-get update -y
+sudo apt-get install python3.8-venv -y
 python3 -m venv virtualenv
 source virtualenv/bin/activate
 pip3 install -r tao_triton/requirements-pip.txt 
