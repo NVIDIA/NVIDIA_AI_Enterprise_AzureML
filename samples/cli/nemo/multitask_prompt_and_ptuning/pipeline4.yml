@@ -1,0 +1,15 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+experiment_name: NVIDIA_NEMO_MODEL_VERIFICATION2
+inputs:
+  model:
+    type: custom_model
+    path: azureml://locations/<location>/workspaces/<workspace_registry_container_id>/models/megatron_gpt_345m_nemo_w/versions/1
+jobs:
+  model_verification:
+    type: command
+    compute: azureml:<gpu-cluster>
+    component: azureml://registries/<registry_name>/components/model_verification/versions/1
+    inputs:
+      model: ${{parent.inputs.model}}
+

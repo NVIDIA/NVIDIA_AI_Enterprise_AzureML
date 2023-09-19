@@ -1,0 +1,20 @@
+# <component>
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: model_verification
+display_name: Get Model Config
+description: Component for specifying the hyperparameters which the model needs
+version: 1
+tags:
+  'NVIDIA AI Enterprise': '4'
+  Preview: ''
+
+type: command
+inputs:
+  model:
+    type: custom_model
+code: ./model_verification_src
+environment: azureml://registries/NVIDIA-NGC-Test/environments/NVIDIA-NEMO/versions/1
+command: >-
+  python model_verification.py --model ${{inputs.model}}
+
+# </component>

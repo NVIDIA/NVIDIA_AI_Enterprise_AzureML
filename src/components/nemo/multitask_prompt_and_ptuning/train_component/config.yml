@@ -13,7 +13,7 @@ inputs:
   config_path: 
     type: uri_file
   model:
-    type: uri_file
+    type: custom_model
   processed_data_dir:
     type: uri_folder 
 outputs:

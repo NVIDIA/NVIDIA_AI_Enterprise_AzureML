@@ -14,7 +14,7 @@ inputs:
     type: uri_folder
     mode: rw_mount
   model:
-    type: uri_file
+    type: custom_model
 code: ./infer_src
 environment: azureml://registries/<registry_name>/environments/NVIDIA-NEMO/versions/1
 command: >-
