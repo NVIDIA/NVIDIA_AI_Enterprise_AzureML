@@ -21,11 +21,8 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-subscription_id="ab221ca4-f098-422d-ab2f-5073b3851e68"    
-resource_group="NVIDIA_COMPONENTS_AND_PIPELINES"
-location="southcentralus"
-registry_name="NVIDIA-NGC-Test"
-workspace="NVIDIA_COMPONENTS_TEST7"
-workspace_registry_container_id="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" 
-compute_name="my-gpu-cluster"
+endpoint_url="triton-tao-endpoint-aml-1.southcentralus.inference.ml.azure.com"
+endpoint_token="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+
+
 

@@ -1,0 +1,3 @@
+FROM nvcr.io/nvidia/tao/triton-apps:22.06-py3
+EXPOSE 8000
+CMD /opt/tritonserver/bin/tritonserver --model-store=/models/model_repository
