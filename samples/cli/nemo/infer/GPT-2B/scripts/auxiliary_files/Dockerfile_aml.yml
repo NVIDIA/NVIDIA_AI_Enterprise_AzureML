@@ -1,3 +1,4 @@
-FROM nvcr.io/nvidia/tao/triton-apps:22.06-py3
+FROM nvcr.io/ea-bignlp/beta-inf-prerelease/infer:23.08.v7
 EXPOSE 8000
-CMD /opt/tritonserver/bin/tritonserver --model-store=/models/model_repository
+CMD python /opt/NeMo/scripts/deploy/deploy_triton.py --nemo_checkpoint /models/nemo/GPT-2B-001_bf16_tp1.nemo --model_typ
+e="gptnext" --triton_model_name GPT-2B
