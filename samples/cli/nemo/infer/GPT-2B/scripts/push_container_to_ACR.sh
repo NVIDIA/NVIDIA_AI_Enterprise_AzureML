@@ -7,9 +7,9 @@ echo "az acr login -n $registryname"
 az acr login -n $registryname
 
 echo "Building the new docker image and tag it"
-docker build -t $registryname.azurecr.io/tao -f scripts/auxiliary_files/Dockerfile_aml.yml .
+docker build -t $registryname.azurecr.io/nemo_infer_gpt_2b -f scripts/auxiliary_files/Dockerfile_aml.yml .
 
 echo "Pushing the image to ACR"
-docker push ${registryname}.azurecr.io/tao:latest
+docker push ${registryname}.azurecr.io/nemo_infer_gpt_2b:latest
 
 
