@@ -1,11 +1,11 @@
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
-name: nemo-gpt-2b-deployment-aml-1
-endpoint_name: nemo-gpt-2b-endpoint-aml-1
-model: azureml:GPT-2B_nemo:1
-model_mount_path: /models 
+name: nemo-llama-deployment-aml-1
+endpoint_name: nemo-llama-endpoint-aml-1
+model: azureml://registries/NVIDIA-AI-Enterprise-Preview/models/llama/versions/1
+model_mount_path: /triton-models
 environment: 
-  name: nemo-gpt-2b-env
-  image: registryname.azurecr.io/nemo_infer_gpt_2b:latest
+  name: tme_genai_model_server-env
+  image: registryname.azurecr.io/tme_genai_model_server:latest
   inference_config:
       liveness_route:
           path: /v2/health/live
