@@ -1,5 +1,5 @@
 #!/bin/bash
-source ../../../config_files/config.sh
+source ../../../../../config_files/config.sh
 
 echo registering models megatron_gpt_345m_nemo and megatron_gpt_345m_nemo_w to registry: $registry_name
 

@@ -11,5 +11,3 @@ docker build -t $registryname.azurecr.io/nemo_infer_gpt_2b -f scripts/auxiliary_
 
 echo "Pushing the image to ACR"
 docker push ${registryname}.azurecr.io/nemo_infer_gpt_2b:latest
-
-
