@@ -2,7 +2,7 @@ $schema: https://azuremlschemas.azureedge.net/latest/pipelineComponent.schema.js
 type: pipeline
 
 name: monai_train_pipeline
-display_name: monai_train_pipeline_component
+display_name: Monai SegResNet Training Pipeline
 description: MONAI train pipeline component with command components <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/blob/main/src/pipelines/monai/3D_image_segmentation/training/README.md>Reference file</a>
 version: 1
 tags:
@@ -24,7 +24,7 @@ outputs:
 jobs:
   load_job:
     type: command
-    component: azureml://registries/<REGISTRY>/components/monai_upload_data_from_blob/versions/1
+    component: azureml://registries/<registry_name>/components/monai_upload_data_from_blob/versions/1
     inputs:
       blob_file_location: ${{parent.inputs.pipeline_input_file}}
     outputs:
@@ -33,7 +33,7 @@ jobs:
 
   train_job:
     type: command
-    component: azureml://registries/<REGISTRY>/components/monai_train_segmentation/versions/1
+    component: azureml://registries/<registry_name>/components/monai_train_segmentation/versions/1
     inputs:
       input_data: ${{parent.jobs.load_job.outputs.image_data_folder}}
       best_model_name: ${{parent.inputs.best_model_name}}
