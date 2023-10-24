@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source scripts/config_files/deployment_config.sh
+source ../../../../../config_files/config.sh
 az login
 
 az account set -s ${subscription_id} 

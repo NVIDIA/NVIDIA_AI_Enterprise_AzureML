@@ -1,3 +1,6 @@
 FROM nvcr.io/ea-bignlp/beta-inf-prerelease/infer:23.08.v7
 EXPOSE 8000
-CMD python /opt/NeMo/scripts/deploy/deploy_triton.py --nemo_checkpoint /models/GPT-2B/GPT-2B-001_bf16_tp1.nemo --model_type="gptnext" --triton_model_name GPT-2B
+#ADD scripts/auxiliary_files/deploy_triton.py /opt/NeMo/scripts/deploy/deploy_triton.py
+#CMD python /opt/NeMo/scripts/deploy/deploy_triton.py --nemo_checkpoint /models/GPT-2B/GPT-2B-001_bf16_tp1.nemo --model_type="gptnext" --triton_model_name GPT-2B
+CMD python /opt/NeMo/scripts/deploy/deploy_triton.py --nemo_checkpoint ${AZUREML_MODEL_DIR}/$(ls ${AZUREML_MODEL_DIR})/GPT-2B-001_bf16_tp1.nemo --model_type="gptnext" --triton_model_name GPT-2B
+

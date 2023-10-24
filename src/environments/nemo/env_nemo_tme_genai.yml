@@ -1,0 +1,16 @@
+$schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
+name: env_nemo_tme_genai
+version: 2
+description: Environment using Nemo NVAIE container. <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/environments/Nemo/env_nemo/License_Attributions.md>License Attritutions</a> 
+build:
+  path: ./env_nemo_tme_genai
+inference_config:
+    liveness_route:
+        path: /v2/health/live
+        port: 8000
+    readiness_route:
+        path: /v2/health/ready
+        port: 8000
+    scoring_route:
+        path: /
+        port: 8000

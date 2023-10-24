@@ -1,21 +1,8 @@
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
 name: nemo-gpt-2b-deployment-aml-1
 endpoint_name: nemo-gpt-2b-endpoint-aml-1
-model: azureml:GPT-2B_nemo:1
-model_mount_path: /models 
-environment: 
-  name: nemo-gpt-2b-env
-  image: registryname.azurecr.io/nemo_infer_gpt_2b:latest
-  inference_config:
-      liveness_route:
-          path: /v2/health/live
-          port: 8000
-      readiness_route:
-          path: /v2/health/ready
-          port: 8000
-      scoring_route:
-          path: /
-          port: 8000
+model: azureml://registries/NVIDIA-AI-Enterprise-Preview/models/GPT-2B_nemo/versions/1
+environment: azureml://registries/NVIDIA-AI-Enterprise-Preview/environments/nemo-infer-gpt-2b-env/versions/1
 instance_type: Standard_NC24ads_A100_v4
 request_settings:
   request_timeout_ms: 10000
