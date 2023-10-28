@@ -1,7 +1,4 @@
 FROM nvcr.io/nv-nvaie-tme/genai-model-server:latest
 ENTRYPOINT []
 EXPOSE 8000
-RUN mkdir /opt/aux
-ADD scripts/auxiliary_files/replace_model_mounting_dir.sh /opt/aux/replace_model_mounting_dir.sh
-ADD scripts/auxiliary_files/deploy_models.sh /opt/aux/deploy_models.sh
-CMD /opt/aux/deploy_models.sh ${AZUREML_MODEL_DIR}
+CMD /opt/tritonserver/bin/tritonserver --model-store=${AZUREML_MODEL_DIR}/$(ls ${AZUREML_MODEL_DIR})
