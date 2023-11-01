@@ -1,0 +1,2 @@
+FROM nvcr.io/lzmequhbhlk4/model-server:nightly
+CMD ["gptnext","--http", "-vv"]

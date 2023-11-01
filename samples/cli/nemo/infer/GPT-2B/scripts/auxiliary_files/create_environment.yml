@@ -1,0 +1,4 @@
+$schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
+name: nemo-infer-env-mayani
+image: mayanicontainerrg.azurecr.io/nemo_test_infer:latest
+

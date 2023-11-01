@@ -1,9 +1,13 @@
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
-name: nemo-gpt-2b-deployment-aml-1
-endpoint_name: nemo-gpt-2b-endpoint-aml-1
+name: nemo-gpt-2b-deployment-aml-8
+endpoint_name: nemo-gpt-2b-endpoint-mayani-6
 model: azureml://registries/NVIDIA-AI-Enterprise-Preview/models/GPT-2B_nemo/versions/1
-environment: azureml://registries/NVIDIA-AI-Enterprise-Preview/environments/nemo-infer-gpt-2b-env/versions/1
+model_mount_path: /models
+#environment: azureml://registries/NVIDIA-AI-Enterprise-Preview/environments/nemo-infer-gpt-2b-env/versions/1
+#environment: azureml://registries/NVIDIARegistryTest1/environments/nemo-infer-env-mayani/versions/2
+environment: azureml://registries/NVIDIA-AI-Enterprise-Preview/environments/nemo_infer_gpt_2b-mohit-env/versions/2
 instance_type: Standard_NC24ads_A100_v4
+#instance_type: STANDARD_NC96ADS_A100_V4
 request_settings:
   request_timeout_ms: 10000
   max_concurrent_requests_per_instance: 512
