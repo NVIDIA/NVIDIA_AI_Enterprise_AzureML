@@ -3,3 +3,4 @@ name: monai-inference
 description: Environment using MONAI NViDIA AI Enterprise container monai-toolkit:1.0. <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/environments/monai/3D_image_segmentation/inference/src/License_Attributions.md>License Attritutions</a> 
 build:
   path: ./src
+
