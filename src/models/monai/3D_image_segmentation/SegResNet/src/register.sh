@@ -1,2 +1,3 @@
-\# create model in registry
-az ml model create --name monai-3d-segmentation --version 1 --type mlflow_model --path ./model/ --registry-name NVIDIARegistryTest1
+#!/bin/bash
+
+az ml model create --name nvidia-monai-segresnet --path ./model --registry-name $REGISTRY --type mlflow_model --version 1 --tags 'NVIDIA AI Enterprise' 'Preview'

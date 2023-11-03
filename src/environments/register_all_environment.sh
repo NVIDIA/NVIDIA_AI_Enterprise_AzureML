@@ -6,11 +6,10 @@ cd Clara-parabricks
 ./register_env.sh
 cd ../DeepStream/triton
 ./register_env.sh
-cd ../../monai/3D_image_segmentation
-cd  inference/src
-#./register.sh
-cd ../../train/src
-#./register.sh
+cd ../../monai/3D_image_segmentation/inference
+./register_env.sh
+cd ../../train
+./register_env.sh
 cd ../../../../RAPIDS
 ./register_env.sh
 cd ../../../PyTorch

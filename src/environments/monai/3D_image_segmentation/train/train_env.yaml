@@ -1,5 +1,6 @@
-name: monai_train_env
-version: 1
+$schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
+name: monai-training
+description: Environment using MONAI NViDIA AI Enterprise container monai-toolkit:1.0. <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/src/environments/monai/3D_image_segmentation/train/src/License_Attributions.md>License Attritutions</a> 
 build:
   path: ./src
-description: Environment using nvcr.io/nvidia/clara/monai-toolkit:1.0. <a href=https://catalog.ngc.nvidia.com/orgs/nvidia/teams/clara/containers/monai-toolkit</a> 
+

@@ -1,6 +1,6 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 name: monai_upload_data_from_blob
-display_name: Upload data from blob
+display_name: Upload 3D Segmentation Data
 type: command
 description: Download and uncompress data from blob to local folder <a href=https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/blob/main/src/components/monai/3D_image_segmentation/upload_from_blob/README.md>Reference file</a>
 is_deterministic: true
@@ -32,4 +32,4 @@ code: ./src
 command: >-
   python run.py --blob_file ${{inputs.blob_file_location}} $[[--overwrite ${{inputs.overwrite}}]] --image_data_folder ${{outputs.image_data_folder}}
 
-environment: "azureml://registries/<REGISTRY>/environments/monai_train_env/versions/1"
+environment: "azureml://registries/<registry_name>/environments/monai_train_env/versions/1"
