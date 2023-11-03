@@ -9,7 +9,6 @@ it is based on the following MONAI tutorial: https://github.com/Project-MONAI/tu
 
 ## Prerequisites
 
-
 To enjoy this quick deployment, you will need to:
 
 * have an active [Azure subscription](https://azure.microsoft.com) that you can use for development purposes,
