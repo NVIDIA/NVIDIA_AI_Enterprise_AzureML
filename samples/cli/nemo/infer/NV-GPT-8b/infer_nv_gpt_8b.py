@@ -73,7 +73,7 @@ def generate_inputs(
 
 def main():
 	question='Who is the fastest animal?'
-	api_key="FE3HDDafKPbNLg6QOnUeODegAtImsmxd"
+	api_key=""
 	system_prompt = "You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Please ensure that your responses are positive in nature."
 	prompt = GPT_PROMPT_TEMPLATE.format(prompt=question)
 	inputs = generate_inputs([[prompt]], 
