@@ -1,5 +1,7 @@
 # $\textcolor{green}{\textsf{MONAI 3D Segmentation sample}}$
 
+
+
 In this tutorial, you will:
 
 * Provision a fully functional environment in your own Azure subscription
