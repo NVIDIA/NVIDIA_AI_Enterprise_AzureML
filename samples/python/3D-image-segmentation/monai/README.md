@@ -36,7 +36,7 @@ To enjoy this quick deployment, you will need to:
     select Compute instances and [create
     one](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-create-manage-compute-instance?view=azureml-api-2&tabs=azure-studio).    
     
-3.  Once you have dev compute instance running you need to open Notebooks File Explorer with your notebooks to run. In the beginning it will be empty
+4.  Once you have dev compute instance running you need to open Notebooks File Explorer with your notebooks to run. In the beginning it will be empty
 
 5.  Click on Open terminal button and open SSH client to your Compute Instance. In this session clone NVIDIA/NVIDIA_AI_Enterprise_AzureML repository (or just what you will use)
 
