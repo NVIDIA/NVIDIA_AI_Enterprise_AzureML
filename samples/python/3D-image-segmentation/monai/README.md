@@ -1,4 +1,4 @@
-# $\textcolor{green}{\textsf{MONAI 3D Segmentation sample}}$
+# MONAI 3D Segmentation sample
 
 In this tutorial, you will:
 
