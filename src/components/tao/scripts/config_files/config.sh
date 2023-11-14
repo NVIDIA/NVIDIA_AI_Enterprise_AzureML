@@ -22,6 +22,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 subscription_id="ab221ca4-f098-422d-ab2f-5073b3851e68"
+
 resource_group="NVIDIA_COMPONENTS_AND_PIPELINES"
 registry_name="Registry_Test3"
 #registry_name="NVIDIA-NGC-Test"
