@@ -1,0 +1,20 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: next-item-deployment
+endpoint_name: next-item-endpoint
+model: azureml:next-item:1
+model_mount_path: /models/ensemble
+environment: 
+  name: triton-nextitem-env
+  image: <acr_name>.azurecr.io/merlin-triton:latest
+  inference_config:
+      liveness_route:
+          path: /v2/health/live
+          port: 8000
+      readiness_route:
+          path: /v2/health/ready
+          port: 8000
+      scoring_route:
+          path: /
+          port: 8000
+instance_type: Standard_NC8as_T4_v3
+instance_count: 1

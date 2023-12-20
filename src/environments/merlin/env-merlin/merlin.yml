@@ -1,0 +1,5 @@
+name: Merlin
+version: 1
+build: 
+  path: ./docker
+description: Merlin pytorch container - based on v 22.12

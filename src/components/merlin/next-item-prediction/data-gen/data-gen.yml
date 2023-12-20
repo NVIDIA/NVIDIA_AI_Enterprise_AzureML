@@ -1,0 +1,16 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+type: command
+
+name: next_item_data_gen
+display_name: next-item-data-gen
+version: 1
+description: Next item prediciton data generation. Replace w/ own data if desired 
+outputs:
+  data_gen_output:
+    type: uri_folder
+
+code: ./src
+
+environment: azureml://registries/<registry_name>/environments/Merlin/versions/1
+
+command: python datagen.py --output-location ${{outputs.data_gen_output}} --start-date 2014-04-01 --end-date 2014-09-30
