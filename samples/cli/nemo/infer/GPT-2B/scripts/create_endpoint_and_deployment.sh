@@ -4,9 +4,9 @@
 source scripts/config_files/deployment_config.sh
 
 echo "Creating Online Endpoint"
-az ml online-endpoint create -f scripts/auxiliary_files/endpoint_aml.yml --resource-group $resource_group --workspace-name $workspace
+#az ml online-endpoint create -f scripts/auxiliary_files/endpoint_aml.yml --resource-group $resource_group --workspace-name $workspace
 
-cp scripts/auxiliary_files/deployment_backup2_aml.yml scripts/auxiliary_files/actual_deployment_aml.yml
+cp scripts/auxiliary_files/deployment_aml.yml scripts/auxiliary_files/actual_deployment_aml.yml
 
 sed -i "s/registryname/${registryname}/g" scripts/auxiliary_files/actual_deployment_aml.yml
 
