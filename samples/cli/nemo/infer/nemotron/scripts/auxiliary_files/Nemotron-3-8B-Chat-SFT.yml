@@ -1,0 +1,38 @@
+model_repo_path: "/model-store/"
+model_type: "GPT3"
+backend: "trt_llm"
+customization_cache_capacity: 256
+logging_level: "INFO"
+enable_chat: true
+preprocessor:
+  prompt_templates:
+    chat: "{{ '<extra_id_0>System\n' }}{% if messages[0]['role'] == 'system' %}{{ messages[0]['content'] }}{% else %}{% raw %}A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions.{% endraw %}{% endif %}{{ '\n' }}{% for message in messages %}{% if message['role'] == 'user' %}{{ '\n<extra_id_1>User\n' + message['content'] }}{% elif message['role'] == 'assistant' %}{{ '\n<extra_id_1>Assistant\n<extra_id_2>' + 'quality:' + quality + ',toxicity:' + toxicity + ',humor:' + humor + ',creativity:' + creativity + ',violence:' + violence + ',helpfulness:' + helpfulness + ',not_appropriate:' + not_appropriate + ',hate_speech:0,sexual_content:0,fails_task:0,political_content:0,moral_judgement:0,lang:' + lang + '\n' + message['content']}}{% endif %}{% endfor %}{{ '\n<extra_id_1>Assistant\n<extra_id_2>' + 'quality:' + quality + ',toxicity:' + toxicity + ',humor:' + humor + ',creativity:' + creativity + ',violence:' + violence + ',helpfulness:' + helpfulness + ',not_appropriate:' + not_appropriate + ',hate_speech:0,sexual_content:0,fails_task:0,political_content:0,moral_judgement:0,lang:' + lang + '\n' }}"
+    stop_words: ["<extra_id_1>"]
+pipeline:
+  model_name: "ensemble"
+  num_instances: 64
+nemo_path: "nemo_path_placeholder"
+trt_llm:
+  use: true
+  use_nemo_path: true
+  model_name: "trt_llm"
+  model_type: "GPT"
+  data_type: "float16"
+  num_gpus: num_gpus_placeholder
+  tensor_para_size: 2
+  pipeline_para_size: 1
+  max_batch_size: 64
+  max_input_len: 4096
+  max_output_len: 4096
+  max_num_tokens: 33000
+  use_mcore: true
+default_params:
+  steer_lm:
+    quality: 4
+    toxicity: 0
+    humor: 0
+    creativity: 0
+    violence: 0
+    helpfulness: 4
+    not_appropriate: 0
+    lang: "en"

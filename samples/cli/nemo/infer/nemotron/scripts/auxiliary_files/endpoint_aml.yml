@@ -1,3 +1,3 @@
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineEndpoint.schema.json
-name: nemo-llama-trt-endpoint-aml-1
+name: nemo-nemotron-endpoint-aml-1
 auth_mode: key

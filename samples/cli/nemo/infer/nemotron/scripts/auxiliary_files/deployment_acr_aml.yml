@@ -1,12 +1,11 @@
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
-name: nemo-llama-trt-deployment-aml-1
-endpoint_name: nemo-llama-trt-endpoint-aml-1
-model: 
-  path: /home/azureuser/NeMoMicroservices/model-store
+name: nemo-nemotron-deployment-aml-1
+endpoint_name: nemo-nemotron-endpoint-aml-1
+model: azureml://registries/nvidia-ai/models/Nemotron-3-8B-Chat-SteerLM/versions/2
 model_mount_path: /triton-models
 environment: 
-  name: nim_llama_ncd-env
-  image: registryname.azurecr.io/nim_llama_ncd:latest
+  name: nim_nemotron_ncd-env
+  image: registryname.azurecr.io/nim_nemotron_ncd:latest
   inference_config:
       liveness_route:
           path: /v2/health/live
@@ -16,6 +15,6 @@ environment:
           port: 8000
       scoring_route:
           path: /
-          port: 8000
-instance_type: Standard_NC24ads_A100_v4
+          port: 9999
+instance_type: Standard_NC48ads_A100_v4
 instance_count: 1

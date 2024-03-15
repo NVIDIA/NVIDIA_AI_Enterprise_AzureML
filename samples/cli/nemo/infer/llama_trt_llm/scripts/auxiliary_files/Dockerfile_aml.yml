@@ -1,6 +1,5 @@
-FROM nvcr.io/nvidian/nemo-llm/nemollm-inference-trt-only:24.01.rc2
+FROM nvcr.io/nvidian/nemo-llm/nemollm-inference-trt-only:24.02.rc2
 ENTRYPOINT []
 EXPOSE 8000
-RUN mkdir /opt/aux
-ADD scripts/auxiliary_files/deploy_models.sh /opt/aux/deploy_models.sh
-CMD /opt/aux/deploy_models.sh ${AZUREML_MODEL_DIR}
+ADD scripts/auxiliary_files/deploy_models.sh ./deploy_models.sh
+CMD ./deploy_models.sh ${AZUREML_MODEL_DIR}

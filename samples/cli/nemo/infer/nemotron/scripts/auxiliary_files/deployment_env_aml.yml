@@ -1,0 +1,7 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: nemo-nemotron-deployment-aml-1
+endpoint_name: nemo-nemotron-endpoint-aml-1
+model: azureml://registries/nvidia-ai/models/Nemotron-3-8B-Chat-SteerLM/versions/2
+environment: azureml://registries/NVIDIA-NGC-Test/environments/nim_nemotron_ncd-env/versions/3
+instance_type: Standard_NC48ads_A100_v4
+instance_count: 1
