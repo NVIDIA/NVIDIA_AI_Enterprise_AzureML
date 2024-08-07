@@ -26,7 +26,7 @@ resource_group="NVIDIA_COMPONENTS_AND_PIPELINES_WEST3"
 workspace="NVIDIA_COMPONENTS_WEST3"
 location="westus3"
 
-ngc_key="azdwMG00YXNicWVzcnFrN3ZqMnFtcTAyb2U6MWMwZjg4NWYtOWFhZC00YjBmLWFmNDQtNmJjNmRkOGIxZTI3"
+ngc_key="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 email_address="mreyesgomez@nvidia.com"
 
 acr_registry_name="nvidiacomponentswest3registry"
