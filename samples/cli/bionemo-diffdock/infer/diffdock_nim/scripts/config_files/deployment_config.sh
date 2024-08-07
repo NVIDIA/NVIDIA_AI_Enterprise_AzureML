@@ -21,26 +21,24 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-##User Credentials/Info
 subscription_id="ab221ca4-f098-422d-ab2f-5073b3851e68"
-resource_group="NVIDIA_COMPONENTS_AND_PIPELINES"
-workspace="NVIDIA_COMPONENTS_TEST7"
-location="southcentralus"
+resource_group="NVIDIA_COMPONENTS_AND_PIPELINES_WEST3"
+workspace="NVIDIA_COMPONENTS_WEST3"
+location="westus3"
+
 ngc_key="azdwMG00YXNicWVzcnFrN3ZqMnFtcTAyb2U6MWMwZjg4NWYtOWFhZC00YjBmLWFmNDQtNmJjNmRkOGIxZTI3"
 email_address="mreyesgomez@nvidia.com"
-acr_registry_name="81e14b41bf1147cc93fa28eaa94818c3"
 
+acr_registry_name="nvidiacomponentswest3registry"
 
 registry_name="NVIDIA-AI-Enterprise-Preview"
 keyvault_name="NGC-Credentials"
-secret_key_version="98c16d76660d4b4588bfd9ead93ea10c"
-#secret_key_version="4"
-image_name=llama3_8B_nim_ncd
-ngc_container="nvcr.io/nim/meta/llama3-8b-instruct:1.0.0"
-endpoint_name="llama3-8b-nim-endpoint-aml-1"
-endpoint_id="cf824ba0-e479-4b04-a428-0e0d9d9aab3c"
-deployment_name="llama3-8b-nim-deployment-aml-1"
-model_name="llama3-8b-instruct-nim_a100_1"
+image_name=diffdock-nim_ncd
+ngc_container="nvcr.io/nim/nvidia/bionemo-diffdock:1.2.0"
+endpoint_name="diffdock-nim-endpoint-aml-1"
+endpoint_id="6cf0fc3a-9ee8-42a8-bfd1-2aee8b218bd3"
+deployment_name="diffdock-nim-deployment-aml-1"
+model_name="vista3d"
 model_version="1"
 instance_type="Standard_NC48ads_A100_v4"
-environment_version="4"
+environment_version="1"

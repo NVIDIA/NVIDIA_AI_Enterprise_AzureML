@@ -1,0 +1,3 @@
+FROM ngc_container_placeholder
+EXPOSE 8000
+CMD ["start_server"]

@@ -1,0 +1,9 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: diffdock-nim-deployment-aml-1
+endpoint_name: diffdock-nim-endpoint-aml-1
+model: azureml://registries/NVIDIA-AI-Enterprise-Preview/models/vista3d/versions/1
+environment_variables:
+    NGC_API_KEY: azdwMG00YXNicWVzcnFrN3ZqMnFtcTAyb2U6MWMwZjg4NWYtOWFhZC00YjBmLWFmNDQtNmJjNmRkOGIxZTI3
+environment: azureml://registries/NVIDIA-AI-Enterprise-Preview/environments/diffdock-nim_ncd-env/versions/1
+instance_type: Standard_NC48ads_A100_v4
+instance_count: 1

@@ -1,0 +1,9 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: deployment_name_placeholder
+endpoint_name: endpoint_name_placeholder
+model: azureml://registries/registry_placeholder/models/model_name_placeholder/versions/model_version_placeholder
+environment_variables:
+    NGC_API_KEY: ngc_key_placeholder
+environment: azureml://registries/registry_placeholder/environments/image_name_placeholder-env/versions/environment_version_placeholder
+instance_type: instance_type_placeholder
+instance_count: 1

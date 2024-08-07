@@ -41,7 +41,7 @@ fi
 
 if ${USE_KEYVAULT}
 then
-    sed -i "s|ngc_key_placeholder|\${{keyvault:https://vault_name_placeholder.vault.azure.net/secrets/NGC-KEY/secret_key_version_placeholder}}|g" scripts/auxiliary_files/actual_deployment_aml.yml
+    sed -i "s|ngc_key_placeholder|\${{keyvault:https://vault_name_placeholder.vault.azure.net/secrets/NGC-KEY}}|g" scripts/auxiliary_files/actual_deployment_aml.yml
 else
     sed -i "s/ngc_key_placeholder/${ngc_key}/g" scripts/auxiliary_files/actual_deployment_aml.yml
 fi
@@ -56,8 +56,7 @@ sed -i "s/image_name_placeholder/${image_name}/g" scripts/auxiliary_files/actual
 sed -i "s/environment_version_placeholder/${environment_version}/g" scripts/auxiliary_files/actual_deployment_aml.yml
 sed -i "s/instance_type_placeholder/${instance_type}/g" scripts/auxiliary_files/actual_deployment_aml.yml
 sed -i "s/vault_name_placeholder/${keyvault_name}/g" scripts/auxiliary_files/actual_deployment_aml.yml
-sed -i "s/secret_key_version_placeholder/${secret_key_version}/g" scripts/auxiliary_files/actual_deployment_aml.yml
 cat scripts/auxiliary_files/actual_deployment_aml.yml
 echo "Creating Online Deployment ${deployment_name}"
-az ml online-deployment create -f scripts/auxiliary_files/actual_deployment_aml.yml
+#az ml online-deployment create -f scripts/auxiliary_files/actual_deployment_aml.yml
 #rm scripts/auxiliary_files/actual_deployment_aml.yml
