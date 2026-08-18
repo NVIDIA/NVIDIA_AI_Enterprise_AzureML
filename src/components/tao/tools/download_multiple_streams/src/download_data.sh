@@ -19,7 +19,7 @@ export CHECKSUM=$4
 
 
 GET_SUBSTRING $URL / 1
-eval ZIPFILE=$SUBSTRING
+ZIPFILE=$SUBSTRING
 
 
 # Download the dataset

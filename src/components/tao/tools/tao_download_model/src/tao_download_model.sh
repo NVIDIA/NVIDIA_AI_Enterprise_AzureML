@@ -18,7 +18,9 @@ mkdir -p $LOCAL_PROJECT_DIR/ngccli
 
 # Remove any previously existing CLI installations
 #rm -rf $LOCAL_PROJECT_DIR/ngccli/*
-wget "https://ngc.nvidia.com/downloads/$CLI" -P $LOCAL_PROJECT_DIR/ngccli
+wget 'https://ngc.nvidia.com/downloads/ngccli_cat_linux.zip' -P $LOCAL_PROJECT_DIR/ngccli 
+echo 'EXPECTED_SHA256  $LOCAL_PROJECT_DIR/ngccli/ngccli_cat_linux.zip' | sha256sum -c - 
+
 unzip -u "$LOCAL_PROJECT_DIR/ngccli/$CLI" -d $LOCAL_PROJECT_DIR/ngccli/
 rm $LOCAL_PROJECT_DIR/ngccli/*.zip 
 
