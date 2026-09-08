@@ -4,7 +4,7 @@ source scripts/config_files/config.sh
 export AZURE_ML_CLI_PRIVATE_FEATURES_ENABLED=true
 
 ##Create Triton Components by Default
-export COMPONENTS_DIR=./
+export COMPONENTS_DIR=./componenets/merlin/next-item-prediction
 
 for component_file in $(find $COMPONENTS_DIR -name '*.yml');
 do

@@ -56,6 +56,10 @@ NVIDIA Triton™, an open-source inference serving software, standardizes AI mod
 
 DeepStream SDK is a complete streaming analytics toolkit based on GStreamer for AI-based multi-sensor processing, video, audio, and image understanding. It’s ideal for vision AI developers, software partners, startups, and OEMs building IVA apps and services. Developers can now create stream processing pipelines that incorporate neural networks and other complex processing tasks such as tracking, video encoding/decoding, and video rendering. DeepStream pipelines enable real-time analytics on video, image, and sensor data.
 
+### Merlin
+
+NVIDIA Merlin is a framework for accelerating the entire recommender systems pipeline on the GPU: from data ingestion and training to deployment. Merlin empowers data scientists, machine learning engineers, and researchers to build high-performing recommenders at scale. Merlin includes tools that democratize building deep learning recommenders by addressing common ETL, training, and inference challenges. Each stage of the Merlin pipeline offers an easy-to-use API and is optimized to support hundreds of terabytes of data.
+
 ## NVIDIA AI Enterprise AzureML GitHub Repository Contents Description
 The [NVIDIA AI Enterprise AzureML GitHub Repo](https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main) has two types of documents contained into two main folders: src and samples
 
@@ -128,6 +132,4 @@ it is based on the following MONAI tutorial: https://github.com/Project-MONAI/tu
 
 * [Deepstream Inference Pipeline](https://github.com/NVIDIA/NVIDIA_AI_Enterprise_AzureML/tree/main/samples/cli/DeepStream) In this pipeline a model from the Registry is deployed using the Deepstream Framework
 
-
-
-
+* [Merlin Next Item Prediciton Pipeline](https://github.com/mich-xu/NVIDIA_AI_Enterprise_AzureML/tree/michxu/samples/cli/merlin/next-item-prediction) This pipeline is an E2E ML pipeline including data prep, training, and inferencing steps. Users will traing their own session-based recommenders that will increase the accuracy of predictions when user interests are dynamic and little or no user data is available.

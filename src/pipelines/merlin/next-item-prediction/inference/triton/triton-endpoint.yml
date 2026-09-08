@@ -1,0 +1,4 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineEndpoint.schema.json
+name: next-item-endpoint
+auth_mode: aml_token
+description: Endpoint for Next Item Prediciton workflow 

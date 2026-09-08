@@ -1,0 +1,19 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+type: command
+
+name: next_item_data_prep
+display_name: next-item-data-prep
+version: 1
+description: component for data prep
+inputs: 
+  data_prep_input: 
+    type: uri_folder
+outputs:
+  data_prep_output:
+    type: uri_folder
+
+code: ./src
+
+environment: azureml://registries/<registry_name>/environments/Merlin/versions/1
+
+command: python dataprep.py --input-location ${{inputs.data_prep_input}} --output-location ${{outputs.data_prep_output}} --start-date 2014-04-01 --end-date 2014-09-30

@@ -1,0 +1,6 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: triton-specific-test-pt2
+endpoint_name: next-item-endpoint
+model: azureml:next-item:8
+instance_count: 1
+instance_type: Standard_NC8as_T4_v3
